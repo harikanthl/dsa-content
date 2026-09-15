@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+leetcode/          # leetcode.nvim's local cache of problem files
+*.mp4
+*.mov
+*.meld

@@ -1,0 +1,227 @@
+#!/usr/bin/env python3
+"""
+dsa — the driver for the 186-episode DSA video project.
+
+  dsa next                 what to record today
+  dsa start [EP]           scaffold + open the tmux recording workspace
+  dsa test  [EP]           run the local tests for an episode
+  dsa prep  [EP]           print the prep sheet in the terminal
+  dsa done  [EP] [url]     mark recorded/uploaded
+  dsa rep   [EP]           log a repetition (spaced repetition drill)
+  dsa due                  problems due for a re-drill today
+  dsa stats                progress dashboard
+  dsa doctor               verify toolchain
+"""
+import csv, json, os, subprocess, sys, datetime, shutil, textwrap
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CUR  = f"{ROOT}/curriculum/curriculum.json"
+PROG = f"{ROOT}/curriculum/progress.csv"
+# Spaced repetition ladder (days after each successful clean solve).
+LADDER = [1, 3, 7, 16, 35, 90]
+
+C = dict(r="\033[31m", g="\033[32m", y="\033[33m", b="\033[34m",
+         m="\033[35m", c="\033[36m", d="\033[2m", B="\033[1m", x="\033[0m")
+
+def eps():        return json.load(open(CUR))
+def rows():
+    with open(PROG) as f: return list(csv.DictReader(f))
+def save(rs):
+    with open(PROG, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=rs[0].keys()); w.writeheader(); w.writerows(rs)
+def ep(n):
+    for e in eps():
+        if e["ep"] == int(n): return e
+    sys.exit(f"no episode {n}")
+def row(n):
+    for r in rows():
+        if r["ep"] == str(n): return r
+    sys.exit(f"no episode {n}")
+def next_ep():
+    for r in rows():
+        if r["recorded"] == "N": return int(r["ep"])
+    return None
+def arg(i, default=None):
+    return sys.argv[i] if len(sys.argv) > i else default
+
+def solfile(e):
+    return f"{ROOT}/problems/{e['folder']}/{e['pat_ep']:02d}_{e['slug'].replace('-','_')}.py"
+
+# ---------------------------------------------------------------- scaffold
+TEMPLATE = '''"""
+EP{ep:03d} · {code} · {title}   [{diff}]
+Pattern: {pattern}
+Prep:    {prep}
+Link:    {link}
+
+Run:  dsa test {ep}          (or)  pytest {fname} -q
+"""
+from typing import List, Optional
+
+
+class Solution:
+    def {fn}(self):
+        # --- brute force (say it out loud, then discard) -------------------
+        # O(?) time / O(?) space
+        #
+        # --- optimal ------------------------------------------------------
+        # O(?) time / O(?) space
+        pass
+
+
+# ---------------------------------------------------------------- tests
+# Add the LeetCode samples here FIRST, before you write the solution.
+CASES = [
+    # (args_tuple, expected),
+]
+
+
+def test_cases():
+    for args, want in CASES:
+        got = Solution().{fn}(*args)
+        assert got == want, f"{{args}} -> {{got}}, want {{want}}"
+'''
+
+def scaffold(e):
+    p = solfile(e)
+    os.makedirs(os.path.dirname(p), exist_ok=True)
+    if os.path.exists(p):
+        return p, False
+    fn = e["slug"].replace("-", "_")[:32] or "solve"
+    open(p, "w").write(TEMPLATE.format(
+        ep=e["ep"], code=e["code"], title=e["title"], diff=e["difficulty"] or "—",
+        pattern=e["pattern"], prep=e["prep"], fname=os.path.relpath(p, ROOT),
+        link=e["links"][0] if e["links"] else "—", fn=fn))
+    return p, True
+
+# ---------------------------------------------------------------- commands
+def cmd_next():
+    n = next_ep()
+    if not n: return print(f"{C['g']}All 186 recorded. Go outside.{C['x']}")
+    e = ep(n); r = row(n)
+    print(f"""
+{C['B']}{C['c']}  EP {e['ep']:03d}  ·  {e['code']}  ·  {e['pattern']}{C['x']}
+{C['B']}  {e['title']}{C['x']}  {C['d']}[{e['difficulty'] or '—'}]{C['x']}
+
+  {C['y']}prep{C['x']}   {e['prep']}
+  {C['y']}link{C['x']}   {e['links'][0] if e['links'] else '—'}
+  {C['y']}reps{C['x']}   {r['reps']}   last: {r['last_rep_date'] or 'never'}
+
+  {C['g']}dsa start {e['ep']}{C['x']}   to open the recording workspace
+""")
+
+def cmd_start():
+    n = int(arg(2) or next_ep()); e = ep(n)
+    path, created = scaffold(e)
+    print(f"{'created' if created else 'exists '}  {os.path.relpath(path, ROOT)}")
+    sess = f"dsa{n}"
+    if not shutil.which("tmux"):
+        return subprocess.run(["nvim", path])
+    if subprocess.run(["tmux", "has-session", "-t", sess],
+                      capture_output=True).returncode != 0:
+        prep = f"{ROOT}/{e['prep']}"
+        # window 0: solve  (nvim left | test-runner right)
+        subprocess.run(["tmux", "new-session", "-d", "-s", sess, "-c", ROOT, "-n", "solve"])
+        subprocess.run(["tmux", "send-keys", "-t", f"{sess}:solve", f"nvim '{path}'", "Enter"])
+        subprocess.run(["tmux", "split-window", "-h", "-p", "38", "-t", f"{sess}:solve", "-c", ROOT])
+        runner = (f"command -v entr >/dev/null && ls '{path}' | entr -c pytest '{path}' -q "
+                  f"|| pytest '{path}' -q")
+        subprocess.run(["tmux", "send-keys", "-t", f"{sess}:solve.1", runner, "Enter"])
+        # window 1: the prep sheet, rendered
+        subprocess.run(["tmux", "new-window", "-d", "-t", sess, "-n", "prep", "-c", ROOT])
+        pager = (f"glow -p '{prep}'" if shutil.which("glow")
+                 else f"bat --style=plain '{prep}'" if shutil.which("bat") else f"less '{prep}'")
+        subprocess.run(["tmux", "send-keys", "-t", f"{sess}:prep", pager, "Enter"])
+        subprocess.run(["tmux", "select-window", "-t", f"{sess}:solve"])
+        subprocess.run(["tmux", "select-pane",  "-t", f"{sess}:solve.0"])
+    os.execvp("tmux", ["tmux", "attach", "-t", sess] if not os.environ.get("TMUX")
+              else ["tmux", "switch-client", "-t", sess])
+
+def cmd_test():
+    n = int(arg(2) or next_ep())
+    subprocess.run(["pytest", solfile(ep(n)), "-q"])
+
+def cmd_prep():
+    n = int(arg(2) or next_ep()); p = f"{ROOT}/{ep(n)['prep']}"
+    if not os.path.exists(p): return print(f"{C['r']}no prep sheet yet: {p}{C['x']}")
+    for c in (["glow", "-p", p], ["bat", "--style=plain", p], ["less", p]):
+        if shutil.which(c[0]): return subprocess.run(c)
+
+def cmd_done():
+    n = str(int(arg(2) or next_ep())); url = arg(3, "")
+    rs = rows()
+    for r in rs:
+        if r["ep"] == n:
+            r["recorded"] = "Y"
+            if url: r["uploaded"], r["youtube_url"] = "Y", url
+            print(f"{C['g']}EP{n} marked recorded{' + uploaded' if url else ''}.{C['x']}")
+    save(rs); cmd_next()
+
+def cmd_rep():
+    n = str(int(arg(2) or next_ep())); today = datetime.date.today()
+    rs = rows()
+    for r in rs:
+        if r["ep"] == n:
+            r["reps"] = str(int(r["reps"]) + 1); r["solved_clean"] = "Y"
+            r["last_rep_date"] = today.isoformat()
+            gap = LADDER[min(int(r["reps"]) - 1, len(LADDER) - 1)]
+            print(f"{C['g']}rep #{r['reps']} logged.{C['x']}  next drill: "
+                  f"{C['B']}{today + datetime.timedelta(days=gap)}{C['x']} (+{gap}d)")
+    save(rs)
+
+def cmd_due():
+    today = datetime.date.today(); due = []
+    for r in rows():
+        if not r["last_rep_date"]: continue
+        gap = LADDER[min(int(r["reps"]) - 1, len(LADDER) - 1)]
+        d = datetime.date.fromisoformat(r["last_rep_date"]) + datetime.timedelta(days=gap)
+        if d <= today: due.append((d, r))
+    if not due: return print(f"{C['g']}nothing due. record a new one: dsa next{C['x']}")
+    print(f"\n{C['B']}  {len(due)} due for a re-drill{C['x']}\n")
+    for d, r in sorted(due):
+        od = (today - d).days
+        print(f"  {C['y']}EP{int(r['ep']):03d}{C['x']}  {r['problem'][:42]:42s} "
+              f"{C['d']}rep {r['reps']} · {od}d overdue{C['x']}")
+    print()
+
+def cmd_stats():
+    rs = rows(); tot = len(rs)
+    def n(k): return sum(1 for r in rs if r[k] == "Y")
+    bar = lambda v: ("█" * round(30 * v / tot)).ljust(30, "·")
+    print(f"\n{C['B']}  DSA PROGRESS{C['x']}   {C['d']}{tot} episodes{C['x']}\n")
+    for k, label in (("prep_ready", "prep sheet"), ("solved_clean", "solved clean"),
+                     ("recorded", "recorded"), ("uploaded", "uploaded")):
+        v = n(k)
+        print(f"  {label:13s} {C['c']}{bar(v)}{C['x']} {v:3d}/{tot}  {100*v//tot:3d}%")
+    pats = {}
+    for r in rs: pats.setdefault(r["pattern"], [0, 0])
+    for r in rs:
+        pats[r["pattern"]][1] += 1
+        if r["recorded"] == "Y": pats[r["pattern"]][0] += 1
+    print(f"\n{C['B']}  BY PATTERN{C['x']}\n")
+    for p, (d, t) in pats.items():
+        mark = C["g"] + "●" + C["x"] if d == t else (C["y"] + "◐" + C["x"] if d else C["d"] + "○" + C["x"])
+        print(f"  {mark} {p:34s} {d:2d}/{t:2d}")
+    print()
+
+def cmd_doctor():
+    need = {"nvim": "editor", "tmux": "multiplexer", "pytest": "test runner",
+            "gh": "github cli", "git": "vcs", "rg": "search", "fzf": "fuzzy find"}
+    want = {"entr": "test-on-save", "bat": "pretty cat", "fd": "find", "lazygit": "git tui",
+            "delta": "diffs", "zoxide": "jump", "eza": "ls", "glow": "markdown"}
+    print(f"\n{C['B']}  required{C['x']}")
+    for t, why in need.items():
+        ok = shutil.which(t)
+        print(f"  {C['g']+'✓'+C['x'] if ok else C['r']+'✗'+C['x']} {t:9s} {C['d']}{why}{C['x']}")
+    print(f"\n{C['B']}  recommended{C['x']}")
+    for t, why in want.items():
+        ok = shutil.which(t)
+        print(f"  {C['g']+'✓'+C['x'] if ok else C['y']+'–'+C['x']} {t:9s} {C['d']}{why}{C['x']}")
+    print(f"\n  {C['d']}missing? → ./scripts/setup-tooling.sh{C['x']}\n")
+
+CMDS = dict(next=cmd_next, start=cmd_start, test=cmd_test, prep=cmd_prep,
+            done=cmd_done, rep=cmd_rep, due=cmd_due, stats=cmd_stats, doctor=cmd_doctor)
+if __name__ == "__main__":
+    c = arg(1, "next")
+    if c in ("-h", "--help", "help"): sys.exit(print(textwrap.dedent(__doc__)))
+    CMDS.get(c, lambda: sys.exit(f"unknown: {c}\n{__doc__}"))()

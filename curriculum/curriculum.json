@@ -1,0 +1,3546 @@
+[
+ {
+  "ep": 1,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Pair with Target Sum",
+  "raw_title": "Pair with Target Sum (easy)",
+  "difficulty": "Easy",
+  "slug": "pair-with-target-sum",
+  "links": [
+   "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 1,
+  "code": "P01E01",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/01-pair-with-target-sum.md"
+ },
+ {
+  "ep": 2,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Rearrange 0 and 1",
+  "raw_title": "Rearrange 0 and 1",
+  "difficulty": "",
+  "slug": "rearrange-0-and-1",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/segregate-0s-and-1s5106/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 2,
+  "code": "P01E02",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/02-rearrange-0-and-1.md"
+ },
+ {
+  "ep": 3,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Remove Duplicates",
+  "raw_title": "Remove Duplicates (easy)",
+  "difficulty": "Easy",
+  "slug": "remove-duplicates",
+  "links": [
+   "https://leetcode.com/problems/remove-duplicates-from-sorted-list/",
+   "https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/",
+   "https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 3,
+  "code": "P01E03",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/03-remove-duplicates.md"
+ },
+ {
+  "ep": 4,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Squaring a Sorted Array",
+  "raw_title": "Squaring a Sorted Array (easy)",
+  "difficulty": "Easy",
+  "slug": "squaring-a-sorted-array",
+  "links": [
+   "https://leetcode.com/problems/squares-of-a-sorted-array/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 4,
+  "code": "P01E04",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/04-squaring-a-sorted-array.md"
+ },
+ {
+  "ep": 5,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Triplet Sum to Zero",
+  "raw_title": "Triplet Sum to Zero (medium)",
+  "difficulty": "Medium",
+  "slug": "triplet-sum-to-zero",
+  "links": [
+   "https://leetcode.com/problems/3sum/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 5,
+  "code": "P01E05",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/05-triplet-sum-to-zero.md"
+ },
+ {
+  "ep": 6,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Triplet Sum Close to Target",
+  "raw_title": "Triplet Sum Close to Target (medium)",
+  "difficulty": "Medium",
+  "slug": "triplet-sum-close-to-target",
+  "links": [
+   "https://leetcode.com/problems/3sum-closest/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 6,
+  "code": "P01E06",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/06-triplet-sum-close-to-target.md"
+ },
+ {
+  "ep": 7,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Triplets with Smaller Sum",
+  "raw_title": "Triplets with Smaller Sum (medium)",
+  "difficulty": "Medium",
+  "slug": "triplets-with-smaller-sum",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/count-triplets-with-sum-smaller-than-x5549/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 7,
+  "code": "P01E07",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/07-triplets-with-smaller-sum.md"
+ },
+ {
+  "ep": 8,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Subarrays with Product Less than a Target",
+  "raw_title": "Subarrays with Product Less than a Target (medium)",
+  "difficulty": "Medium",
+  "slug": "subarrays-with-product-less-than-a-target",
+  "links": [
+   "https://leetcode.com/problems/subarray-product-less-than-k/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 8,
+  "code": "P01E08",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/08-subarrays-with-product-less-than-a-target.md"
+ },
+ {
+  "ep": 9,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Dutch National Flag Problem",
+  "raw_title": "Dutch National Flag Problem (medium)",
+  "difficulty": "Medium",
+  "slug": "dutch-national-flag-problem",
+  "links": [
+   "https://leetcode.com/problems/sort-colors/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 9,
+  "code": "P01E09",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/09-dutch-national-flag-problem.md"
+ },
+ {
+  "ep": 10,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Quadruple Sum to Target",
+  "raw_title": "Problem Challenge 1: Quadruple Sum to Target (medium)",
+  "difficulty": "Medium",
+  "slug": "quadruple-sum-to-target",
+  "links": [
+   "https://leetcode.com/problems/4sum/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 10,
+  "code": "P01E10",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/10-quadruple-sum-to-target.md"
+ },
+ {
+  "ep": 11,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Comparing Strings containing Backspaces",
+  "raw_title": "Problem Challenge 2: Comparing Strings containing Backspaces (medium)",
+  "difficulty": "Medium",
+  "slug": "comparing-strings-containing-backspaces",
+  "links": [
+   "https://leetcode.com/problems/backspace-string-compare/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 11,
+  "code": "P01E11",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/11-comparing-strings-containing-backspaces.md"
+ },
+ {
+  "ep": 12,
+  "pattern": "Two Pointers",
+  "subgroup": null,
+  "title": "Minimum Window Sort",
+  "raw_title": "Problem Challenge 3: Minimum Window Sort (medium)",
+  "difficulty": "Medium",
+  "slug": "minimum-window-sort",
+  "links": [
+   "https://leetcode.com/problems/shortest-unsorted-continuous-subarray/",
+   "https://www.ideserve.co.in/learn/minimum-length-subarray-sorting-which-results-in-sorted-array"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 1,
+  "pat_ep": 12,
+  "code": "P01E12",
+  "folder": "01-two-pointers",
+  "prep": "prep/01-two-pointers/12-minimum-window-sort.md"
+ },
+ {
+  "ep": 13,
+  "pattern": "Fast & Slow pointers",
+  "subgroup": null,
+  "title": "LinkedList Cycle",
+  "raw_title": "LinkedList Cycle (easy)",
+  "difficulty": "Easy",
+  "slug": "linkedlist-cycle",
+  "links": [
+   "https://leetcode.com/problems/linked-list-cycle/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 2,
+  "pat_ep": 1,
+  "code": "P02E01",
+  "folder": "02-fast-slow",
+  "prep": "prep/02-fast-slow/01-linkedlist-cycle.md"
+ },
+ {
+  "ep": 14,
+  "pattern": "Fast & Slow pointers",
+  "subgroup": null,
+  "title": "Start of LinkedList Cycle",
+  "raw_title": "Start of LinkedList Cycle (medium)",
+  "difficulty": "Medium",
+  "slug": "start-of-linkedlist-cycle",
+  "links": [
+   "https://leetcode.com/problems/linked-list-cycle-ii/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 2,
+  "pat_ep": 2,
+  "code": "P02E02",
+  "folder": "02-fast-slow",
+  "prep": "prep/02-fast-slow/02-start-of-linkedlist-cycle.md"
+ },
+ {
+  "ep": 15,
+  "pattern": "Fast & Slow pointers",
+  "subgroup": null,
+  "title": "Happy Number",
+  "raw_title": "Happy Number (medium)",
+  "difficulty": "Medium",
+  "slug": "happy-number",
+  "links": [
+   "https://leetcode.com/problems/happy-number/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 2,
+  "pat_ep": 3,
+  "code": "P02E03",
+  "folder": "02-fast-slow",
+  "prep": "prep/02-fast-slow/03-happy-number.md"
+ },
+ {
+  "ep": 16,
+  "pattern": "Fast & Slow pointers",
+  "subgroup": null,
+  "title": "FIND DUPLICATE NUMBER",
+  "raw_title": "FIND DUPLICATE NUMBER",
+  "difficulty": "",
+  "slug": "find-duplicate-number",
+  "links": [
+   "https://leetcode.com/problems/find-the-duplicate-number/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 2,
+  "pat_ep": 4,
+  "code": "P02E04",
+  "folder": "02-fast-slow",
+  "prep": "prep/02-fast-slow/04-find-duplicate-number.md"
+ },
+ {
+  "ep": 17,
+  "pattern": "Fast & Slow pointers",
+  "subgroup": null,
+  "title": "Middle of the LinkedList",
+  "raw_title": "Middle of the LinkedList (easy)",
+  "difficulty": "Easy",
+  "slug": "middle-of-the-linkedlist",
+  "links": [
+   "https://leetcode.com/problems/middle-of-the-linked-list/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 2,
+  "pat_ep": 5,
+  "code": "P02E05",
+  "folder": "02-fast-slow",
+  "prep": "prep/02-fast-slow/05-middle-of-the-linkedlist.md"
+ },
+ {
+  "ep": 18,
+  "pattern": "Fast & Slow pointers",
+  "subgroup": null,
+  "title": "Palindrome LinkedList",
+  "raw_title": "Problem Challenge 1: Palindrome LinkedList (medium)",
+  "difficulty": "Medium",
+  "slug": "palindrome-linkedlist",
+  "links": [
+   "https://leetcode.com/problems/palindrome-linked-list/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 2,
+  "pat_ep": 6,
+  "code": "P02E06",
+  "folder": "02-fast-slow",
+  "prep": "prep/02-fast-slow/06-palindrome-linkedlist.md"
+ },
+ {
+  "ep": 19,
+  "pattern": "Fast & Slow pointers",
+  "subgroup": null,
+  "title": "Rearrange a LinkedList",
+  "raw_title": "Problem Challenge 2: Rearrange a LinkedList (medium)",
+  "difficulty": "Medium",
+  "slug": "rearrange-a-linkedlist",
+  "links": [
+   "https://leetcode.com/problems/reorder-list/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 2,
+  "pat_ep": 7,
+  "code": "P02E07",
+  "folder": "02-fast-slow",
+  "prep": "prep/02-fast-slow/07-rearrange-a-linkedlist.md"
+ },
+ {
+  "ep": 20,
+  "pattern": "Fast & Slow pointers",
+  "subgroup": null,
+  "title": "Cycle in a Circular Array",
+  "raw_title": "Problem Challenge 3: Cycle in a Circular Array (hard)",
+  "difficulty": "Hard",
+  "slug": "cycle-in-a-circular-array",
+  "links": [
+   "https://leetcode.com/problems/circular-array-loop/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 2,
+  "pat_ep": 8,
+  "code": "P02E08",
+  "folder": "02-fast-slow",
+  "prep": "prep/02-fast-slow/08-cycle-in-a-circular-array.md"
+ },
+ {
+  "ep": 21,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "Maximum Sum Subarray of Size K",
+  "raw_title": "Maximum Sum Subarray of Size K (easy)",
+  "difficulty": "Easy",
+  "slug": "maximum-sum-subarray-of-size-k",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 1,
+  "code": "P03E01",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/01-maximum-sum-subarray-of-size-k.md"
+ },
+ {
+  "ep": 22,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "Smallest Subarray with a given sum",
+  "raw_title": "Smallest Subarray with a given sum (easy)",
+  "difficulty": "Easy",
+  "slug": "smallest-subarray-with-a-given-sum",
+  "links": [
+   "https://leetcode.com/problems/minimum-size-subarray-sum/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 2,
+  "code": "P03E02",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/02-smallest-subarray-with-a-given-sum.md"
+ },
+ {
+  "ep": 23,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "Longest Substring with K Distinct Characters",
+  "raw_title": "Longest Substring with K Distinct Characters (medium)",
+  "difficulty": "Medium",
+  "slug": "longest-substring-with-k-distinct-characters",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/longest-k-unique-characters-substring0853/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 3,
+  "code": "P03E03",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/03-longest-substring-with-k-distinct-characters.md"
+ },
+ {
+  "ep": 24,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "Fruits into Baskets",
+  "raw_title": "Fruits into Baskets (medium)",
+  "difficulty": "Medium",
+  "slug": "fruits-into-baskets",
+  "links": [
+   "https://leetcode.com/problems/fruit-into-baskets/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 4,
+  "code": "P03E04",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/04-fruits-into-baskets.md"
+ },
+ {
+  "ep": 25,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "No-repeat Substring",
+  "raw_title": "No-repeat Substring (hard)",
+  "difficulty": "Hard",
+  "slug": "no-repeat-substring",
+  "links": [
+   "https://leetcode.com/problems/longest-substring-without-repeating-characters/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 5,
+  "code": "P03E05",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/05-no-repeat-substring.md"
+ },
+ {
+  "ep": 26,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "Longest Substring with Same Letters after Replacement",
+  "raw_title": "Longest Substring with Same Letters after Replacement (hard)",
+  "difficulty": "Hard",
+  "slug": "longest-substring-with-same-letters-after-replac",
+  "links": [
+   "https://leetcode.com/problems/longest-repeating-character-replacement/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 6,
+  "code": "P03E06",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/06-longest-substring-with-same-letters-after-replac.md"
+ },
+ {
+  "ep": 27,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "Longest Subarray with Ones after Replacement",
+  "raw_title": "Longest Subarray with Ones after Replacement (hard)",
+  "difficulty": "Hard",
+  "slug": "longest-subarray-with-ones-after-replacement",
+  "links": [
+   "https://leetcode.com/problems/max-consecutive-ones-iii/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 7,
+  "code": "P03E07",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/07-longest-subarray-with-ones-after-replacement.md"
+ },
+ {
+  "ep": 28,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "Minimum size subarray SUM",
+  "raw_title": "Minimum size subarray SUM",
+  "difficulty": "",
+  "slug": "minimum-size-subarray-sum",
+  "links": [
+   "https://leetcode.com/problems/minimum-size-subarray-sum/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 8,
+  "code": "P03E08",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/08-minimum-size-subarray-sum.md"
+ },
+ {
+  "ep": 29,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "MInimum Size Substring",
+  "raw_title": "MInimum Size Substring (HARD)",
+  "difficulty": "Hard",
+  "slug": "minimum-size-substring",
+  "links": [
+   "https://leetcode.com/problems/minimum-window-substring/description/?envType=study-plan-v2&envId=top-interview-150"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 9,
+  "code": "P03E09",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/09-minimum-size-substring.md"
+ },
+ {
+  "ep": 30,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "Permutation in a String",
+  "raw_title": "Problem Challenge 1: Permutation in a String (hard)",
+  "difficulty": "Hard",
+  "slug": "permutation-in-a-string",
+  "links": [
+   "https://leetcode.com/problems/permutation-in-string/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 10,
+  "code": "P03E10",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/10-permutation-in-a-string.md"
+ },
+ {
+  "ep": 31,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "String Anagrams",
+  "raw_title": "Problem Challenge 2: String Anagrams (hard)",
+  "difficulty": "Hard",
+  "slug": "string-anagrams",
+  "links": [
+   "https://leetcode.com/problems/find-all-anagrams-in-a-string/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 11,
+  "code": "P03E11",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/11-string-anagrams.md"
+ },
+ {
+  "ep": 32,
+  "pattern": "Sliding Window",
+  "subgroup": null,
+  "title": "Words Concatenation",
+  "raw_title": "Problem Challenge 4: Words Concatenation (hard)",
+  "difficulty": "Hard",
+  "slug": "words-concatenation",
+  "links": [
+   "https://leetcode.com/problems/substring-with-concatenation-of-all-words/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 3,
+  "pat_ep": 12,
+  "code": "P03E12",
+  "folder": "03-sliding-window",
+  "prep": "prep/03-sliding-window/12-words-concatenation.md"
+ },
+ {
+  "ep": 33,
+  "pattern": "Kadane",
+  "subgroup": null,
+  "title": "Maximum subarray sum",
+  "raw_title": "Maximum subarray sum",
+  "difficulty": "",
+  "slug": "maximum-subarray-sum",
+  "links": [
+   "https://leetcode.com/problems/maximum-subarray/?utm_source=chatgpt.com"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 4,
+  "pat_ep": 1,
+  "code": "P04E01",
+  "folder": "04-kadane",
+  "prep": "prep/04-kadane/01-maximum-subarray-sum.md"
+ },
+ {
+  "ep": 34,
+  "pattern": "Kadane",
+  "subgroup": null,
+  "title": "Minimum Subarray Sum",
+  "raw_title": "Minimum Subarray Sum",
+  "difficulty": "",
+  "slug": "minimum-subarray-sum",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/smallest-sum-contiguous-subarray/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 4,
+  "pat_ep": 2,
+  "code": "P04E02",
+  "folder": "04-kadane",
+  "prep": "prep/04-kadane/02-minimum-subarray-sum.md"
+ },
+ {
+  "ep": 35,
+  "pattern": "Kadane",
+  "subgroup": null,
+  "title": "Maximum product subarray",
+  "raw_title": "Maximum product subarray",
+  "difficulty": "",
+  "slug": "maximum-product-subarray",
+  "links": [
+   "https://leetcode.com/problems/maximum-product-subarray/?utm_source=chatgpt.com"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 4,
+  "pat_ep": 3,
+  "code": "P04E03",
+  "folder": "04-kadane",
+  "prep": "prep/04-kadane/03-maximum-product-subarray.md"
+ },
+ {
+  "ep": 36,
+  "pattern": "Kadane",
+  "subgroup": null,
+  "title": "Maximum subarray sum with one deletion",
+  "raw_title": "Maximum subarray sum with one deletion",
+  "difficulty": "",
+  "slug": "maximum-subarray-sum-with-one-deletion",
+  "links": [
+   "https://leetcode.com/problems/maximum-subarray-sum-with-one-deletion/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 4,
+  "pat_ep": 4,
+  "code": "P04E04",
+  "folder": "04-kadane",
+  "prep": "prep/04-kadane/04-maximum-subarray-sum-with-one-deletion.md"
+ },
+ {
+  "ep": 37,
+  "pattern": "Kadane",
+  "subgroup": null,
+  "title": "Maximum absolute sum of any subarray",
+  "raw_title": "Maximum absolute sum of any subarray",
+  "difficulty": "",
+  "slug": "maximum-absolute-sum-of-any-subarray",
+  "links": [
+   "https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 4,
+  "pat_ep": 5,
+  "code": "P04E05",
+  "folder": "04-kadane",
+  "prep": "prep/04-kadane/05-maximum-absolute-sum-of-any-subarray.md"
+ },
+ {
+  "ep": 38,
+  "pattern": "Kadane",
+  "subgroup": null,
+  "title": "Maximum sum in circular array variant",
+  "raw_title": "Maximum sum in circular array variant",
+  "difficulty": "",
+  "slug": "maximum-sum-in-circular-array-variant",
+  "links": [
+   "https://leetcode.com/problems/maximum-sum-circular-subarray/?utm_source=chatgpt.com"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 4,
+  "pat_ep": 6,
+  "code": "P04E06",
+  "folder": "04-kadane",
+  "prep": "prep/04-kadane/06-maximum-sum-in-circular-array-variant.md"
+ },
+ {
+  "ep": 39,
+  "pattern": "Prefix Sum",
+  "subgroup": null,
+  "title": "Subarray Sum Equals K",
+  "raw_title": "Subarray Sum Equals K (EASY)",
+  "difficulty": "Easy",
+  "slug": "subarray-sum-equals-k",
+  "links": [
+   "https://leetcode.com/problems/subarray-sum-equals-k/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 5,
+  "pat_ep": 1,
+  "code": "P05E01",
+  "folder": "05-prefix-sum",
+  "prep": "prep/05-prefix-sum/01-subarray-sum-equals-k.md"
+ },
+ {
+  "ep": 40,
+  "pattern": "Prefix Sum",
+  "subgroup": null,
+  "title": "Find Pivot Index",
+  "raw_title": "Find Pivot Index (EASY)",
+  "difficulty": "Easy",
+  "slug": "find-pivot-index",
+  "links": [
+   "https://leetcode.com/problems/find-pivot-index/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 5,
+  "pat_ep": 2,
+  "code": "P05E02",
+  "folder": "05-prefix-sum",
+  "prep": "prep/05-prefix-sum/02-find-pivot-index.md"
+ },
+ {
+  "ep": 41,
+  "pattern": "Prefix Sum",
+  "subgroup": null,
+  "title": "Subarray Sums Divisible By K",
+  "raw_title": "Subarray Sums Divisible By K (Med)",
+  "difficulty": "Medium",
+  "slug": "subarray-sums-divisible-by-k",
+  "links": [
+   "https://leetcode.com/problems/subarray-sums-divisible-by-k/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 5,
+  "pat_ep": 3,
+  "code": "P05E03",
+  "folder": "05-prefix-sum",
+  "prep": "prep/05-prefix-sum/03-subarray-sums-divisible-by-k.md"
+ },
+ {
+  "ep": 42,
+  "pattern": "Prefix Sum",
+  "subgroup": null,
+  "title": "Contiguous array",
+  "raw_title": "Contiguous array (MED)",
+  "difficulty": "Medium",
+  "slug": "contiguous-array",
+  "links": [
+   "https://leetcode.com/problems/contiguous-array/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 5,
+  "pat_ep": 4,
+  "code": "P05E04",
+  "folder": "05-prefix-sum",
+  "prep": "prep/05-prefix-sum/04-contiguous-array.md"
+ },
+ {
+  "ep": 43,
+  "pattern": "Prefix Sum",
+  "subgroup": null,
+  "title": "Shortest Subarray With Sum at Least K",
+  "raw_title": "Problem challenge: Shortest Subarray With Sum at Least K (HARD)",
+  "difficulty": "Hard",
+  "slug": "shortest-subarray-with-sum-at-least-k",
+  "links": [
+   "https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 5,
+  "pat_ep": 5,
+  "code": "P05E05",
+  "folder": "05-prefix-sum",
+  "prep": "prep/05-prefix-sum/05-shortest-subarray-with-sum-at-least-k.md"
+ },
+ {
+  "ep": 44,
+  "pattern": "Prefix Sum",
+  "subgroup": null,
+  "title": "Count Range Sum",
+  "raw_title": "Problem challenge: Count Range Sum (hard)",
+  "difficulty": "Hard",
+  "slug": "count-range-sum",
+  "links": [
+   "https://leetcode.com/problems/count-of-range-sum/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 5,
+  "pat_ep": 6,
+  "code": "P05E06",
+  "folder": "05-prefix-sum",
+  "prep": "prep/05-prefix-sum/06-count-range-sum.md"
+ },
+ {
+  "ep": 45,
+  "pattern": "Merge Intervals",
+  "subgroup": null,
+  "title": "Merge Intervals",
+  "raw_title": "Merge Intervals (medium)",
+  "difficulty": "Medium",
+  "slug": "merge-intervals",
+  "links": [
+   "https://leetcode.com/problems/merge-intervals/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 6,
+  "pat_ep": 1,
+  "code": "P06E01",
+  "folder": "06-merge-intervals",
+  "prep": "prep/06-merge-intervals/01-merge-intervals.md"
+ },
+ {
+  "ep": 46,
+  "pattern": "Merge Intervals",
+  "subgroup": null,
+  "title": "Insert Interval",
+  "raw_title": "Insert Interval (medium)",
+  "difficulty": "Medium",
+  "slug": "insert-interval",
+  "links": [
+   "https://leetcode.com/problems/insert-interval/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 6,
+  "pat_ep": 2,
+  "code": "P06E02",
+  "folder": "06-merge-intervals",
+  "prep": "prep/06-merge-intervals/02-insert-interval.md"
+ },
+ {
+  "ep": 47,
+  "pattern": "Merge Intervals",
+  "subgroup": null,
+  "title": "Intervals Intersection",
+  "raw_title": "Intervals Intersection (medium)",
+  "difficulty": "Medium",
+  "slug": "intervals-intersection",
+  "links": [
+   "https://leetcode.com/problems/interval-list-intersections/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 6,
+  "pat_ep": 3,
+  "code": "P06E03",
+  "folder": "06-merge-intervals",
+  "prep": "prep/06-merge-intervals/03-intervals-intersection.md"
+ },
+ {
+  "ep": 48,
+  "pattern": "Merge Intervals",
+  "subgroup": null,
+  "title": "Overlapping Intervals",
+  "raw_title": "Overlapping Intervals",
+  "difficulty": "",
+  "slug": "overlapping-intervals",
+  "links": [
+   "https://www.geeksforgeeks.org/check-if-any-two-intervals-overlap-among-a-given-set-of-intervals/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 6,
+  "pat_ep": 4,
+  "code": "P06E04",
+  "folder": "06-merge-intervals",
+  "prep": "prep/06-merge-intervals/04-overlapping-intervals.md"
+ },
+ {
+  "ep": 49,
+  "pattern": "Merge Intervals",
+  "subgroup": null,
+  "title": "Minimum Meeting Rooms",
+  "raw_title": "Problem Challenge 1: Minimum Meeting Rooms (hard)",
+  "difficulty": "Hard",
+  "slug": "minimum-meeting-rooms",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/attend-all-meetings-ii/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 6,
+  "pat_ep": 5,
+  "code": "P06E05",
+  "folder": "06-merge-intervals",
+  "prep": "prep/06-merge-intervals/05-minimum-meeting-rooms.md"
+ },
+ {
+  "ep": 50,
+  "pattern": "Merge Intervals",
+  "subgroup": null,
+  "title": "Maximum CPU Load",
+  "raw_title": "Problem Challenge 2: Maximum CPU Load (hard)",
+  "difficulty": "Hard",
+  "slug": "maximum-cpu-load",
+  "links": [
+   "https://www.geeksforgeeks.org/maximum-cpu-load-from-the-given-list-of-jobs/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 6,
+  "pat_ep": 6,
+  "code": "P06E06",
+  "folder": "06-merge-intervals",
+  "prep": "prep/06-merge-intervals/06-maximum-cpu-load.md"
+ },
+ {
+  "ep": 51,
+  "pattern": "Merge Intervals",
+  "subgroup": null,
+  "title": "Employee Free Time",
+  "raw_title": "Problem Challenge 3: Employee Free Time (hard)",
+  "difficulty": "Hard",
+  "slug": "employee-free-time",
+  "links": [
+   "https://www.codertrain.co/employee-free-time"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 6,
+  "pat_ep": 7,
+  "code": "P06E07",
+  "folder": "06-merge-intervals",
+  "prep": "prep/06-merge-intervals/07-employee-free-time.md"
+ },
+ {
+  "ep": 52,
+  "pattern": "In-place Reversal of a LinkedList",
+  "subgroup": null,
+  "title": "Reverse a LinkedList",
+  "raw_title": "Reverse a LinkedList (easy)",
+  "difficulty": "Easy",
+  "slug": "reverse-a-linkedlist",
+  "links": [
+   "https://leetcode.com/problems/reverse-linked-list/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 7,
+  "pat_ep": 1,
+  "code": "P07E01",
+  "folder": "07-linkedlist-reversal",
+  "prep": "prep/07-linkedlist-reversal/01-reverse-a-linkedlist.md"
+ },
+ {
+  "ep": 53,
+  "pattern": "In-place Reversal of a LinkedList",
+  "subgroup": null,
+  "title": "Reverse a Sub-list",
+  "raw_title": "Reverse a Sub-list (medium)",
+  "difficulty": "Medium",
+  "slug": "reverse-a-sub-list",
+  "links": [
+   "https://leetcode.com/problems/reverse-linked-list-ii/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 7,
+  "pat_ep": 2,
+  "code": "P07E02",
+  "folder": "07-linkedlist-reversal",
+  "prep": "prep/07-linkedlist-reversal/02-reverse-a-sub-list.md"
+ },
+ {
+  "ep": 54,
+  "pattern": "In-place Reversal of a LinkedList",
+  "subgroup": null,
+  "title": "Reverse List in Pairs",
+  "raw_title": "Reverse List in Pairs (Medium)",
+  "difficulty": "Medium",
+  "slug": "reverse-list-in-pairs",
+  "links": [
+   "https://leetcode.com/problems/swap-nodes-in-pairs/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 7,
+  "pat_ep": 3,
+  "code": "P07E03",
+  "folder": "07-linkedlist-reversal",
+  "prep": "prep/07-linkedlist-reversal/03-reverse-list-in-pairs.md"
+ },
+ {
+  "ep": 55,
+  "pattern": "In-place Reversal of a LinkedList",
+  "subgroup": null,
+  "title": "Reverse every K-element Sub-list",
+  "raw_title": "Reverse every K-element Sub-list (HARD)",
+  "difficulty": "Hard",
+  "slug": "reverse-every-k-element-sub-list",
+  "links": [
+   "https://leetcode.com/problems/reverse-nodes-in-k-group/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 7,
+  "pat_ep": 4,
+  "code": "P07E04",
+  "folder": "07-linkedlist-reversal",
+  "prep": "prep/07-linkedlist-reversal/04-reverse-every-k-element-sub-list.md"
+ },
+ {
+  "ep": 56,
+  "pattern": "In-place Reversal of a LinkedList",
+  "subgroup": null,
+  "title": "Reverse nodes in EVEN Length Groups",
+  "raw_title": "Problem Challenge 1: Reverse nodes in EVEN Length Groups (HARD)",
+  "difficulty": "Hard",
+  "slug": "reverse-nodes-in-even-length-groups",
+  "links": [
+   "https://leetcode.com/problems/reverse-nodes-in-even-length-groups/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 7,
+  "pat_ep": 5,
+  "code": "P07E05",
+  "folder": "07-linkedlist-reversal",
+  "prep": "prep/07-linkedlist-reversal/05-reverse-nodes-in-even-length-groups.md"
+ },
+ {
+  "ep": 57,
+  "pattern": "In-place Reversal of a LinkedList",
+  "subgroup": null,
+  "title": "Rotate a LinkedList",
+  "raw_title": "Problem Challenge 2: Rotate a LinkedList (medium)",
+  "difficulty": "Medium",
+  "slug": "rotate-a-linkedlist",
+  "links": [
+   "https://leetcode.com/problems/rotate-list/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 7,
+  "pat_ep": 6,
+  "code": "P07E06",
+  "folder": "07-linkedlist-reversal",
+  "prep": "prep/07-linkedlist-reversal/06-rotate-a-linkedlist.md"
+ },
+ {
+  "ep": 58,
+  "pattern": "Stack",
+  "subgroup": null,
+  "title": "remove adjacent duplicates",
+  "raw_title": "remove adjacent duplicates",
+  "difficulty": "",
+  "slug": "remove-adjacent-duplicates",
+  "links": [
+   "https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 8,
+  "pat_ep": 1,
+  "code": "P08E01",
+  "folder": "08-stack",
+  "prep": "prep/08-stack/01-remove-adjacent-duplicates.md"
+ },
+ {
+  "ep": 59,
+  "pattern": "Stack",
+  "subgroup": null,
+  "title": "Balanced Parentheses",
+  "raw_title": "Balanced Parentheses",
+  "difficulty": "",
+  "slug": "balanced-parentheses",
+  "links": [
+   "https://leetcode.com/problems/valid-parentheses/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 8,
+  "pat_ep": 2,
+  "code": "P08E02",
+  "folder": "08-stack",
+  "prep": "prep/08-stack/02-balanced-parentheses.md"
+ },
+ {
+  "ep": 60,
+  "pattern": "Stack",
+  "subgroup": null,
+  "title": "Reverse a String",
+  "raw_title": "Reverse a String",
+  "difficulty": "",
+  "slug": "reverse-a-string",
+  "links": [],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 8,
+  "pat_ep": 3,
+  "code": "P08E03",
+  "folder": "08-stack",
+  "prep": "prep/08-stack/03-reverse-a-string.md"
+ },
+ {
+  "ep": 61,
+  "pattern": "Stack",
+  "subgroup": null,
+  "title": "Next Greater Element",
+  "raw_title": "Next Greater Element (easy)",
+  "difficulty": "Easy",
+  "slug": "next-greater-element",
+  "links": [
+   "https://leetcode.com/problems/next-greater-element-ii/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 8,
+  "pat_ep": 4,
+  "code": "P08E04",
+  "folder": "08-stack",
+  "prep": "prep/08-stack/04-next-greater-element.md"
+ },
+ {
+  "ep": 62,
+  "pattern": "Stack",
+  "subgroup": null,
+  "title": "Daily Temperatures",
+  "raw_title": "Daily Temperatures (easy)",
+  "difficulty": "Easy",
+  "slug": "daily-temperatures",
+  "links": [
+   "https://leetcode.com/problems/daily-temperatures/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 8,
+  "pat_ep": 5,
+  "code": "P08E05",
+  "folder": "08-stack",
+  "prep": "prep/08-stack/05-daily-temperatures.md"
+ },
+ {
+  "ep": 63,
+  "pattern": "Stack",
+  "subgroup": null,
+  "title": "Remove Nodes From Linked List",
+  "raw_title": "Remove Nodes From Linked List (easy)",
+  "difficulty": "Easy",
+  "slug": "remove-nodes-from-linked-list",
+  "links": [
+   "https://leetcode.com/problems/remove-nodes-from-linked-list/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 8,
+  "pat_ep": 6,
+  "code": "P08E06",
+  "folder": "08-stack",
+  "prep": "prep/08-stack/06-remove-nodes-from-linked-list.md"
+ },
+ {
+  "ep": 64,
+  "pattern": "Stack",
+  "subgroup": null,
+  "title": "Remove All Adjacent Duplicates in String II",
+  "raw_title": "Remove All Adjacent Duplicates in String II (medium)",
+  "difficulty": "Medium",
+  "slug": "remove-all-adjacent-duplicates-in-string-ii",
+  "links": [
+   "https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 8,
+  "pat_ep": 7,
+  "code": "P08E07",
+  "folder": "08-stack",
+  "prep": "prep/08-stack/07-remove-all-adjacent-duplicates-in-string-ii.md"
+ },
+ {
+  "ep": 65,
+  "pattern": "Stack",
+  "subgroup": null,
+  "title": "Simplify Path (Problem Challenge)",
+  "raw_title": "Simplify Path (Problem Challenge)",
+  "difficulty": "",
+  "slug": "simplify-path-problem-challenge",
+  "links": [
+   "https://leetcode.com/problems/simplify-path/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 8,
+  "pat_ep": 8,
+  "code": "P08E08",
+  "folder": "08-stack",
+  "prep": "prep/08-stack/08-simplify-path-problem-challenge.md"
+ },
+ {
+  "ep": 66,
+  "pattern": "Stack",
+  "subgroup": null,
+  "title": "Remove K Digits Problem challenge",
+  "raw_title": "Remove K Digits (hard) Problem challenge",
+  "difficulty": "Hard",
+  "slug": "remove-k-digits-problem-challenge",
+  "links": [
+   "https://leetcode.com/problems/remove-k-digits/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 8,
+  "pat_ep": 9,
+  "code": "P08E09",
+  "folder": "08-stack",
+  "prep": "prep/08-stack/09-remove-k-digits-problem-challenge.md"
+ },
+ {
+  "ep": 67,
+  "pattern": "Hash Maps",
+  "subgroup": null,
+  "title": "First Non-repeating Character",
+  "raw_title": "First Non-repeating Character (easy)",
+  "difficulty": "Easy",
+  "slug": "first-non-repeating-character",
+  "links": [
+   "https://leetcode.com/problems/first-unique-character-in-a-string/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 9,
+  "pat_ep": 1,
+  "code": "P09E01",
+  "folder": "09-hash-maps",
+  "prep": "prep/09-hash-maps/01-first-non-repeating-character.md"
+ },
+ {
+  "ep": 68,
+  "pattern": "Hash Maps",
+  "subgroup": null,
+  "title": "Maximum Number of Balloons",
+  "raw_title": "Maximum Number of Balloons (easy)",
+  "difficulty": "Easy",
+  "slug": "maximum-number-of-balloons",
+  "links": [
+   "https://leetcode.com/problems/maximum-number-of-balloons/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 9,
+  "pat_ep": 2,
+  "code": "P09E02",
+  "folder": "09-hash-maps",
+  "prep": "prep/09-hash-maps/02-maximum-number-of-balloons.md"
+ },
+ {
+  "ep": 69,
+  "pattern": "Hash Maps",
+  "subgroup": null,
+  "title": "Longest Palindrome",
+  "raw_title": "Longest Palindrome(easy)",
+  "difficulty": "Easy",
+  "slug": "longest-palindrome",
+  "links": [
+   "https://leetcode.com/problems/longest-palindrome/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 9,
+  "pat_ep": 3,
+  "code": "P09E03",
+  "folder": "09-hash-maps",
+  "prep": "prep/09-hash-maps/03-longest-palindrome.md"
+ },
+ {
+  "ep": 70,
+  "pattern": "Hash Maps",
+  "subgroup": null,
+  "title": "Ransom Note",
+  "raw_title": "Ransom Note (easy)",
+  "difficulty": "Easy",
+  "slug": "ransom-note",
+  "links": [
+   "https://leetcode.com/problems/ransom-note/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 9,
+  "pat_ep": 4,
+  "code": "P09E04",
+  "folder": "09-hash-maps",
+  "prep": "prep/09-hash-maps/04-ransom-note.md"
+ },
+ {
+  "ep": 71,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Binary search basic",
+  "raw_title": "Binary search basic",
+  "difficulty": "",
+  "slug": "binary-search-basic",
+  "links": [
+   "https://leetcode.com/problems/binary-search/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 1,
+  "code": "P10E01",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/01-binary-search-basic.md"
+ },
+ {
+  "ep": 72,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Upper Bound/ Ceiling",
+  "raw_title": "Upper Bound/ Ceiling",
+  "difficulty": "",
+  "slug": "upper-bound-ceiling",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/ceil-in-a-sorted-array/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 2,
+  "code": "P10E02",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/02-upper-bound-ceiling.md"
+ },
+ {
+  "ep": 73,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "First and Last position",
+  "raw_title": "First and Last position",
+  "difficulty": "",
+  "slug": "first-and-last-position",
+  "links": [
+   "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 3,
+  "code": "P10E03",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/03-first-and-last-position.md"
+ },
+ {
+  "ep": 74,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Count number of occurences",
+  "raw_title": "Count number of occurences",
+  "difficulty": "",
+  "slug": "count-number-of-occurences",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/number-of-occurrence2259/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 4,
+  "code": "P10E04",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/04-count-number-of-occurences.md"
+ },
+ {
+  "ep": 75,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Search in infinite Sorted array",
+  "raw_title": "Search in infinite Sorted array",
+  "difficulty": "",
+  "slug": "search-in-infinite-sorted-array",
+  "links": [
+   "https://www.geeksforgeeks.org/find-position-element-sorted-array-infinite-numbers/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 5,
+  "code": "P10E05",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/05-search-in-infinite-sorted-array.md"
+ },
+ {
+  "ep": 76,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Peak index in Mountain",
+  "raw_title": "Peak index in Mountain",
+  "difficulty": "",
+  "slug": "peak-index-in-mountain",
+  "links": [
+   "https://leetcode.com/problems/peak-index-in-a-mountain-array/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 6,
+  "code": "P10E06",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/06-peak-index-in-mountain.md"
+ },
+ {
+  "ep": 77,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Find peak in mountain range",
+  "raw_title": "Find peak in mountain range",
+  "difficulty": "",
+  "slug": "find-peak-in-mountain-range",
+  "links": [
+   "https://leetcode.com/problems/find-peak-element/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 7,
+  "code": "P10E07",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/07-find-peak-in-mountain-range.md"
+ },
+ {
+  "ep": 78,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Find minimum in rotated sorted array",
+  "raw_title": "Find minimum in rotated sorted array",
+  "difficulty": "",
+  "slug": "find-minimum-in-rotated-sorted-array",
+  "links": [
+   "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 8,
+  "code": "P10E08",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/08-find-minimum-in-rotated-sorted-array.md"
+ },
+ {
+  "ep": 79,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Find number of rotations to sorted array",
+  "raw_title": "Find number of rotations to sorted array",
+  "difficulty": "",
+  "slug": "find-number-of-rotations-to-sorted-array",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/rotation4723/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 9,
+  "code": "P10E09",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/09-find-number-of-rotations-to-sorted-array.md"
+ },
+ {
+  "ep": 80,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Search in rotated sorted array",
+  "raw_title": "Search in rotated sorted array",
+  "difficulty": "",
+  "slug": "search-in-rotated-sorted-array",
+  "links": [
+   "https://leetcode.com/problems/search-in-rotated-sorted-array/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 10,
+  "code": "P10E10",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/10-search-in-rotated-sorted-array.md"
+ },
+ {
+  "ep": 81,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "KOKO eating BANANAS",
+  "raw_title": "KOKO eating BANANAS",
+  "difficulty": "",
+  "slug": "koko-eating-bananas",
+  "links": [
+   "https://leetcode.com/problems/koko-eating-bananas/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 11,
+  "code": "P10E11",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/11-koko-eating-bananas.md"
+ },
+ {
+  "ep": 82,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Min num of days to make m bouquets",
+  "raw_title": "Min num of days to make m bouquets",
+  "difficulty": "",
+  "slug": "min-num-of-days-to-make-m-bouquets",
+  "links": [
+   "https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 12,
+  "code": "P10E12",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/12-min-num-of-days-to-make-m-bouquets.md"
+ },
+ {
+  "ep": 83,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Aggresive cows",
+  "raw_title": "Aggresive cows",
+  "difficulty": "",
+  "slug": "aggresive-cows",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/aggressive-cows/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 13,
+  "code": "P10E13",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/13-aggresive-cows.md"
+ },
+ {
+  "ep": 84,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "H index 2",
+  "raw_title": "H index 2",
+  "difficulty": "",
+  "slug": "h-index-2",
+  "links": [
+   "https://leetcode.com/problems/h-index-ii/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 14,
+  "code": "P10E14",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/14-h-index-2.md"
+ },
+ {
+  "ep": 85,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Max candies to k children",
+  "raw_title": "Max candies to k children",
+  "difficulty": "",
+  "slug": "max-candies-to-k-children",
+  "links": [
+   "https://leetcode.com/problems/maximum-candies-allocated-to-k-children/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 15,
+  "code": "P10E15",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/15-max-candies-to-k-children.md"
+ },
+ {
+  "ep": 86,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Capacity to ship packages in d days",
+  "raw_title": "Capacity to ship packages in d days",
+  "difficulty": "",
+  "slug": "capacity-to-ship-packages-in-d-days",
+  "links": [
+   "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 16,
+  "code": "P10E16",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/16-capacity-to-ship-packages-in-d-days.md"
+ },
+ {
+  "ep": 87,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Book Allocation Problem",
+  "raw_title": "Book Allocation Problem",
+  "difficulty": "",
+  "slug": "book-allocation-problem",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/allocate-minimum-number-of-pages0937/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 17,
+  "code": "P10E17",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/17-book-allocation-problem.md"
+ },
+ {
+  "ep": 88,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Split largest arrray",
+  "raw_title": "Split largest arrray",
+  "difficulty": "",
+  "slug": "split-largest-arrray",
+  "links": [
+   "https://leetcode.com/problems/split-array-largest-sum/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 18,
+  "code": "P10E18",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/18-split-largest-arrray.md"
+ },
+ {
+  "ep": 89,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Search 2 D matrix",
+  "raw_title": "Search 2 D matrix",
+  "difficulty": "",
+  "slug": "search-2-d-matrix",
+  "links": [
+   "https://leetcode.com/problems/search-a-2d-matrix/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 19,
+  "code": "P10E19",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/19-search-2-d-matrix.md"
+ },
+ {
+  "ep": 90,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "Search 2D matrix (Hard)",
+  "raw_title": "Search 2D matrix (Hard)",
+  "difficulty": "Hard",
+  "slug": "search-2d-matrix-hard",
+  "links": [
+   "https://leetcode.com/problems/search-a-2d-matrix-ii/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 20,
+  "code": "P10E20",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/20-search-2d-matrix-hard.md"
+ },
+ {
+  "ep": 91,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "kth smallest in sorted matrix",
+  "raw_title": "kth smallest in sorted matrix",
+  "difficulty": "",
+  "slug": "kth-smallest-in-sorted-matrix",
+  "links": [
+   "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 21,
+  "code": "P10E21",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/21-kth-smallest-in-sorted-matrix.md"
+ },
+ {
+  "ep": 92,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "kth smallest in multiplication matrix",
+  "raw_title": "kth smallest in multiplication matrix",
+  "difficulty": "",
+  "slug": "kth-smallest-in-multiplication-matrix",
+  "links": [
+   "https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 22,
+  "code": "P10E22",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/22-kth-smallest-in-multiplication-matrix.md"
+ },
+ {
+  "ep": 93,
+  "pattern": "Binary Search",
+  "subgroup": null,
+  "title": "median of 2 sorted arrays",
+  "raw_title": "median of 2 sorted arrays",
+  "difficulty": "",
+  "slug": "median-of-2-sorted-arrays",
+  "links": [
+   "https://leetcode.com/problems/median-of-two-sorted-arrays/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 10,
+  "pat_ep": 23,
+  "code": "P10E23",
+  "folder": "10-binary-search",
+  "prep": "prep/10-binary-search/23-median-of-2-sorted-arrays.md"
+ },
+ {
+  "ep": 94,
+  "pattern": "Heap",
+  "subgroup": "Kth",
+  "title": "kth smallest",
+  "raw_title": "kth smallest",
+  "difficulty": "",
+  "slug": "kth-smallest",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/kth-smallest-element5635/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 1,
+  "code": "P11E01",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/01-kth-smallest.md"
+ },
+ {
+  "ep": 95,
+  "pattern": "Heap",
+  "subgroup": "Kth",
+  "title": "kth largest",
+  "raw_title": "kth largest",
+  "difficulty": "",
+  "slug": "kth-largest",
+  "links": [
+   "https://leetcode.com/problems/kth-largest-element-in-an-array/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 2,
+  "code": "P11E02",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/02-kth-largest.md"
+ },
+ {
+  "ep": 96,
+  "pattern": "Heap",
+  "subgroup": "Kth",
+  "title": "TOP K frequent Elements",
+  "raw_title": "TOP K frequent Elements",
+  "difficulty": "",
+  "slug": "top-k-frequent-elements",
+  "links": [
+   "https://leetcode.com/problems/top-k-frequent-elements/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 3,
+  "code": "P11E03",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/03-top-k-frequent-elements.md"
+ },
+ {
+  "ep": 97,
+  "pattern": "Heap",
+  "subgroup": "Kth",
+  "title": "Top K frequent Words",
+  "raw_title": "Top K frequent Words",
+  "difficulty": "",
+  "slug": "top-k-frequent-words",
+  "links": [
+   "https://leetcode.com/problems/top-k-frequent-words/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 4,
+  "code": "P11E04",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/04-top-k-frequent-words.md"
+ },
+ {
+  "ep": 98,
+  "pattern": "Heap",
+  "subgroup": "K closest",
+  "title": "K closest points to origin",
+  "raw_title": "K closest points to origin",
+  "difficulty": "",
+  "slug": "k-closest-points-to-origin",
+  "links": [
+   "https://leetcode.com/problems/k-closest-points-to-origin/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 5,
+  "code": "P11E05",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/05-k-closest-points-to-origin.md"
+ },
+ {
+  "ep": 99,
+  "pattern": "Heap",
+  "subgroup": "K closest",
+  "title": "Find K closest elements",
+  "raw_title": "Find K closest elements",
+  "difficulty": "",
+  "slug": "find-k-closest-elements",
+  "links": [
+   "https://leetcode.com/problems/find-k-closest-elements/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 6,
+  "code": "P11E06",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/06-find-k-closest-elements.md"
+ },
+ {
+  "ep": 100,
+  "pattern": "Heap",
+  "subgroup": "K closest",
+  "title": "Kth weakest row in Matrix",
+  "raw_title": "Kth weakest row in Matrix",
+  "difficulty": "",
+  "slug": "kth-weakest-row-in-matrix",
+  "links": [
+   "https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 7,
+  "code": "P11E07",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/07-kth-weakest-row-in-matrix.md"
+ },
+ {
+  "ep": 101,
+  "pattern": "Heap",
+  "subgroup": "heap as pointer",
+  "title": "Merge K Sorted Arrays",
+  "raw_title": "Merge K Sorted Arrays",
+  "difficulty": "",
+  "slug": "merge-k-sorted-arrays",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/merge-k-sorted-arrays/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 8,
+  "code": "P11E08",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/08-merge-k-sorted-arrays.md"
+ },
+ {
+  "ep": 102,
+  "pattern": "Heap",
+  "subgroup": "heap as pointer",
+  "title": "Kth Smallest in Sorted Matrix",
+  "raw_title": "Kth Smallest in Sorted Matrix",
+  "difficulty": "",
+  "slug": "kth-smallest-in-sorted-matrix",
+  "links": [
+   "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/"
+  ],
+  "duplicate_of": 91,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 9,
+  "code": "P11E09",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/09-kth-smallest-in-sorted-matrix.md"
+ },
+ {
+  "ep": 103,
+  "pattern": "Heap",
+  "subgroup": "GREEDY+heap",
+  "title": "LAST STONE WEIGHT",
+  "raw_title": "LAST STONE WEIGHT",
+  "difficulty": "",
+  "slug": "last-stone-weight",
+  "links": [
+   "https://leetcode.com/problems/last-stone-weight/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 10,
+  "code": "P11E10",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/10-last-stone-weight.md"
+ },
+ {
+  "ep": 104,
+  "pattern": "Heap",
+  "subgroup": "GREEDY+heap",
+  "title": "CPU Task Scheduler",
+  "raw_title": "CPU Task Scheduler",
+  "difficulty": "",
+  "slug": "cpu-task-scheduler",
+  "links": [
+   "https://leetcode.com/problems/task-scheduler/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 11,
+  "code": "P11E11",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/11-cpu-task-scheduler.md"
+ },
+ {
+  "ep": 105,
+  "pattern": "Heap",
+  "subgroup": "GREEDY+heap",
+  "title": "Reorganize String",
+  "raw_title": "Reorganize String",
+  "difficulty": "",
+  "slug": "reorganize-string",
+  "links": [
+   "https://leetcode.com/problems/reorganize-string/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 12,
+  "code": "P11E12",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/12-reorganize-string.md"
+ },
+ {
+  "ep": 106,
+  "pattern": "Heap",
+  "subgroup": "GREEDY+heap",
+  "title": "Min number of refueling stops",
+  "raw_title": "Min number of refueling stops",
+  "difficulty": "",
+  "slug": "min-number-of-refueling-stops",
+  "links": [
+   "https://leetcode.com/problems/minimum-number-of-refueling-stops/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 13,
+  "code": "P11E13",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/13-min-number-of-refueling-stops.md"
+ },
+ {
+  "ep": 107,
+  "pattern": "Heap",
+  "subgroup": "GREEDY+heap",
+  "title": "IPO",
+  "raw_title": "IPO",
+  "difficulty": "",
+  "slug": "ipo",
+  "links": [
+   "https://leetcode.com/problems/ipo/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 14,
+  "code": "P11E14",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/14-ipo.md"
+ },
+ {
+  "ep": 108,
+  "pattern": "Heap",
+  "subgroup": "GREEDY+heap",
+  "title": "Course Scheduler 3",
+  "raw_title": "Course Scheduler 3",
+  "difficulty": "",
+  "slug": "course-scheduler-3",
+  "links": [
+   "https://leetcode.com/problems/course-schedule-iii/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 15,
+  "code": "P11E15",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/15-course-scheduler-3.md"
+ },
+ {
+  "ep": 109,
+  "pattern": "Heap",
+  "subgroup": "2 heaps",
+  "title": "Find median in data stream",
+  "raw_title": "Find median in data stream",
+  "difficulty": "",
+  "slug": "find-median-in-data-stream",
+  "links": [
+   "https://leetcode.com/problems/find-median-from-data-stream/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 16,
+  "code": "P11E16",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/16-find-median-in-data-stream.md"
+ },
+ {
+  "ep": 110,
+  "pattern": "Heap",
+  "subgroup": "2 heaps",
+  "title": "Sliding Window Median",
+  "raw_title": "Sliding Window Median (hard)",
+  "difficulty": "Hard",
+  "slug": "sliding-window-median",
+  "links": [
+   "https://leetcode.com/problems/sliding-window-median/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 11,
+  "pat_ep": 17,
+  "code": "P11E17",
+  "folder": "11-heap",
+  "prep": "prep/11-heap/17-sliding-window-median.md"
+ },
+ {
+  "ep": 111,
+  "pattern": "Recursion and Backtracking",
+  "subgroup": null,
+  "title": "Fibonnaci",
+  "raw_title": "Fibonnaci",
+  "difficulty": "",
+  "slug": "fibonnaci",
+  "links": [
+   "https://leetcode.com/problems/fibonacci-number/description/",
+   "https://www.youtube.com/watch?v=j4wjZqzhMqc&t"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 12,
+  "pat_ep": 1,
+  "code": "P12E01",
+  "folder": "12-recursion-backtracking",
+  "prep": "prep/12-recursion-backtracking/01-fibonnaci.md"
+ },
+ {
+  "ep": 112,
+  "pattern": "Recursion and Backtracking",
+  "subgroup": null,
+  "title": "Check if string is Pallindrome",
+  "raw_title": "Check if string is Pallindrome",
+  "difficulty": "",
+  "slug": "check-if-string-is-pallindrome",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/palindrome-string0817/1",
+   "https://www.youtube.com/watch?v=j4wjZqzhMqc&t"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 12,
+  "pat_ep": 2,
+  "code": "P12E02",
+  "folder": "12-recursion-backtracking",
+  "prep": "prep/12-recursion-backtracking/02-check-if-string-is-pallindrome.md"
+ },
+ {
+  "ep": 113,
+  "pattern": "Recursion and Backtracking",
+  "subgroup": null,
+  "title": "Check if Array is Sorted",
+  "raw_title": "Check if Array is Sorted",
+  "difficulty": "",
+  "slug": "check-if-array-is-sorted",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1",
+   "https://www.youtube.com/watch?v=-gC-QEdpvO4"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 12,
+  "pat_ep": 3,
+  "code": "P12E03",
+  "folder": "12-recursion-backtracking",
+  "prep": "prep/12-recursion-backtracking/03-check-if-array-is-sorted.md"
+ },
+ {
+  "ep": 114,
+  "pattern": "Recursion and Backtracking",
+  "subgroup": null,
+  "title": "Sum of digits of a number",
+  "raw_title": "Sum of digits of a number",
+  "difficulty": "",
+  "slug": "sum-of-digits-of-a-number",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/sum-of-digits1742/1",
+   "https://www.youtube.com/watch?v=-gC-QEdpvO4"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 12,
+  "pat_ep": 4,
+  "code": "P12E04",
+  "folder": "12-recursion-backtracking",
+  "prep": "prep/12-recursion-backtracking/04-sum-of-digits-of-a-number.md"
+ },
+ {
+  "ep": 115,
+  "pattern": "Recursion and Backtracking",
+  "subgroup": null,
+  "title": "Remove occurences of a character in string",
+  "raw_title": "Remove occurences of a character in string",
+  "difficulty": "",
+  "slug": "remove-occurences-of-a-character-in-string",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/remove-all-occurrences-of-a-character-in-a-string/1",
+   "https://www.youtube.com/watch?v=-gC-QEdpvO4"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 12,
+  "pat_ep": 5,
+  "code": "P12E05",
+  "folder": "12-recursion-backtracking",
+  "prep": "prep/12-recursion-backtracking/05-remove-occurences-of-a-character-in-string.md"
+ },
+ {
+  "ep": 116,
+  "pattern": "Recursion and Backtracking",
+  "subgroup": null,
+  "title": "Generate parenthesis",
+  "raw_title": "Generate parenthesis",
+  "difficulty": "",
+  "slug": "generate-parenthesis",
+  "links": [
+   "https://leetcode.com/problems/generate-parentheses/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 12,
+  "pat_ep": 6,
+  "code": "P12E06",
+  "folder": "12-recursion-backtracking",
+  "prep": "prep/12-recursion-backtracking/06-generate-parenthesis.md"
+ },
+ {
+  "ep": 117,
+  "pattern": "Recursion and Backtracking",
+  "subgroup": null,
+  "title": "Letter Combinations of phone number",
+  "raw_title": "Letter Combinations of phone number",
+  "difficulty": "",
+  "slug": "letter-combinations-of-phone-number",
+  "links": [
+   "https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/",
+   "https://www.youtube.com/watch?v=IKfIT6uFOcs"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 12,
+  "pat_ep": 7,
+  "code": "P12E07",
+  "folder": "12-recursion-backtracking",
+  "prep": "prep/12-recursion-backtracking/07-letter-combinations-of-phone-number.md"
+ },
+ {
+  "ep": 118,
+  "pattern": "Recursion and Backtracking",
+  "subgroup": null,
+  "title": "Permutations",
+  "raw_title": "Permutations",
+  "difficulty": "",
+  "slug": "permutations",
+  "links": [
+   "https://leetcode.com/problems/permutations/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 12,
+  "pat_ep": 8,
+  "code": "P12E08",
+  "folder": "12-recursion-backtracking",
+  "prep": "prep/12-recursion-backtracking/08-permutations.md"
+ },
+ {
+  "ep": 119,
+  "pattern": "Recursion and Backtracking",
+  "subgroup": null,
+  "title": "Combination Sum",
+  "raw_title": "Combination Sum",
+  "difficulty": "",
+  "slug": "combination-sum",
+  "links": [
+   "https://leetcode.com/problems/combination-sum/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 12,
+  "pat_ep": 9,
+  "code": "P12E09",
+  "folder": "12-recursion-backtracking",
+  "prep": "prep/12-recursion-backtracking/09-combination-sum.md"
+ },
+ {
+  "ep": 120,
+  "pattern": "Recursion and Backtracking",
+  "subgroup": null,
+  "title": "Pallindrome partition",
+  "raw_title": "Pallindrome partition",
+  "difficulty": "",
+  "slug": "pallindrome-partition",
+  "links": [
+   "https://leetcode.com/problems/palindrome-partitioning/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 12,
+  "pat_ep": 10,
+  "code": "P12E10",
+  "folder": "12-recursion-backtracking",
+  "prep": "prep/12-recursion-backtracking/10-pallindrome-partition.md"
+ },
+ {
+  "ep": 121,
+  "pattern": "Tree",
+  "subgroup": "Traversal",
+  "title": "Inorder",
+  "raw_title": "Inorder",
+  "difficulty": "",
+  "slug": "inorder",
+  "links": [
+   "https://leetcode.com/problems/binary-tree-inorder-traversal/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 1,
+  "code": "P13E01",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/01-inorder.md"
+ },
+ {
+  "ep": 122,
+  "pattern": "Tree",
+  "subgroup": "Traversal",
+  "title": "Preorder",
+  "raw_title": "Preorder",
+  "difficulty": "",
+  "slug": "preorder",
+  "links": [
+   "https://leetcode.com/problems/binary-tree-preorder-traversal/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 2,
+  "code": "P13E02",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/02-preorder.md"
+ },
+ {
+  "ep": 123,
+  "pattern": "Tree",
+  "subgroup": "Traversal",
+  "title": "Postorder",
+  "raw_title": "Postorder",
+  "difficulty": "",
+  "slug": "postorder",
+  "links": [
+   "https://leetcode.com/problems/binary-tree-postorder-traversal/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [
+   "Homework"
+  ],
+  "pat_no": 13,
+  "pat_ep": 3,
+  "code": "P13E03",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/03-postorder.md"
+ },
+ {
+  "ep": 124,
+  "pattern": "Tree",
+  "subgroup": "Traversal",
+  "title": "Level Order",
+  "raw_title": "Level Order",
+  "difficulty": "",
+  "slug": "level-order",
+  "links": [
+   "https://leetcode.com/problems/binary-tree-level-order-traversal/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 4,
+  "code": "P13E04",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/04-level-order.md"
+ },
+ {
+  "ep": 125,
+  "pattern": "Tree",
+  "subgroup": "Traversal",
+  "title": "ZigZag Order",
+  "raw_title": "ZigZag Order",
+  "difficulty": "",
+  "slug": "zigzag-order",
+  "links": [
+   "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 5,
+  "code": "P13E05",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/05-zigzag-order.md"
+ },
+ {
+  "ep": 126,
+  "pattern": "Tree",
+  "subgroup": "Traversal",
+  "title": "Level Order II",
+  "raw_title": "Level Order II",
+  "difficulty": "",
+  "slug": "level-order-ii",
+  "links": [
+   "https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [
+   "Homework"
+  ],
+  "pat_no": 13,
+  "pat_ep": 6,
+  "code": "P13E06",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/06-level-order-ii.md"
+ },
+ {
+  "ep": 127,
+  "pattern": "Tree",
+  "subgroup": "Mirror and Symmetry",
+  "title": "Invert Tree",
+  "raw_title": "Invert Tree",
+  "difficulty": "",
+  "slug": "invert-tree",
+  "links": [
+   "https://leetcode.com/problems/invert-binary-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 7,
+  "code": "P13E07",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/07-invert-tree.md"
+ },
+ {
+  "ep": 128,
+  "pattern": "Tree",
+  "subgroup": "Mirror and Symmetry",
+  "title": "Symmetric Tree",
+  "raw_title": "Symmetric Tree",
+  "difficulty": "",
+  "slug": "symmetric-tree",
+  "links": [
+   "https://leetcode.com/problems/symmetric-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 8,
+  "code": "P13E08",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/08-symmetric-tree.md"
+ },
+ {
+  "ep": 129,
+  "pattern": "Tree",
+  "subgroup": "Mirror and Symmetry",
+  "title": "Same Tree",
+  "raw_title": "Same Tree",
+  "difficulty": "",
+  "slug": "same-tree",
+  "links": [
+   "https://leetcode.com/problems/same-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [
+   "Homework"
+  ],
+  "pat_no": 13,
+  "pat_ep": 9,
+  "code": "P13E09",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/09-same-tree.md"
+ },
+ {
+  "ep": 130,
+  "pattern": "Tree",
+  "subgroup": "Mirror and Symmetry",
+  "title": "Subtree of another TREE",
+  "raw_title": "Subtree of another TREE",
+  "difficulty": "",
+  "slug": "subtree-of-another-tree",
+  "links": [
+   "https://leetcode.com/problems/subtree-of-another-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 10,
+  "code": "P13E10",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/10-subtree-of-another-tree.md"
+ },
+ {
+  "ep": 131,
+  "pattern": "Tree",
+  "subgroup": "Mirror and Symmetry",
+  "title": "Flip Equivalent Tree",
+  "raw_title": "Flip Equivalent Tree",
+  "difficulty": "",
+  "slug": "flip-equivalent-tree",
+  "links": [
+   "https://leetcode.com/problems/flip-equivalent-binary-trees/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 11,
+  "code": "P13E11",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/11-flip-equivalent-tree.md"
+ },
+ {
+  "ep": 132,
+  "pattern": "Tree",
+  "subgroup": "Search",
+  "title": "LCA of Binary TREE",
+  "raw_title": "LCA of Binary TREE",
+  "difficulty": "",
+  "slug": "lca-of-binary-tree",
+  "links": [
+   "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 12,
+  "code": "P13E12",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/12-lca-of-binary-tree.md"
+ },
+ {
+  "ep": 133,
+  "pattern": "Tree",
+  "subgroup": "Search",
+  "title": "Binary Search Tree",
+  "raw_title": "Binary Search Tree",
+  "difficulty": "",
+  "slug": "binary-search-tree",
+  "links": [
+   "https://leetcode.com/problems/search-in-a-binary-search-tree/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 13,
+  "code": "P13E13",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/13-binary-search-tree.md"
+ },
+ {
+  "ep": 134,
+  "pattern": "Tree",
+  "subgroup": "Search",
+  "title": "LCA of BST",
+  "raw_title": "LCA of BST",
+  "difficulty": "",
+  "slug": "lca-of-bst",
+  "links": [
+   "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 14,
+  "code": "P13E14",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/14-lca-of-bst.md"
+ },
+ {
+  "ep": 135,
+  "pattern": "Tree",
+  "subgroup": "Search",
+  "title": "LCA of Deepest Leaves",
+  "raw_title": "LCA of Deepest Leaves",
+  "difficulty": "",
+  "slug": "lca-of-deepest-leaves",
+  "links": [
+   "https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 15,
+  "code": "P13E15",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/15-lca-of-deepest-leaves.md"
+ },
+ {
+  "ep": 136,
+  "pattern": "Tree",
+  "subgroup": "Search",
+  "title": "Two Sum IV",
+  "raw_title": "Two Sum IV",
+  "difficulty": "",
+  "slug": "two-sum-iv",
+  "links": [
+   "https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 16,
+  "code": "P13E16",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/16-two-sum-iv.md"
+ },
+ {
+  "ep": 137,
+  "pattern": "Tree",
+  "subgroup": "Search",
+  "title": "Kth smallest element in BST",
+  "raw_title": "Kth smallest element in BST",
+  "difficulty": "",
+  "slug": "kth-smallest-element-in-bst",
+  "links": [
+   "https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 17,
+  "code": "P13E17",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/17-kth-smallest-element-in-bst.md"
+ },
+ {
+  "ep": 138,
+  "pattern": "Tree",
+  "subgroup": "Validation",
+  "title": "Minimum Depth of Binary Tree",
+  "raw_title": "Minimum Depth of Binary Tree",
+  "difficulty": "",
+  "slug": "minimum-depth-of-binary-tree",
+  "links": [
+   "https://leetcode.com/problems/minimum-depth-of-binary-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 18,
+  "code": "P13E18",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/18-minimum-depth-of-binary-tree.md"
+ },
+ {
+  "ep": 139,
+  "pattern": "Tree",
+  "subgroup": "Validation",
+  "title": "Maximum Depth of Binary Tree",
+  "raw_title": "Maximum Depth of Binary Tree",
+  "difficulty": "",
+  "slug": "maximum-depth-of-binary-tree",
+  "links": [
+   "https://leetcode.com/problems/maximum-depth-of-binary-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 19,
+  "code": "P13E19",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/19-maximum-depth-of-binary-tree.md"
+ },
+ {
+  "ep": 140,
+  "pattern": "Tree",
+  "subgroup": "Validation",
+  "title": "Balanced Binary Tree",
+  "raw_title": "Balanced Binary Tree",
+  "difficulty": "",
+  "slug": "balanced-binary-tree",
+  "links": [
+   "https://leetcode.com/problems/balanced-binary-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 20,
+  "code": "P13E20",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/20-balanced-binary-tree.md"
+ },
+ {
+  "ep": 141,
+  "pattern": "Tree",
+  "subgroup": "Validation",
+  "title": "Diameter of Binary Tree",
+  "raw_title": "Diameter of Binary Tree",
+  "difficulty": "",
+  "slug": "diameter-of-binary-tree",
+  "links": [
+   "https://leetcode.com/problems/diameter-of-binary-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 21,
+  "code": "P13E21",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/21-diameter-of-binary-tree.md"
+ },
+ {
+  "ep": 142,
+  "pattern": "Tree",
+  "subgroup": "Validation",
+  "title": "Check Completeness of Binary Tree",
+  "raw_title": "Check Completeness of Binary Tree",
+  "difficulty": "",
+  "slug": "check-completeness-of-binary-tree",
+  "links": [
+   "https://leetcode.com/problems/check-completeness-of-a-binary-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 22,
+  "code": "P13E22",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/22-check-completeness-of-binary-tree.md"
+ },
+ {
+  "ep": 143,
+  "pattern": "Tree",
+  "subgroup": "Validation",
+  "title": "Validate BST",
+  "raw_title": "Validate BST",
+  "difficulty": "",
+  "slug": "validate-bst",
+  "links": [
+   "https://leetcode.com/problems/validate-binary-search-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 23,
+  "code": "P13E23",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/23-validate-bst.md"
+ },
+ {
+  "ep": 144,
+  "pattern": "Tree",
+  "subgroup": "Validation",
+  "title": "Recover BST",
+  "raw_title": "Recover BST",
+  "difficulty": "",
+  "slug": "recover-bst",
+  "links": [
+   "https://leetcode.com/problems/recover-binary-search-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 24,
+  "code": "P13E24",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/24-recover-bst.md"
+ },
+ {
+  "ep": 145,
+  "pattern": "Tree",
+  "subgroup": "Path SUM",
+  "title": "Path Sum",
+  "raw_title": "Path Sum",
+  "difficulty": "",
+  "slug": "path-sum",
+  "links": [
+   "https://leetcode.com/problems/path-sum/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 25,
+  "code": "P13E25",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/25-path-sum.md"
+ },
+ {
+  "ep": 146,
+  "pattern": "Tree",
+  "subgroup": "Path SUM",
+  "title": "Path Sum II",
+  "raw_title": "Path Sum II",
+  "difficulty": "",
+  "slug": "path-sum-ii",
+  "links": [
+   "https://leetcode.com/problems/path-sum-ii/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 26,
+  "code": "P13E26",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/26-path-sum-ii.md"
+ },
+ {
+  "ep": 147,
+  "pattern": "Tree",
+  "subgroup": "Path SUM",
+  "title": "Sum of Root to Leaf",
+  "raw_title": "Sum of Root to Leaf",
+  "difficulty": "",
+  "slug": "sum-of-root-to-leaf",
+  "links": [
+   "https://leetcode.com/problems/sum-root-to-leaf-numbers/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 27,
+  "code": "P13E27",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/27-sum-of-root-to-leaf.md"
+ },
+ {
+  "ep": 148,
+  "pattern": "Tree",
+  "subgroup": "Path SUM",
+  "title": "Maximum Path Sum",
+  "raw_title": "Maximum Path Sum",
+  "difficulty": "",
+  "slug": "maximum-path-sum",
+  "links": [
+   "https://leetcode.com/problems/binary-tree-maximum-path-sum/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 28,
+  "code": "P13E28",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/28-maximum-path-sum.md"
+ },
+ {
+  "ep": 149,
+  "pattern": "Tree",
+  "subgroup": "Construction",
+  "title": "Contruct tree from preorder and inorder",
+  "raw_title": "Contruct tree from preorder and inorder",
+  "difficulty": "",
+  "slug": "contruct-tree-from-preorder-and-inorder",
+  "links": [
+   "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 29,
+  "code": "P13E29",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/29-contruct-tree-from-preorder-and-inorder.md"
+ },
+ {
+  "ep": 150,
+  "pattern": "Tree",
+  "subgroup": "Construction",
+  "title": "Contruct tree from postorder and inorder",
+  "raw_title": "Contruct tree from postorder and inorder",
+  "difficulty": "",
+  "slug": "contruct-tree-from-postorder-and-inorder",
+  "links": [
+   "https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 30,
+  "code": "P13E30",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/30-contruct-tree-from-postorder-and-inorder.md"
+ },
+ {
+  "ep": 151,
+  "pattern": "Tree",
+  "subgroup": "Construction",
+  "title": "Sorted Array to BST",
+  "raw_title": "Sorted Array to BST",
+  "difficulty": "",
+  "slug": "sorted-array-to-bst",
+  "links": [
+   "https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 13,
+  "pat_ep": 31,
+  "code": "P13E31",
+  "folder": "13-tree",
+  "prep": "prep/13-tree/31-sorted-array-to-bst.md"
+ },
+ {
+  "ep": 152,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Construct Adjancency List from EDGES+Nodes",
+  "raw_title": "Construct Adjancency List from EDGES+Nodes",
+  "difficulty": "",
+  "slug": "construct-adjancency-list-from-edges-nodes",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/print-adjacency-list-1587115620/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 1,
+  "code": "P14E01",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/01-construct-adjancency-list-from-edges-nodes.md"
+ },
+ {
+  "ep": 153,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Graph DFS",
+  "raw_title": "Graph DFS",
+  "difficulty": "",
+  "slug": "graph-dfs",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 2,
+  "code": "P14E02",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/02-graph-dfs.md"
+ },
+ {
+  "ep": 154,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "GRAPH BFS",
+  "raw_title": "GRAPH BFS",
+  "difficulty": "",
+  "slug": "graph-bfs",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 3,
+  "code": "P14E03",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/03-graph-bfs.md"
+ },
+ {
+  "ep": 155,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Number of Islands",
+  "raw_title": "Number of Islands",
+  "difficulty": "",
+  "slug": "number-of-islands",
+  "links": [
+   "https://leetcode.com/problems/number-of-islands/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 4,
+  "code": "P14E04",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/04-number-of-islands.md"
+ },
+ {
+  "ep": 156,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Number of Provinces",
+  "raw_title": "Number of Provinces",
+  "difficulty": "",
+  "slug": "number-of-provinces",
+  "links": [
+   "https://leetcode.com/problems/number-of-provinces/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 5,
+  "code": "P14E05",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/05-number-of-provinces.md"
+ },
+ {
+  "ep": 157,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Rotten Oranges",
+  "raw_title": "Rotten Oranges",
+  "difficulty": "",
+  "slug": "rotten-oranges",
+  "links": [
+   "https://leetcode.com/problems/rotting-oranges/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 6,
+  "code": "P14E06",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/06-rotten-oranges.md"
+ },
+ {
+  "ep": 158,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Cycle detection in undirected graph",
+  "raw_title": "Cycle detection in undirected graph",
+  "difficulty": "",
+  "slug": "cycle-detection-in-undirected-graph",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 7,
+  "code": "P14E07",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/07-cycle-detection-in-undirected-graph.md"
+ },
+ {
+  "ep": 159,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Cycle detection in directed graph",
+  "raw_title": "Cycle detection in directed graph",
+  "difficulty": "",
+  "slug": "cycle-detection-in-directed-graph",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 8,
+  "code": "P14E08",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/08-cycle-detection-in-directed-graph.md"
+ },
+ {
+  "ep": 160,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Topological sort",
+  "raw_title": "Topological sort",
+  "difficulty": "",
+  "slug": "topological-sort",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/topological-sort/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 9,
+  "code": "P14E09",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/09-topological-sort.md"
+ },
+ {
+  "ep": 161,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Bipartite Graph/ Graph Coloring",
+  "raw_title": "Bipartite Graph/ Graph Coloring",
+  "difficulty": "",
+  "slug": "bipartite-graph-graph-coloring",
+  "links": [
+   "https://leetcode.com/problems/is-graph-bipartite/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 10,
+  "code": "P14E10",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/10-bipartite-graph-graph-coloring.md"
+ },
+ {
+  "ep": 162,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Surrounded Regoins",
+  "raw_title": "Surrounded Regoins",
+  "difficulty": "",
+  "slug": "surrounded-regoins",
+  "links": [
+   "https://leetcode.com/problems/surrounded-regions/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 11,
+  "code": "P14E11",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/11-surrounded-regoins.md"
+ },
+ {
+  "ep": 163,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Shortest Path in Non-Weighted Graph",
+  "raw_title": "Shortest Path in Non-Weighted Graph",
+  "difficulty": "",
+  "slug": "shortest-path-in-non-weighted-graph",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 12,
+  "code": "P14E12",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/12-shortest-path-in-non-weighted-graph.md"
+ },
+ {
+  "ep": 164,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Dijkstra's Algorithm",
+  "raw_title": "Dijkstra's Algorithm",
+  "difficulty": "",
+  "slug": "dijkstra-s-algorithm",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 13,
+  "code": "P14E13",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/13-dijkstra-s-algorithm.md"
+ },
+ {
+  "ep": 165,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Network Delay",
+  "raw_title": "Network Delay",
+  "difficulty": "",
+  "slug": "network-delay",
+  "links": [
+   "https://leetcode.com/problems/network-delay-time/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 14,
+  "code": "P14E14",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/14-network-delay.md"
+ },
+ {
+  "ep": 166,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Path With Minimum Effort",
+  "raw_title": "Path With Minimum Effort",
+  "difficulty": "",
+  "slug": "path-with-minimum-effort",
+  "links": [
+   "https://leetcode.com/problems/path-with-minimum-effort/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 15,
+  "code": "P14E15",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/15-path-with-minimum-effort.md"
+ },
+ {
+  "ep": 167,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Swim in Rising Water",
+  "raw_title": "Swim in Rising Water",
+  "difficulty": "",
+  "slug": "swim-in-rising-water",
+  "links": [
+   "https://leetcode.com/problems/swim-in-rising-water/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 16,
+  "code": "P14E16",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/16-swim-in-rising-water.md"
+ },
+ {
+  "ep": 168,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Bellman ford",
+  "raw_title": "Bellman ford",
+  "difficulty": "",
+  "slug": "bellman-ford",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 17,
+  "code": "P14E17",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/17-bellman-ford.md"
+ },
+ {
+  "ep": 169,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Cheapest Path in K stops",
+  "raw_title": "Cheapest Path in K stops",
+  "difficulty": "",
+  "slug": "cheapest-path-in-k-stops",
+  "links": [
+   "https://leetcode.com/problems/cheapest-flights-within-k-stops/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 18,
+  "code": "P14E18",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/18-cheapest-path-in-k-stops.md"
+ },
+ {
+  "ep": 170,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Prim MST",
+  "raw_title": "Prim MST",
+  "difficulty": "",
+  "slug": "prim-mst",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 19,
+  "code": "P14E19",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/19-prim-mst.md"
+ },
+ {
+  "ep": 171,
+  "pattern": "Graphs",
+  "subgroup": null,
+  "title": "Word Ladder",
+  "raw_title": "Word Ladder",
+  "difficulty": "",
+  "slug": "word-ladder",
+  "links": [
+   "https://leetcode.com/problems/word-ladder/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 14,
+  "pat_ep": 20,
+  "code": "P14E20",
+  "folder": "14-graphs",
+  "prep": "prep/14-graphs/20-word-ladder.md"
+ },
+ {
+  "ep": 172,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "Fibonacci",
+  "raw_title": "Episode-02: Fibonacci",
+  "difficulty": "",
+  "slug": "fibonacci",
+  "links": [
+   "https://leetcode.com/problems/fibonacci-number/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 1,
+  "code": "P15E01",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/01-fibonacci.md"
+ },
+ {
+  "ep": 173,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "Climbing Stairs",
+  "raw_title": "Episode 03: Climbing Stairs",
+  "difficulty": "",
+  "slug": "climbing-stairs",
+  "links": [
+   "https://leetcode.com/problems/climbing-stairs/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 2,
+  "code": "P15E02",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/02-climbing-stairs.md"
+ },
+ {
+  "ep": 174,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "House Robber",
+  "raw_title": "Episode 04: House Robber",
+  "difficulty": "",
+  "slug": "house-robber",
+  "links": [
+   "https://leetcode.com/problems/house-robber/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 3,
+  "code": "P15E03",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/03-house-robber.md"
+ },
+ {
+  "ep": 175,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "0/1 Knapsack",
+  "raw_title": "Episode 05: 0/1 Knapsack",
+  "difficulty": "",
+  "slug": "0-1-knapsack",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 4,
+  "code": "P15E04",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/04-0-1-knapsack.md"
+ },
+ {
+  "ep": 176,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "tabulation Intro",
+  "raw_title": "Episode 06: tabulation Intro",
+  "difficulty": "",
+  "slug": "tabulation-intro",
+  "links": [],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 5,
+  "code": "P15E05",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/05-tabulation-intro.md"
+ },
+ {
+  "ep": 177,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "0/1 Knapsack Tabulation",
+  "raw_title": "Episode 07: 0/1 Knapsack Tabulation",
+  "difficulty": "",
+  "slug": "0-1-knapsack-tabulation",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 6,
+  "code": "P15E06",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/06-0-1-knapsack-tabulation.md"
+ },
+ {
+  "ep": 178,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "Subset sum",
+  "raw_title": "Episode 08: Subset sum",
+  "difficulty": "",
+  "slug": "subset-sum",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 7,
+  "code": "P15E07",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/07-subset-sum.md"
+ },
+ {
+  "ep": 179,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "Target Sum",
+  "raw_title": "Episode 09 : Target Sum",
+  "difficulty": "",
+  "slug": "target-sum",
+  "links": [
+   "https://www.geeksforgeeks.org/problems/target-sum-1626326450/1"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 8,
+  "code": "P15E08",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/08-target-sum.md"
+ },
+ {
+  "ep": 180,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "LIS",
+  "raw_title": "Episode 10 : LIS",
+  "difficulty": "",
+  "slug": "lis",
+  "links": [
+   "https://leetcode.com/problems/longest-increasing-subsequence/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 9,
+  "code": "P15E09",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/09-lis.md"
+ },
+ {
+  "ep": 181,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "LIS Tabulation",
+  "raw_title": "Episode 11 : LIS Tabulation",
+  "difficulty": "",
+  "slug": "lis-tabulation",
+  "links": [],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 10,
+  "code": "P15E10",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/10-lis-tabulation.md"
+ },
+ {
+  "ep": 182,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "LCS",
+  "raw_title": "Episode 12 : LCS",
+  "difficulty": "",
+  "slug": "lcs",
+  "links": [
+   "https://leetcode.com/problems/longest-common-subsequence/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 11,
+  "code": "P15E11",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/11-lcs.md"
+ },
+ {
+  "ep": 183,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "Unique Paths",
+  "raw_title": "Episode 13 : Unique Paths",
+  "difficulty": "",
+  "slug": "unique-paths",
+  "links": [
+   "https://leetcode.com/problems/unique-paths/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 12,
+  "code": "P15E12",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/12-unique-paths.md"
+ },
+ {
+  "ep": 184,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "Buy Sell Stocks",
+  "raw_title": "Episode 14: Buy Sell Stocks",
+  "difficulty": "",
+  "slug": "buy-sell-stocks",
+  "links": [
+   "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/",
+   "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/",
+   "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/",
+   "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 13,
+  "code": "P15E13",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/13-buy-sell-stocks.md"
+ },
+ {
+  "ep": 185,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "MIn cost to cut stick",
+  "raw_title": "Episode 15: MIn cost to cut stick",
+  "difficulty": "",
+  "slug": "min-cost-to-cut-stick",
+  "links": [
+   "https://leetcode.com/problems/minimum-cost-to-cut-a-stick/"
+  ],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 14,
+  "code": "P15E14",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/14-min-cost-to-cut-stick.md"
+ },
+ {
+  "ep": 186,
+  "pattern": "DP (Dynamic Programming)",
+  "subgroup": null,
+  "title": "Revision",
+  "raw_title": "Episode 16: Revision",
+  "difficulty": "",
+  "slug": "revision",
+  "links": [],
+  "duplicate_of": null,
+  "notes": [],
+  "pat_no": 15,
+  "pat_ep": 15,
+  "code": "P15E15",
+  "folder": "15-dp",
+  "prep": "prep/15-dp/15-revision.md"
+ }
+]

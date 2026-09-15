@@ -146,6 +146,80 @@ Use it to reformat a list of test cases in one shot. Genuinely good on camera.
 
 ---
 
+## 3b. Multiple files on one screen
+
+Two different tools do this and picking the right one matters.
+
+| You want | Use | Why |
+|---|---|---|
+| Several **files** side by side | **nvim splits** | one editor: yank between them, one LSP, `:wa` saves all |
+| Several **programs** (editor + tests + git) | **tmux panes** | separate processes |
+
+### nvim splits — for files
+
+| Key | Does |
+|---|---|
+| `Ctrl-w v` | split **v**ertical (left/right) |
+| `Ctrl-w s` | split horizontal (top/bottom) |
+| `Ctrl-h j k l` | move between splits *(kickstart binds this)* |
+| `Ctrl-w q` | close this split |
+| `Ctrl-w o` | close all the **o**thers — the "zoom" of nvim |
+| `Ctrl-w =` | make them all equal size |
+| `Ctrl-w _` / `Ctrl-w \|` | maximise height / width |
+| `Ctrl-w r` | rotate them |
+| `Ctrl-w H J K L` | move this split to the far left/bottom/top/right |
+
+**The fast way to build a layout** — from the file picker:
+
+```
+Space s f       find a file
+  Ctrl-v          open it in a VERTICAL split
+  Ctrl-x          open it in a HORIZONTAL split
+  Enter           open it in the current split
+```
+
+So four files in about six keystrokes: `Space s f` → pick → `Ctrl-v`, repeat.
+Same works from grep results (`Space s g`).
+
+### Buffers — usually better than a 4-way split
+
+Every file you open is a **buffer**, whether or not it's visible. Splits are just
+*windows onto* buffers. Four splits on one screen gives you ~40 columns each, which
+is too narrow for real code.
+
+| Key | Does |
+|---|---|
+| `Space Space` | fuzzy-pick any open buffer |
+| `Ctrl-^` | toggle between the last two files — *the one to build muscle memory on* |
+| `:bd` | close the current buffer |
+
+**Recommended:** keep **two** splits, and cycle buffers inside them with
+`Space Space` and `Ctrl-^`. You get the side-by-side comparison where it helps,
+without shrinking everything to unreadable columns. Most people over-split.
+
+### tmux panes — for programs
+
+To build a 4-pane grid in one window:
+
+```
+Ctrl-a |        split left/right
+Ctrl-a -        split the right one top/bottom
+Ctrl-a h        move back to the left pane
+Ctrl-a -        split that one too
+```
+
+| Key | Does |
+|---|---|
+| `Ctrl-a h j k l` | move between panes |
+| `Ctrl-a z` | zoom one to fullscreen / back |
+| `Ctrl-a x` | close this pane |
+| `Ctrl-a !` | pop this pane out into its own window |
+| `Ctrl-a space` | cycle through preset layouts |
+| `Ctrl-a H J K L` | resize |
+
+**No conflict with nvim:** tmux needs the `Ctrl-a` prefix first; nvim's `Ctrl-h/j/k/l`
+is pressed directly. Different keys, they coexist.
+
 ## 4. Shell tools
 
 | Command | Does |

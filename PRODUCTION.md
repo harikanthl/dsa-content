@@ -96,11 +96,13 @@ screen edge.
 **It will not work as a webcam on this Mac, and I'd skip it for this project.**
 
 DJI never shipped UVC webcam mode for the Pocket 2. Their own support page lists
-webcam mode only for Osmo Pocket 3/4 and the Action 2–6 line — the Pocket 2 is
-absent. Plugging it into the Mac mini's USB-C gives you a *storage* device (you'll
-see the SD card), not a camera. macOS currently reports exactly one camera on this
-machine: the Brio 300. So there is no on-device menu step I can give you, because the
-mode doesn't exist in its firmware.
+webcam mode only for Osmo Pocket 3/4 and the Action 2–6 line — the Pocket 2 is absent.
+
+**Verified on this machine.** With the Pocket 2 plugged into the Mac mini's USB-C, it
+mounts as a *storage volume* (`/Volumes/Untitled`, 256 GB, containing `DCIM/` and
+`MISC/` — the microSD card), and `system_profiler SPCameraDataType` still reports
+exactly one camera: the Brio 300. There is no on-device menu step I can give you,
+because the mode does not exist in its firmware. It is a card reader to this Mac.
 
 Your three real options, ranked:
 

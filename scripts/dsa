@@ -4,6 +4,7 @@ dsa — the driver for the 186-episode DSA video project.
 
   dsa next                 what to record today
   dsa start [EP]           scaffold + open the tmux recording workspace
+  dsa scaffold [EP]        create the solution file only (no tmux)
   dsa test  [EP]           run the local tests for an episode
   dsa prep  [EP]           print the prep sheet in the terminal
   dsa done  [EP] [url]     mark recorded/uploaded
@@ -137,6 +138,12 @@ def cmd_start():
     os.execvp("tmux", ["tmux", "attach", "-t", sess] if not os.environ.get("TMUX")
               else ["tmux", "switch-client", "-t", sess])
 
+def cmd_scaffold():
+    """Create the solution file without opening tmux (useful for batching)."""
+    n = int(arg(2) or next_ep()); e = ep(n)
+    path, created = scaffold(e)
+    print(f"{'created' if created else 'exists '}  {os.path.relpath(path, ROOT)}")
+
 def cmd_test():
     n = int(arg(2) or next_ep())
     subprocess.run(["pytest", solfile(ep(n)), "-q"])
@@ -219,7 +226,7 @@ def cmd_doctor():
         print(f"  {C['g']+'✓'+C['x'] if ok else C['y']+'–'+C['x']} {t:9s} {C['d']}{why}{C['x']}")
     print(f"\n  {C['d']}missing? → ./scripts/setup-tooling.sh{C['x']}\n")
 
-CMDS = dict(next=cmd_next, start=cmd_start, test=cmd_test, prep=cmd_prep,
+CMDS = dict(next=cmd_next, start=cmd_start, scaffold=cmd_scaffold, test=cmd_test, prep=cmd_prep,
             done=cmd_done, rep=cmd_rep, due=cmd_due, stats=cmd_stats, doctor=cmd_doctor)
 if __name__ == "__main__":
     c = arg(1, "next")

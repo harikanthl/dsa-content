@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+# ─────────────────────────────────────────────────────────────────────────────
+#  archive — push recordings to the Linux box (hkt460s) over Tailscale.
+#
+#  This Mac has ~19 GB free. A 14-minute 1080p recording is roughly 800 MB,
+#  so local storage is good for about 20 videos. hkt460s has 377 GB.
+#
+#  RECORD LOCALLY, ARCHIVE AFTER. Never record straight to the network share:
+#  a Tailscale hiccup mid-take corrupts the file and you reshoot.
+#
+#  Usage:
+#    archive              dry run — show what WOULD transfer
+#    archive push         copy to hkt460s (keeps local copies)
+#    archive push --purge copy, VERIFY, then delete the local originals
+#    archive status       disk space both ends + what's already archived
+#    archive pull <name>  bring one file back
+# ─────────────────────────────────────────────────────────────────────────────
+set -uo pipefail
+
+REMOTE="hkt460s"
+REMOTE_DIR="/home/hk/Videos/dsa-content"
+LOCAL_DIR="${DSA_RECORDINGS:-$HOME/Movies/dsa}"
+RSYNC_OPTS=(-av --partial --progress --human-readable
+            --include='*/' --include='*.mp4' --include='*.mov' --include='*.mkv'
+            --exclude='*')
+
+g() { printf "\033[32m%s\033[0m\n" "$1"; }
+y() { printf "\033[33m%s\033[0m\n" "$1"; }
+r() { printf "\033[31m%s\033[0m\n" "$1"; }
+b() { printf "\033[1m%s\033[0m\n" "$1"; }
+
+mkdir -p "$LOCAL_DIR"
+
+reachable() {
+  ssh -o BatchMode=yes -o ConnectTimeout=8 "$REMOTE" true 2>/dev/null
+}
+
+case "${1:-dry}" in
+  dry)
+    reachable || { r "$REMOTE unreachable — is Tailscale up?"; exit 1; }
+    b "dry run — nothing will be written"
+    rsync "${RSYNC_OPTS[@]}" --dry-run "$LOCAL_DIR/" "$REMOTE:$REMOTE_DIR/"
+    echo; y "to actually transfer:  archive push"
+    ;;
+
+  push)
+    reachable || { r "$REMOTE unreachable — is Tailscale up?"; exit 1; }
+    ssh "$REMOTE" "mkdir -p '$REMOTE_DIR'"
+
+    b "transferring $LOCAL_DIR  →  $REMOTE:$REMOTE_DIR"
+    rsync "${RSYNC_OPTS[@]}" "$LOCAL_DIR/" "$REMOTE:$REMOTE_DIR/" || { r "rsync failed"; exit 1; }
+
+    if [ "${2:-}" = "--purge" ]; then
+      echo; b "verifying before deleting anything"
+      failed=0; removed=0
+      while IFS= read -r -d '' f; do
+        rel="${f#"$LOCAL_DIR"/}"
+        lsum=$(shasum -a 256 "$f" | awk '{print $1}')
+        rsum=$(ssh "$REMOTE" "sha256sum '$REMOTE_DIR/$rel' 2>/dev/null | cut -d' ' -f1")
+        if [ -n "$rsum" ] && [ "$lsum" = "$rsum" ]; then
+          rm -f "$f"; g "  verified + removed locally: $rel"; removed=$((removed+1))
+        else
+          r "  CHECKSUM MISMATCH, keeping local copy: $rel"; failed=$((failed+1))
+        fi
+      done < <(find "$LOCAL_DIR" -type f \( -name '*.mp4' -o -name '*.mov' -o -name '*.mkv' \) -print0)
+      echo; g "$removed verified and freed"; [ "$failed" -gt 0 ] && r "$failed kept locally (mismatch)"
+    fi
+    echo; "$0" status
+    ;;
+
+  status)
+    b "local   $LOCAL_DIR"
+    df -h "$HOME" | tail -1 | awk '{printf "  %s free of %s\n", $4, $2}'
+    find "$LOCAL_DIR" -type f \( -name '*.mp4' -o -name '*.mov' -o -name '*.mkv' \) 2>/dev/null \
+      | wc -l | awk '{printf "  %s recording(s) waiting\n", $1}'
+    echo
+    if reachable; then
+      b "remote  $REMOTE:$REMOTE_DIR"
+      ssh "$REMOTE" "mkdir -p '$REMOTE_DIR'; df -h '$REMOTE_DIR' | tail -1 | awk '{printf \"  %s free of %s\n\", \$4, \$2}';
+                     find '$REMOTE_DIR' -type f \\( -name '*.mp4' -o -name '*.mov' -o -name '*.mkv' \\) | wc -l | awk '{printf \"  %s archived\n\", \$1}'"
+    else
+      r "remote  $REMOTE unreachable (Tailscale down?)"
+    fi
+    ;;
+
+  pull)
+    [ -z "${2:-}" ] && { r "usage: archive pull <filename>"; exit 1; }
+    rsync -av --progress "$REMOTE:$REMOTE_DIR/$2" "$LOCAL_DIR/" && g "pulled $2"
+    ;;
+
+  *) echo "usage: archive [dry|push [--purge]|status|pull <file>]"; exit 1 ;;
+esac

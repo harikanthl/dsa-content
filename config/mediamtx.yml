@@ -1,0 +1,26 @@
+# MediaMTX — local RTMP ingest for the DJI Pocket 2 (via the DJI Mimo app).
+# Phone streams here over Wi-Fi; Meld Studio reads it back out as WebRTC.
+logLevel: info
+readTimeout: 20s
+writeTimeout: 20s
+
+rtmp: yes
+rtmpAddress: :1935          # <- DJI Mimo publishes here
+
+webrtc: yes                 # <- Meld Studio browser source reads here (sub-second)
+webrtcAddress: :8889
+webrtcLocalUDPAddress: :8189
+
+hls: yes                    # <- fallback if WebRTC is blocked (3-5s latency)
+hlsAddress: :8888
+hlsVariant: lowLatency
+
+rtsp: yes                   # <- ffmpeg/OBS can pull from here
+rtspAddress: :8554
+
+api: yes
+apiAddress: 127.0.0.1:9997
+
+paths:
+  pocket:                   # the stream name: rtmp://<mac-ip>/pocket
+    source: publisher

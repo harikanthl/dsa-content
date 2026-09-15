@@ -46,9 +46,24 @@ dsa stats           # progress dashboard
 dsa doctor          # verify the toolchain
 ```
 
+## Camera + storage
+
+```bash
+pocketcam start      # DJI Pocket 2 as a camera, via DJI Mimo -> local RTMP -> Meld
+pocketcam status     # is the phone publishing yet?
+
+archive status       # disk space on this Mac and on hkt460s
+archive push --purge # copy recordings to hkt460s, SHA-256 verify, free local space
+```
+
+This Mac has ~19 GB free; `hkt460s` has 377 GB. Record locally, archive after —
+never record straight to the network share.
+
 Add to `~/.zshrc`:
 ```bash
 alias dsa='~/Documents/dsa-content/scripts/dsa'
+alias pocketcam='~/Documents/dsa-content/scripts/pocketcam'
+alias archive='~/Documents/dsa-content/scripts/archive'
 ```
 
 ## The patterns

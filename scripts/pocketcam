@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+# ─────────────────────────────────────────────────────────────────────────────
+#  pocketcam — use the DJI Pocket 2 as a camera in Meld Studio.
+#
+#  The Pocket 2 has NO UVC webcam mode (verified: it mounts as storage).
+#  But it CAN livestream via the DJI Mimo app to a custom RTMP server.
+#  So we run that server locally and let Meld read it back as a Browser layer.
+#
+#      Pocket 2 --USB--> phone (DJI Mimo) --wifi--> this Mac (MediaMTX)
+#                                                      |
+#                                            Meld Studio Browser layer
+#
+#  Usage:  pocketcam start | stop | status | url
+# ─────────────────────────────────────────────────────────────────────────────
+set -uo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+CONF="$ROOT/config/mediamtx.yml"
+LOG="${TMPDIR:-/tmp}/pocketcam.log"
+PIDF="${TMPDIR:-/tmp}/pocketcam.pid"
+PATH_NAME="pocket"
+
+ip() { ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null || echo "127.0.0.1"; }
+
+b() { printf "\033[1m%s\033[0m" "$1"; }
+g() { printf "\033[32m%s\033[0m" "$1"; }
+y() { printf "\033[33m%s\033[0m" "$1"; }
+d() { printf "\033[2m%s\033[0m" "$1"; }
+
+urls() {
+  local LAN; LAN="$(ip)"
+  cat <<EOF
+
+  $(b "1. In DJI Mimo on your phone")  $(d "(Pocket 2 plugged into the phone)")
+     Record/Live toggle → $(b "Live") → platform $(b "RTMP")
+       RTMP URL   $(g "rtmp://${LAN}:1935/${PATH_NAME}")
+       Stream key $(g "(leave empty)")
+     Resolution   $(b "1080p")   $(d "Pocket 2 streams 1080p30 max, 3-6 Mbps")
+     Then press GO LIVE.
+
+  $(b "2. In Meld Studio")
+     Add layer → $(b "Browser") → URL:
+       $(g "http://localhost:8889/${PATH_NAME}/?controls=false&muted=true")
+     Size 1920x1080. Crop/mask it into the corner circle for your CODE scene.
+
+  $(b "3. Fix the lip sync")  $(y "— do not skip this")
+     Wi-Fi adds ~1-2s of video delay. Your USB mic has none, so your voice
+     will run ahead of your face. In Meld, add a $(b "delay on the mic channel")
+     to match. Measure it once: clap on camera, look at the waveform, set the
+     offset, and it stays put for every recording after.
+
+  $(d "Fallbacks if the Browser layer misbehaves:")
+  $(d "  RTSP  rtsp://localhost:8554/${PATH_NAME}   (pull with ffmpeg/OBS)")
+  $(d "  HLS   http://localhost:8888/${PATH_NAME}   (3-5s latency)")
+
+EOF
+}
+
+case "${1:-status}" in
+  start)
+    if [ -f "$PIDF" ] && kill -0 "$(cat "$PIDF")" 2>/dev/null; then
+      echo "$(y "already running") (pid $(cat "$PIDF"))"; urls; exit 0
+    fi
+    command -v mediamtx >/dev/null || { echo "mediamtx not installed: brew install mediamtx"; exit 1; }
+    mediamtx "$CONF" > "$LOG" 2>&1 &
+    echo $! > "$PIDF"
+    sleep 2
+    if kill -0 "$(cat "$PIDF")" 2>/dev/null; then
+      echo "$(g "RTMP server up")  $(d "log: $LOG")"; urls
+    else
+      echo "failed to start — see $LOG"; tail -5 "$LOG"; exit 1
+    fi
+    ;;
+  stop)
+    [ -f "$PIDF" ] && kill "$(cat "$PIDF")" 2>/dev/null && rm -f "$PIDF" && echo "$(g "stopped")" || echo "not running"
+    ;;
+  status)
+    if [ -f "$PIDF" ] && kill -0 "$(cat "$PIDF")" 2>/dev/null; then
+      echo "$(g "● running")  pid $(cat "$PIDF")"
+      local_state=$(curl -s "http://127.0.0.1:9997/v3/paths/get/${PATH_NAME}" 2>/dev/null)
+      if echo "$local_state" | grep -q '"ready":true'; then
+        echo "$(g "● stream live")  — the phone is publishing"
+      else
+        echo "$(y "○ no stream yet")  — start the livestream in DJI Mimo"
+      fi
+    else
+      echo "$(d "○ not running")  →  pocketcam start"
+    fi
+    ;;
+  url) urls ;;
+  *) echo "usage: pocketcam start|stop|status|url"; exit 1 ;;
+esac

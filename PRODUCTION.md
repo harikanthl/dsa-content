@@ -91,36 +91,83 @@ absolute line numbers so viewers can follow along when you say "line 14", kills 
 sign column and status line, and sets `scrolloff=8` so your cursor never sits at the
 screen edge.
 
-### The DJI Pocket 2 — the honest answer
+### The DJI Pocket 2 — it CAN work. Here's how.
 
-**It will not work as a webcam on this Mac, and I'd skip it for this project.**
+**Correction to my first take:** I said skip it. That was wrong. There's no UVC
+webcam mode, but there *is* a working path, and it's already installed and tested on
+this machine.
 
-DJI never shipped UVC webcam mode for the Pocket 2. Their own support page lists
-webcam mode only for Osmo Pocket 3/4 and the Action 2–6 line — the Pocket 2 is absent.
+**What's actually true.** DJI never shipped UVC webcam mode for the Pocket 2 —
+verified here: plugged into USB-C it mounts as storage (`/Volumes/Untitled`, 256 GB,
+`DCIM/` + `MISC/`) and macOS still lists only the Brio 300 as a camera. So no cable
+will make it a webcam.
 
-**Verified on this machine.** With the Pocket 2 plugged into the Mac mini's USB-C, it
-mounts as a *storage volume* (`/Volumes/Untitled`, 256 GB, containing `DCIM/` and
-`MISC/` — the microSD card), and `system_profiler SPCameraDataType` still reports
-exactly one camera: the Brio 300. There is no on-device menu step I can give you,
-because the mode does not exist in its firmware. It is a card reader to this Mac.
+**But** DJI's own docs list the Pocket 2 as supporting **livestream via the DJI Mimo
+app** (v1.2.20+), to a **custom RTMP server**, at 1080p30 / 3–6 Mbps. So we run that
+server locally:
 
-Your three real options, ranked:
+```
+Pocket 2 ──USB──> your phone (DJI Mimo) ──wifi──> this Mac (MediaMTX)
+                                                       │
+                                            Meld Studio "Browser" layer
+```
 
-1. **Just use the Brio 300.** For a 320px face circle in the corner of a code video,
-   the Pocket 2's better sensor is invisible. The viewer is reading your editor. This
-   costs you nothing and is what I'd do for all 186.
-2. **Third-party Wi-Fi bridge** ([webcam-tool.com](https://www.webcam-tool.com/))
-   supports the Pocket 2 over Wi-Fi as a virtual camera. It's paid, it adds latency,
-   and it adds a thing that can fail at the start of every recording session. For a
-   186-video run, a daily failure point is a real cost.
-3. **Record the Pocket 2 separately to its microSD and sync in post.** Genuinely the
-   best image, and genuinely not worth it — it adds a sync-and-export step to every
-   single episode, and that is exactly the kind of friction that kills a daily series
-   at week three.
+No Do-It-All Handle needed — the phone provides the network.
 
-**Where the Pocket 2 *is* worth using:** a channel trailer, a "who I am / why I'm
-doing 186 videos" intro film, or B-roll. Shoot those as one-off projects where an
-extra hour of editing is fine. Keep it out of the daily loop.
+**Already set up and tested:**
+
+```bash
+pocketcam start     # starts the local RTMP server, prints both URLs
+pocketcam status    # is the phone publishing yet?
+pocketcam stop
+```
+
+It prints exactly what to type into Mimo (`rtmp://192.168.31.69:1935/pocket`, empty
+stream key) and what to paste into Meld's Browser layer
+(`http://localhost:8889/pocket/?controls=false&muted=true`).
+
+I verified the full chain with a synthetic 1080p30 stream: RTMP ingest accepted,
+readable back over WebRTC, RTSP and HLS. Meld's layer list confirms a **Browser**
+layer exists, so no extra software and nothing to buy.
+
+**The one real cost: latency.** Wi-Fi adds 1–2 seconds of video delay. Your USB mic
+has none, so your voice arrives ahead of your face. Fix it once in Meld by adding a
+matching **delay to the mic channel** — clap on camera, line up the waveform, note
+the offset. It stays put for every recording afterwards. This is fine for *recording*;
+it would be miserable for live interaction, which you aren't doing.
+
+**The paid alternative.** [Webcam Tool](https://www.webcam-tool.com/) explicitly
+supports the Pocket 2 on macOS 13+ and produces a real **virtual camera**, which Meld
+takes directly as a Video Device layer (cleaner than a Browser layer). Same 1–2s
+Wi-Fi latency. It connects over Wi-Fi in AP mode — which for a Pocket 2 means you
+need the **Do-It-All Handle**, since the bare camera has no Wi-Fi of its own. Worth
+it only if you own the handle and the Browser layer annoys you.
+
+**My recommendation, unchanged in substance:** shoot the daily 186 on the Brio 300.
+In a 320px corner circle the Pocket 2's sensor advantage is invisible, and a Wi-Fi
+hop is one more thing that can fail at the start of a session. Use the RTMP path for
+the pieces where image quality actually shows — the channel trailer, a "why I'm doing
+this" video, pattern-recap intros. Now you have the option, which you didn't before.
+
+### Storage — record local, archive to hkt460s
+
+This Mac has **19 GB free**. At ~800 MB per 14-minute 1080p recording that's about
+20 videos before you're stuck. `hkt460s` (ThinkPad T460s, reachable over Tailscale at
+`100.126.137.0`) has **377 GB free**.
+
+**Never record straight to the network share.** A Tailscale hiccup mid-take corrupts
+the file and you reshoot. Record to `~/Movies/dsa`, archive after.
+
+```bash
+archive              # dry run — what would transfer
+archive push         # copy to hkt460s, keep local copies
+archive push --purge # copy, SHA-256 verify BOTH ends, then free local space
+archive status       # disk + counts, both machines
+archive pull <file>  # bring one back for re-editing
+```
+
+The `--purge` path checksums every file on both ends and refuses to delete anything
+that doesn't match. Tested end to end.
 
 ## 3. The recording loop
 

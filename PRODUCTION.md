@@ -91,7 +91,11 @@ absolute line numbers so viewers can follow along when you say "line 14", kills 
 sign column and status line, and sets `scrolloff=8` so your cursor never sits at the
 screen edge.
 
-### The DJI Pocket 2 — it CAN work. Here's how.
+### The DJI Pocket 2 — optional, parked for now
+
+**Decision (2026-09-14): the daily 186 are shot on the Brio 300.** The setup below
+works and stays installed, but it's for the channel trailer and pattern-recap
+intros — not the daily loop. Skip to *Storage* unless you're shooting one of those.
 
 **Correction to my first take:** I said skip it. That was wrong. There's no UVC
 webcam mode, but there *is* a working path, and it's already installed and tested on

@@ -291,10 +291,10 @@
   "ep": 16,
   "pattern": "Fast & Slow pointers",
   "subgroup": null,
-  "title": "FIND DUPLICATE NUMBER",
+  "title": "Find the Duplicate Number",
   "raw_title": "FIND DUPLICATE NUMBER",
-  "difficulty": "",
-  "slug": "find-duplicate-number",
+  "difficulty": "Medium",
+  "slug": "find-the-duplicate-number",
   "links": [
    "https://leetcode.com/problems/find-the-duplicate-number/description/"
   ],
@@ -304,7 +304,7 @@
   "pat_ep": 4,
   "code": "P02E04",
   "folder": "02-fast-slow",
-  "prep": "prep/02-fast-slow/04-find-duplicate-number.md"
+  "prep": "prep/02-fast-slow/04-find-the-duplicate-number.md"
  },
  {
   "ep": 17,

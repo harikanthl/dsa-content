@@ -30,7 +30,7 @@ One video per problem. One problem per day. Source: *DSA Patterns Cheat Sheet*.
 | 13 | P02E01 | LinkedList Cycle | Easy | [`sheet`](prep/02-fast-slow/01-linkedlist-cycle.md) | [practice](https://leetcode.com/problems/linked-list-cycle/) |
 | 14 | P02E02 | Start of LinkedList Cycle | Medium | [`sheet`](prep/02-fast-slow/02-start-of-linkedlist-cycle.md) | [practice](https://leetcode.com/problems/linked-list-cycle-ii/) |
 | 15 | P02E03 | Happy Number | Medium | [`sheet`](prep/02-fast-slow/03-happy-number.md) | [practice](https://leetcode.com/problems/happy-number/) |
-| 16 | P02E04 | FIND DUPLICATE NUMBER | — | [`sheet`](prep/02-fast-slow/04-find-duplicate-number.md) | [practice](https://leetcode.com/problems/find-the-duplicate-number/description/) |
+| 16 | P02E04 | Find the Duplicate Number | Medium | [`sheet`](prep/02-fast-slow/04-find-the-duplicate-number.md) | [practice](https://leetcode.com/problems/find-the-duplicate-number/description/) |
 | 17 | P02E05 | Middle of the LinkedList | Easy | [`sheet`](prep/02-fast-slow/05-middle-of-the-linkedlist.md) | [practice](https://leetcode.com/problems/middle-of-the-linked-list/) |
 | 18 | P02E06 | Palindrome LinkedList | Medium | [`sheet`](prep/02-fast-slow/06-palindrome-linkedlist.md) | [practice](https://leetcode.com/problems/palindrome-linked-list/) |
 | 19 | P02E07 | Rearrange a LinkedList | Medium | [`sheet`](prep/02-fast-slow/07-rearrange-a-linkedlist.md) | [practice](https://leetcode.com/problems/reorder-list/) |

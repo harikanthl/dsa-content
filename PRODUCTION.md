@@ -149,6 +149,71 @@ hop is one more thing that can fail at the start of a session. Use the RTMP path
 the pieces where image quality actually shows — the channel trailer, a "why I'm doing
 this" video, pattern-recap intros. Now you have the option, which you didn't before.
 
+### Checking the stream without Meld
+
+```bash
+pocketcam preview          # opens the WebRTC player — exactly what Meld will show
+pocketcam preview ff       # ffplay instead; lowest latency, q to quit
+pocketcam status           # is the phone publishing yet?
+```
+
+If you see colour bars / an RGB test pattern, that's a synthetic test stream, not
+your camera — it means the pipeline is working end to end and is waiting for Mimo.
+
+### The face cam: circle/square crop and background
+
+**The crop is built into Meld.** Select the camera layer; a quick-actions toolbar
+appears above its bounding box. Hit **Crop**, then pick the **Circle** preset (or the
+rounded-square). For a custom radius, drag any of the four corner handles inward.
+**Reset Crop** puts it back. No mask PNG, no plugin.
+
+**The background — three options, in the order to try them.**
+
+**1. macOS built-in (free, no green screen) — test this first.**
+macOS 26 Tahoe can replace your background with a gradient, an Apple image, or *your
+own photo* (a woods shot, a clean colour), using on-device ML. AVFoundation reports
+your Brio 300 as supporting it at the full 1920×1080@30:
+
+```
+1920x1080 @30fps  portrait=true  bgReplace=true  studioLight=true
+```
+
+The catch: Apple has historically gated these effects to built-in FaceTime cameras
+and the Studio Display, and community reports say third-party USB webcams often
+don't get the toggle even when the format advertises support. So test it rather than
+trust it:
+
+```bash
+./scripts/camcheck
+```
+
+That opens the Brio, prints which effects are currently active, and pops the macOS
+**Video Effects** panel. Look for a **Background** control. Leave it running while
+you click around — it live-prints each flag as you toggle it, so you get an
+unambiguous yes/no. `Ctrl-C` to quit.
+
+If Background is there: turn it on, point it at your image, and you're done — the
+effect is applied at the OS level, so Meld just sees a camera that already has the
+background replaced. Zero cost inside Meld.
+
+**2. Camo Studio (paid, no green screen) — the reliable Mac fallback.**
+[Camo](https://reincubate.com/camo/) does background **Replace** and privacy blur on
+*any* USB webcam and publishes a virtual camera. Meld takes that directly as a
+**Video Device** layer, which is cleaner than a Browser layer. This is the answer if
+`camcheck` shows no Background control.
+
+**3. Physical green screen + Meld's Chroma Key (cheapest reliable).**
+Meld has a built-in **Green Screen / Chroma Key** effect with an eyedropper for the
+key colour: select the layer → Effects → **＋** → Chroma Key → pick the colour. A
+collapsible green screen is about $20 and it is the only option here that never
+depends on a vendor's ML being in a good mood. It also keys far better, which matters
+if you ever want a *transparent* background so your code shows through behind you.
+
+**Worth saying plainly:** at 320px in the corner, background replacement is mostly
+invisible — viewers are reading your editor. Where it genuinely pays off is the
+full-frame `TALK` scene in beats 1, 4, 9 and 10. Consider enabling it per-scene
+rather than globally.
+
 ### Storage — record local, archive to hkt460s
 
 This Mac has **19 GB free**. At ~800 MB per 14-minute 1080p recording that's about

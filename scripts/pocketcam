@@ -10,7 +10,7 @@
 #                                                      |
 #                                            Meld Studio Browser layer
 #
-#  Usage:  pocketcam start | stop | status | url
+#  Usage:  pocketcam start | stop | status | preview [browser|ff] | url
 # ─────────────────────────────────────────────────────────────────────────────
 set -uo pipefail
 
@@ -87,6 +87,21 @@ case "${1:-status}" in
       echo "$(d "○ not running")  →  pocketcam start"
     fi
     ;;
+  preview)
+    # Watch the incoming stream without Meld, to confirm the phone is publishing.
+    if ! curl -s "http://127.0.0.1:9997/v3/paths/get/${PATH_NAME}" 2>/dev/null | grep -q '"ready":true'; then
+      y "no stream yet — start the livestream in DJI Mimo first"; exit 1
+    fi
+    case "${2:-browser}" in
+      browser) g "opening the WebRTC player (this is exactly what Meld will show)"
+               open "http://localhost:8889/${PATH_NAME}/?controls=false&muted=true" ;;
+      ff)      g "ffplay — lowest latency, closes with q"
+               ffplay -loglevel warning -fflags nobuffer -flags low_delay \
+                      -rtsp_transport tcp "rtsp://localhost:8554/${PATH_NAME}" ;;
+      *)       echo "usage: pocketcam preview [browser|ff]"; exit 1 ;;
+    esac
+    ;;
+
   url) urls ;;
-  *) echo "usage: pocketcam start|stop|status|url"; exit 1 ;;
+  *) echo "usage: pocketcam start|stop|status|preview [browser|ff]|url"; exit 1 ;;
 esac

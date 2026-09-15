@@ -8,3 +8,4 @@ leetcode/          # leetcode.nvim's local cache of problem files
 *.mp4
 *.mov
 *.meld
+scripts/camcheck   # compiled binary; build from tools/camcheck.swift

@@ -51,6 +51,8 @@ dsa doctor          # verify the toolchain
 ```bash
 pocketcam start      # DJI Pocket 2 as a camera, via DJI Mimo -> local RTMP -> Meld
 pocketcam status     # is the phone publishing yet?
+pocketcam preview    # watch the stream without Meld (browser or ffplay)
+./scripts/camcheck   # does this camera get macOS background replacement?
 
 archive status       # disk space on this Mac and on hkt460s
 archive push --purge # copy recordings to hkt460s, SHA-256 verify, free local space

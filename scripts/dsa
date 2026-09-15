@@ -11,6 +11,7 @@ dsa — the driver for the 186-episode DSA video project.
   dsa rep   [EP]           log a repetition (spaced repetition drill)
   dsa due                  problems due for a re-drill today
   dsa stats                progress dashboard
+  dsa keys                 keybinding cheatsheet (tmux + nvim + shell)
   dsa doctor               verify toolchain
 """
 import csv, json, os, subprocess, sys, datetime, shutil, textwrap
@@ -211,6 +212,49 @@ def cmd_stats():
         print(f"  {mark} {p:34s} {d:2d}/{t:2d}")
     print()
 
+KEYS = """
+  \033[1m\033[36mTMUX\033[0m  \033[2mprefix is Ctrl-a  (press it, release, then the key)\033[0m
+
+    \033[33mCtrl-a z\033[0m   zoom this pane fullscreen / back   \033[2m<- use constantly\033[0m
+    \033[33mCtrl-a h j k l\033[0m   move between panes            \033[2msame as nvim\033[0m
+    \033[33mCtrl-a 1 2\033[0m  jump to window 1 (solve) / 2 (prep)
+    \033[33mCtrl-a |\033[0m   split left/right      \033[33mCtrl-a -\033[0m   split top/bottom
+    \033[33mCtrl-a d\033[0m   detach  \033[2m(work keeps running; `tmux a` to come back)\033[0m
+    \033[33mCtrl-a [\033[0m   scroll back  \033[2m(then hjkl / q to quit)\033[0m
+    \033[33mCtrl-a g\033[0m   lazygit popup      \033[33mCtrl-a S\033[0m   switch session
+    \033[33mCtrl-a N\033[0m   what to record next   \033[33mCtrl-a D\033[0m   progress
+    \033[33mCtrl-a r\033[0m   reload the config     \033[33mCtrl-a x\033[0m   kill pane
+
+  \033[1m\033[36mNVIM\033[0m  \033[2mleader is Space\033[0m
+
+    \033[33mSpace s f\033[0m   find file        \033[33mSpace s g\033[0m   grep the whole repo
+    \033[33mSpace Space\033[0m  switch buffer    \033[33mSpace s h\033[0m   search help
+    \033[33mSpace l l\033[0m   LeetCode dashboard
+    \033[33mSpace l r\033[0m   run testcases    \033[33mSpace l s\033[0m   submit
+    \033[33mSpace l d\033[0m   toggle problem description
+    \033[33mSpace d t\033[0m   pytest this file \033[33mSpace d r\033[0m   recording mode
+    \033[33mSpace d u\033[0m   drills due       \033[33mSpace d S\033[0m   progress
+    \033[2m:w  save     :q  quit     :wq save+quit     u  undo     Ctrl-r  redo\033[0m
+
+  \033[1m\033[36mVIM MOTIONS\033[0m  \033[2mthe grammar: operator + motion\033[0m
+
+    \033[33mw b e\033[0m  word fwd/back/end     \033[33m0 ^ $\033[0m  line start/first/end
+    \033[33mgg G\033[0m   top / bottom          \033[33m%\033[0m      jump to matching bracket
+    \033[33mdw\033[0m delete word   \033[33mdd\033[0m delete line   \033[33mciw\033[0m change word
+    \033[33mci(\033[0m change inside parens     \033[33mci\"\033[0m  change inside quotes
+    \033[33m/text\033[0m search  \033[33mn N\033[0m next/prev  \033[33m*\033[0m search word under cursor
+    \033[33mCtrl-o\033[0m jump back             \033[33mCtrl-i\033[0m jump forward
+
+  \033[1m\033[36mSHELL\033[0m
+
+    \033[33mz <dir>\033[0m   jump to a dir you've visited   \033[33mCtrl-r\033[0m  search history
+    \033[33mrg <text>\033[0m search file contents           \033[33mfd <name>\033[0m find files
+    \033[33mlg\033[0m        lazygit                        \033[33mbat <file>\033[0m pretty cat
+"""
+
+def cmd_keys():
+    print(KEYS)
+
 def cmd_doctor():
     need = {"nvim": "editor", "tmux": "multiplexer", "pytest": "test runner",
             "gh": "github cli", "git": "vcs", "rg": "search", "fzf": "fuzzy find"}
@@ -226,7 +270,7 @@ def cmd_doctor():
         print(f"  {C['g']+'✓'+C['x'] if ok else C['y']+'–'+C['x']} {t:9s} {C['d']}{why}{C['x']}")
     print(f"\n  {C['d']}missing? → ./scripts/setup-tooling.sh{C['x']}\n")
 
-CMDS = dict(next=cmd_next, start=cmd_start, scaffold=cmd_scaffold, test=cmd_test, prep=cmd_prep,
+CMDS = dict(next=cmd_next, start=cmd_start, scaffold=cmd_scaffold, keys=cmd_keys, test=cmd_test, prep=cmd_prep,
             done=cmd_done, rep=cmd_rep, due=cmd_due, stats=cmd_stats, doctor=cmd_doctor)
 if __name__ == "__main__":
     c = arg(1, "next")

@@ -28,6 +28,9 @@ problems/            the solutions themselves, with tests
 scripts/dsa          the CLI that drives all of it
 PRODUCTION.md        recording format, gear, titles, thumbnails, cadence
 TOOLING.md           nvim/tmux learning ladder, what's installed and why
+TERMINAL-CHEATSHEET.md  every shortcut: ghostty, tmux, nvim, shell, lazygit
+HOW-TO.md            read this first if picking the project up cold
+config/dotfiles/     copies of the tmux/ghostty/nvim configs, for backup
 CODING-STANDARDS.md  how to write code people recognise
 ```
 

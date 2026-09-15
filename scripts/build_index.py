@@ -54,11 +54,36 @@ for p in order:
 open(f"{ROOT}/curriculum/CURRICULUM.md","w").write("\n".join(L))
 
 # ---- progress.csv ----
-with open(f"{ROOT}/curriculum/progress.csv","w",newline="") as f:
-    w = csv.writer(f)
-    w.writerow(["ep","code","pattern","problem","difficulty","prep_ready",
-                "solved_clean","recorded","edited","uploaded","youtube_url","reps","last_rep_date"])
-    for d in data:
-        w.writerow([d["ep"], d["code"], d["pattern"], d["title"], d["difficulty"],
-                    "N","N","N","N","N","","0",""])
-print(f"wrote CURRICULUM.md ({len(data)} eps) and progress.csv")
+# MERGE, never clobber: existing per-episode state (recorded, reps, urls...) is
+# preserved and keyed by episode number. Only new episodes get a fresh row, and
+# only the derived columns (pattern/problem/difficulty) are refreshed.
+PROG = f"{ROOT}/curriculum/progress.csv"
+FIELDS = ["ep","code","pattern","problem","difficulty","prep_ready",
+          "solved_clean","recorded","edited","uploaded","youtube_url","reps","last_rep_date"]
+DERIVED = {"code","pattern","problem","difficulty"}
+
+prior = {}
+if os.path.exists(PROG):
+    with open(PROG) as f:
+        for row in csv.DictReader(f):
+            prior[row["ep"]] = row
+
+rows = []
+for d in data:
+    ep_s = str(d["ep"])
+    row = {k: "" for k in FIELDS}
+    row.update(prior.get(ep_s, {k: ("N" if k in ("prep_ready","solved_clean","recorded",
+                                                 "edited","uploaded") else
+                                    "0" if k == "reps" else "") for k in FIELDS}))
+    row.update(ep=ep_s, code=d["code"], pattern=d["pattern"],
+               problem=d["title"], difficulty=d["difficulty"])
+    rows.append({k: row.get(k, "") for k in FIELDS})
+
+with open(PROG, "w", newline="") as f:
+    w = csv.DictWriter(f, fieldnames=FIELDS)
+    w.writeheader(); w.writerows(rows)
+
+kept = sum(1 for r in rows if any(r[k] == "Y" for k in
+           ("prep_ready","solved_clean","recorded","edited","uploaded")))
+print(f"wrote CURRICULUM.md ({len(data)} eps); progress.csv merged "
+      f"({len(prior)} prior rows, {kept} with state)")

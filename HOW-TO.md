@@ -45,8 +45,10 @@ TOOLING.md                 nvim/tmux learning ladder
 CODING-STANDARDS.md        how to write code people recognise
 ```
 
-`scripts/build_index.py` regenerates `CURRICULUM.md` + `progress.csv` from the JSON.
-**Edit the JSON, then rerun it** — never hand-edit `CURRICULUM.md`.
+`scripts/build_index.py` regenerates `CURRICULUM.md` and **merges** `progress.csv`
+from the JSON. **Edit the JSON, then rerun it** — never hand-edit `CURRICULUM.md`.
+The merge preserves per-episode state (recorded, reps, URLs) and is idempotent, so
+it's safe to run any time.
 
 ## Progress
 

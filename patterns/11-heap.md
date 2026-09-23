@@ -243,7 +243,7 @@ slides off its own median deliberately.
 | C, k-way merge of N total elements | O(N log k) | O(k) |
 | D, greedy, n pops and pushes | O(n log n) | O(n) |
 | E, median, per insert | O(log n) | O(n) |
-| E, sliding window median, n windows | O(n log k) amortised with lazy deletion | O(k) live + stale |
+| E, sliding window median, n windows | O(n log n) with lazy deletion (stale entries can pile up) | O(n) worst case |
 | the sort you're beating | O(n log n) | O(n) |
 
 Build a heap from n items with `heapify` in **O(n)**, not O(n log n), it's the

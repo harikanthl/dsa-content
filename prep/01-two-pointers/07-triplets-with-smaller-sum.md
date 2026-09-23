@@ -36,28 +36,28 @@ Triplets: (-1,1,2)=2  (-1,1,3)=3  (-1,1,4)=4  (-1,2,3)=4    all < 5
 > You don't need to check them one at a time. There are `hi − lo` of them. Add that
 > number to your count and slide the left finger right.
 >
-> It's like a shop where you find the most expensive thing you can afford — you
+> It's like a shop where you find the most expensive thing you can afford, you
 > instantly know you can afford everything cheaper, without checking price tags.
 
 ## 🐌 Brute force (say it, don't type it)
-Three nested loops counting — **O(n³)**.
+Three nested loops counting, **O(n³)**.
 
 ## 💡 The pattern reveal
 **Signal:** *count* triplets satisfying an **inequality** (not an equality).
 **Therefore:** sort + fix one + two pointers, with **batch counting**.
 
-**Key insight — this is the whole video:** when `nums[i] + nums[lo] + nums[hi] < target`,
+**Key insight, this is the whole video:** when `nums[i] + nums[lo] + nums[hi] < target`,
 every index strictly between `lo` and `hi` also works as the third element, because
 all of them are ≤ `nums[hi]`. That's `hi - lo` triplets, counted in one operation
 instead of `hi - lo` operations. This is what turns O(n³) into O(n²).
 
-## 🔍 Dry run — `[-1, 1, 2, 3, 4]`, target 5
+## 🔍 Dry run: `[-1, 1, 2, 3, 4]`, target 5
 | i | anchor | lo | hi | sum | < 5? | action |
 |---|---|---|---|---|---|---|
 | 0 | −1 | 1 | 4 | −1+1+4 = 4 | yes | count += (4−1) = **3**, `lo=2` |
 | 0 | −1 | 2 | 4 | −1+2+4 = 5 | no | `hi=3` |
 | 0 | −1 | 2 | 3 | −1+2+3 = 4 | yes | count += (3−2) = **1**, `lo=3` |
-| 0 | | 3 | 3 | — | | `lo == hi`, stop |
+| 0 | | 3 | 3 | - | | `lo == hi`, stop |
 | 1 | 1 | 2 | 4 | 1+2+4 = 7 | no | `hi=3` |
 | 1 | 1 | 2 | 3 | 1+2+3 = 6 | no | `hi=2`, stop |
 | 2 | 2 | 3 | 4 | 2+3+4 = 9 | no | stop |
@@ -88,13 +88,13 @@ class Solution:
 **Time:** O(n²) · **Space:** O(1) beyond the sort
 
 ## ⚠️ Gotchas
-- **`hi - lo`, not `hi - lo + 1`.** The `+1` would count the pair `(lo, hi)` twice —
+- **`hi - lo`, not `hi - lo + 1`.** The `+1` would count the pair `(lo, hi)` twice,
   once as itself and once as "an element between." Draw the indices on screen and
   count them by hand; this off-by-one is the entire difficulty of the problem.
 - Advance `lo` **after** counting, not before.
 - No duplicate-skipping. You're counting index triplets, so repeated *values* at
   different indices are genuinely different triplets and must all be counted. This is
-  the opposite of 3Sum — call out the contrast explicitly, it makes both stick.
+  the opposite of 3Sum, call out the contrast explicitly, it makes both stick.
 - If the problem asked you to *list* the triplets instead of count them, the batch
   trick evaporates and you're back to O(n³) output-bound. Worth saying: the batching
   is only available because the output is a single number.
@@ -103,15 +103,15 @@ class Solution:
 - *"Sortedness lets me count a range of solutions in O(1) instead of enumerating it.
   That's the difference between O(n³) and O(n²) here."*
 - *"Because the output is a count, not a list, I'm not bound by the size of the
-  answer set — so I can batch."*
+  answer set, so I can batch."*
 
 ## 🔗 Transfer
 "Counting a batch instead of enumerating it" is the same move as EP8 (Subarray
 Product Less Than K), where `hi - lo + 1` counts all subarrays ending at `hi`. Note
-the `+1` differs between the two — and know *why*. That pair of problems, side by
+the `+1` differs between the two, and know *why*. That pair of problems, side by
 side, is one of the best off-by-one lessons in the whole sheet.
 
 ## 📹 Metadata
-- **Title:** `Count Triplets with Smaller Sum — count a batch, not one at a time | Two Pointers #7`
+- **Title:** `Count Triplets with Smaller Sum, count a batch, not one at a time | Two Pointers #7`
 - **Thumbnail:** `COUNT, DON'T LIST` (blue block)
 - **Short:** The `hi - lo` vs `hi - lo + 1` question. Ask it, pause, answer it.

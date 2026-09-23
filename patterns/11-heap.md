@@ -1,4 +1,4 @@
-# Pattern 11 — Heap
+# Pattern 11: Heap
 
 **17 episodes · EP 94–110**
 
@@ -7,7 +7,7 @@
 ## The one-sentence version
 
 A heap answers **"what is the current minimum (or maximum)?"** in O(1), and stays
-correct through inserts and removals at **O(log n) each** — so any problem that
+correct through inserts and removals at **O(log n) each**: so any problem that
 repeatedly asks for the extreme of a *changing* set is a heap problem, and any problem
 that asks for the **top k** of n things is a heap of size k, not a sort: **O(n log n) →
 O(n log k)**.
@@ -49,7 +49,7 @@ five ways to spend that bargain:
 | **"top k"**, "k most frequent" | Top K Frequent Elements (EP96), Words (EP97) |
 | **"k closest / nearest"** | K Closest Points (EP98), Kth Weakest Row (EP100) |
 | "merge k sorted …" | Merge K Sorted Arrays (EP101), Kth Smallest in Sorted Matrix (EP102) |
-| a **stream** — "data arrives one at a time" | Find Median from Data Stream (EP109) |
+| a **stream**: "data arrives one at a time" | Find Median from Data Stream (EP109) |
 | "median" | EP109, Sliding Window Median (EP110) |
 | **schedule / assign / pick the best available** repeatedly | Task Scheduler (EP104), IPO (EP107), Course Schedule III (EP108) |
 | "minimum number of steps" where each step consumes the current best | Last Stone Weight (EP103), Refueling Stops (EP106) |
@@ -60,12 +60,12 @@ choices, each choice is "the biggest/smallest thing available *right now*", and 
 of what's available changes after each choice. A sorted list can't keep up with the
 changes; a heap can.
 
-**The anti-signals.** If you need the **full order** — every element in position — that's
+**The anti-signals.** If you need the **full order**: every element in position, that's
 a sort, O(n log n), and a heap gains you nothing. If you need to **look up an arbitrary
 element** by key, that's a hash map; a heap can't find anything but its top. If k is
 close to n, sorting is simpler and no slower.
 
-## Shape A — Top k with a bounded heap
+## Shape A: Top k with a bounded heap
 
 ```python
 import heapq
@@ -81,7 +81,7 @@ def k_largest(nums, k):
 
 **Why a min-heap for the k *largest*:** the heap's top is the weakest thing you're
 currently keeping. When something new arrives you compare it with the weakest survivor,
-not the strongest — so the weakest has to be the thing that's O(1) to reach. This is the
+not the strongest, so the weakest has to be the thing that's O(1) to reach. This is the
 single most counter-intuitive line in the pattern and the one interviewers watch for.
 
 Two Python facts you say out loud every time:
@@ -89,14 +89,14 @@ Two Python facts you say out loud every time:
 - **`heapq` is a min-heap and only a min-heap.** For a max-heap you push `-x` and negate
   on the way out. There is no flag.
 - **Ties are broken by the next tuple element.** For Top K Frequent Words (EP97) you want
-  highest frequency, then *alphabetically first* — so push `(-freq, word)`: the negation
+  highest frequency, then *alphabetically first*, so push `(-freq, word)`: the negation
   makes big frequencies small, and the untouched `word` sorts ascending, which is the
   order you wanted. When the second element is *also* the wrong way round, you can't
   negate a string; see "what goes wrong" #2.
 - `heapq.nlargest(k, iterable, key=...)` and `heapq.nsmallest` do all of this in one
   line. Know they exist; write the loop by hand when asked to.
 
-## Shape B — K closest
+## Shape B: K closest
 
 ```python
 def k_closest(points, k):
@@ -118,7 +118,7 @@ right tool is binary search for the window's left edge, O(log(n−k) + k), and a
 the slow answer. This episode exists to make you check for sortedness before reaching for
 the heap.
 
-## Shape C — Heap as a merged pointer
+## Shape C: Heap as a merged pointer
 
 ```python
 def merge_k(lists):
@@ -144,7 +144,7 @@ element to the right. EP91 solves the same problem by binary searching on the *v
 EP102 is here to show the two solutions side by side and argue about which is faster
 when k is small versus when it's near n².
 
-## Shape D — Greedy + heap
+## Shape D: Greedy + heap
 
 ```python
 def last_stone_weight(stones):
@@ -164,19 +164,19 @@ differ only in what "best" means and what "remainder" means:
 
 | EP | pop the … | push back … | the twist |
 |---|---|---|---|
-| 103 Last Stone Weight | two heaviest | their difference | none — the clean template |
+| 103 Last Stone Weight | two heaviest | their difference | none, the clean template |
 | 104 Task Scheduler | most frequent task | count − 1, *after the cooldown* | a queue holds tasks that are cooling; pop from heap, park in queue, re-push when ready |
 | 105 Reorganize String | most frequent char | count − 1, *one step later* | hold the previous char out of the heap for exactly one turn so it can't repeat |
-| 106 Refueling Stops | biggest station **passed** | nothing — stations are consumed | drive as far as you can; only when stranded, retroactively "refuel" at the best station you already drove past |
+| 106 Refueling Stops | biggest station **passed** | nothing, stations are consumed | drive as far as you can; only when stranded, retroactively "refuel" at the best station you already drove past |
 | 107 IPO | most profitable **affordable** project | nothing, but capital grows | **two heaps**: a min-heap by capital of locked projects, a max-heap by profit of unlocked ones; each round, move everything newly affordable across, then pop one |
-| 108 Course Schedule III | the **longest course taken so far** | nothing — it's dropped | sort by deadline, take every course, and when over the deadline, *undo the longest one you took* — the heap remembers which that was |
+| 108 Course Schedule III | the **longest course taken so far** | nothing, it's dropped | sort by deadline, take every course, and when over the deadline, *undo the longest one you took*, the heap remembers which that was |
 
 EP106 and EP108 share the deepest idea in this pattern: **the heap lets you make a
 greedy decision *retroactively*.** You don't decide at a gas station whether to stop;
 you decide later, when you run dry, which past station you *should* have stopped at.
 Say that sentence in the interview and the rest follows.
 
-## Shape E — Two heaps for a running median
+## Shape E: Two heaps for a running median
 
 ```python
 class MedianFinder:
@@ -213,12 +213,12 @@ the balance step compares logical sizes, not `len(heap)`.
 Every max-heap in Python is a min-heap of negated keys. The failure is silent: the code
 runs, the answer is the k *smallest* instead of the k largest, and one test passes by
 coincidence. Write the negation the moment you type `heappush`, and negate again on the
-way out — `-heapq.heappop(h)`, never `heapq.heappop(h)` followed by a fix-up three lines
+way out, `-heapq.heappop(h)`, never `heapq.heappop(h)` followed by a fix-up three lines
 later.
 
 ### 2. Tuple comparison reaching an uncomparable element
 
-`heappush(h, (dist, point))` works until two points have the same distance — then Python
+`heappush(h, (dist, point))` works until two points have the same distance, then Python
 compares the second elements, and if those are lists, dicts, or custom objects, you get
 `TypeError: '<' not supported` at a random moment on a random input. The fix is a
 tie-breaker that's always comparable, usually the index: `(dist, i, point)`. For "highest
@@ -229,7 +229,7 @@ wrapper class with `__lt__`, because you can't negate a string.
 ### 3. Trusting `heap[0]` in a sliding window
 
 Once elements can *leave*, the top of the heap may be an element that's no longer in the
-window. Anything that reads `heap[0]` — the median, the balance check, the size — has to
+window. Anything that reads `heap[0]`, the median, the balance check, the size, has to
 first evict stale tops. The bug shows up as a median that's off by one element and only
 on inputs where the departing element was the current median. Test with a window that
 slides off its own median deliberately.
@@ -238,15 +238,15 @@ slides off its own median deliberately.
 
 | Shape | Time | Space |
 |---|---|---|
-| A / B — top k, k closest | O(n log k) | O(k) |
+| A / B, top k, k closest | O(n log k) | O(k) |
 | A with `heapify` on the whole input, then k pops | O(n + k log n) | O(n) |
-| C — k-way merge of N total elements | O(N log k) | O(k) |
-| D — greedy, n pops and pushes | O(n log n) | O(n) |
-| E — median, per insert | O(log n) | O(n) |
-| E — sliding window median, n windows | O(n log k) amortised with lazy deletion | O(k) live + stale |
+| C, k-way merge of N total elements | O(N log k) | O(k) |
+| D, greedy, n pops and pushes | O(n log n) | O(n) |
+| E, median, per insert | O(log n) | O(n) |
+| E, sliding window median, n windows | O(n log k) amortised with lazy deletion | O(k) live + stale |
 | the sort you're beating | O(n log n) | O(n) |
 
-Build a heap from n items with `heapify` in **O(n)**, not O(n log n) — it's the
+Build a heap from n items with `heapify` in **O(n)**, not O(n log n), it's the
 follow-up question after "why not sort", and the answer is that most nodes are leaves
 and sift down a short distance.
 
@@ -262,7 +262,7 @@ and sift down a short distance.
 | 99 | Find K Closest Elements | k-closest | Sorted input → the answer is a window → binary search beats the heap. |
 | 100 | Kth Weakest Row | k-closest | Compute the key per row (soldiers via binary search), then top-k. |
 | 101 | Merge K Sorted Arrays | pointer | One head per list; pop and push the successor. |
-| 102 | Kth Smallest in Sorted Matrix | pointer | EP91 again — heap over rows vs binary search on value, side by side. |
+| 102 | Kth Smallest in Sorted Matrix | pointer | EP91 again, heap over rows vs binary search on value, side by side. |
 | 103 | Last Stone Weight | greedy | Pop two, push the difference. The clean template. |
 | 104 | CPU Task Scheduler | greedy | A cooling queue next to the heap; idle slots when the heap runs dry. |
 | 105 | Reorganize String | greedy | Hold the last-used char out for one turn. |
@@ -274,8 +274,8 @@ and sift down a short distance.
 
 ## What "knowing this in your sleep" means
 
-1. Why a **min**-heap for the k **largest**? *(The heap's top is the one you'd evict —
-   the weakest survivor — so it has to be the thing that's O(1) to reach.)*
+1. Why a **min**-heap for the k **largest**? *(The heap's top is the one you'd evict,
+   the weakest survivor, so it has to be the thing that's O(1) to reach.)*
 2. Why is top-k O(n log k) and not O(n log n)? *(The heap never holds more than k
    elements, so every push and pop costs log k.)*
 3. How do you get a max-heap in Python? *(Negate the key on the way in and out. There
@@ -286,7 +286,7 @@ and sift down a short distance.
    `high`, and `len(low) − len(high) ∈ {0, 1}`. Median is `low`'s top, or the mean of
    both tops.)*
 6. What does "retroactive greedy" mean? *(Take the step now, and when it turns out you
-   needed a resource earlier, the heap tells you which past option was best — refueling
+   needed a resource earlier, the heap tells you which past option was best, refueling
    stops, Course Schedule III.)*
 7. When is a heap the wrong tool? *(Full order needed → sort. Lookup by key → hash map.
    Sorted input and a contiguous answer → binary search or two pointers.)*

@@ -7,7 +7,7 @@
 ## 🎬 Hook
 > "Three kinds of bracket, and a string is valid only if every one of them closes in the
 > right order. It's the canonical stack problem, and the interesting part isn't the
-> algorithm — it's that there are **three different ways to be invalid**, and a solution
+> algorithm, it's that there are **three different ways to be invalid**, and a solution
 > that only checks two of them passes most test cases."
 
 ## 📋 Problem, in your words
@@ -35,7 +35,7 @@ code. Write them on the whiteboard before writing the solution.
 
 ## 🧸 ELI5
 > Every time you open a bracket, put it on a pile. Every time you close one, the pile's
-> **top** must be its partner — because the most recently opened bracket is the only one
+> **top** must be its partner, because the most recently opened bracket is the only one
 > you're allowed to close right now.
 >
 > ```
@@ -59,13 +59,13 @@ code. Write them on the whiteboard before writing the solution.
 >  )  -> top is [ , NOT my partner ✗  -> invalid
 > ```
 >
-> The `)` wants to close the `(`, but the `[` is in the way — unfinished business, more
+> The `)` wants to close the `(`, but the `[` is in the way, unfinished business, more
 > recent. A stack catches that without knowing anything about nesting rules.
 
 ## 🐌 Brute force (say it, don't type it)
 Repeatedly delete `"()"`, `"[]"` and `"{}"` from the string until nothing changes; valid
 iff the result is empty. **O(n²)**, cute, and a legitimate one-liner in Python
-(`while` + three `.replace()`s) — worth saying because it is *provably* the same
+(`while` + three `.replace()`s), worth saying because it is *provably* the same
 cancelling process the stack performs in one pass.
 
 ## 💡 The pattern reveal
@@ -73,7 +73,7 @@ cancelling process the stack performs in one pass.
 **Therefore:** a cancelling stack, where the pop must be **verified**.
 
 **Key insight:** the stack's top is the innermost unclosed bracket, which is the only
-one a closing bracket may legally match. EP58's pop was unconditional — the characters
+one a closing bracket may legally match. EP58's pop was unconditional, the characters
 were equal by definition. Here you must *check what you popped*:
 
 ```python
@@ -91,7 +91,7 @@ else:
 | failure | example | the line that catches it |
 |---|---|---|
 | wrong **type** | `"(]"` | `stack.pop() != partner[ch]` |
-| wrong **order** | `"([)]"` | the same line — the top is `[`, not `(` |
+| wrong **order** | `"([)]"` | the same line, the top is `[`, not `(` |
 | closing something **never opened** | `"]"` | `not stack` |
 | opening something **never closed** | `"("` | `return not stack` at the **end** |
 
@@ -99,26 +99,26 @@ That last row is the one people drop. The loop can finish without ever returning
 `False` and the string still be invalid, because the pile is not empty. `return True`
 instead of `return not stack` is the classic wrong submission.
 
-## 🔍 Dry run — `"{[]}"` (valid)
+## 🔍 Dry run: `"{[]}"` (valid)
 
 | ch | kind | stack before | check | stack after |
 |---|---|---|---|---|
-| `{` | open | — | — | `{` |
-| `[` | open | `{` | — | `{ [` |
+| `{` | open | - | - | `{` |
+| `[` | open | `{` | - | `{ [` |
 | `]` | close | `{ [` | pop → `[` = partner ✓ | `{` |
 | `}` | close | `{` | pop → `{` = partner ✓ | *(empty)* |
 
 Stack is empty → **True** ✓
 
-## 🔍 Dry run — `"([)]"` (invalid, right types wrong order)
+## 🔍 Dry run: `"([)]"` (invalid, right types wrong order)
 
 | ch | kind | stack before | check | result |
 |---|---|---|---|---|
-| `(` | open | — | — | `(` |
-| `[` | open | `(` | — | `( [` |
+| `(` | open | - | - | `(` |
+| `[` | open | `(` | - | `( [` |
 | `)` | close | `( [` | pop → `[`, partner needed `(` ✗ | **return False** |
 
-Answer **False** ✓ — and note the string has equal counts of every bracket type.
+Answer **False** ✓, and note the string has equal counts of every bracket type.
 Counting can never solve this problem; only order can.
 
 ## ✅ Optimal solution
@@ -127,8 +127,8 @@ class Solution:
     def isValid(self, s: str) -> bool:
         """True if the bracket string is correctly typed and correctly nested.
 
-        Time:  O(n) — one pass, O(1) work per character.
-        Space: O(n) — worst case "(((((((" pushes everything.
+        Time:  O(n), one pass, O(1) work per character.
+        Space: O(n), worst case "(((((((" pushes everything.
         """
         partner = {')': '(', ']': '[', '}': '{'}     # closer -> required opener
         stack = []
@@ -148,7 +148,7 @@ class Solution:
 ## ⚠️ Gotchas
 - **`return not stack`, not `return True`.** `"("` is invalid and the loop never fires a
   `False`. This is the single most common miss on this problem.
-- **`not stack` before `stack.pop()`.** Short-circuit order matters — `"]"` on an empty
+- **`not stack` before `stack.pop()`.** Short-circuit order matters, `"]"` on an empty
   stack must return `False`, not raise `IndexError`.
 - **Map closers to openers, not the reverse.** You look up by the character you're
   *holding*, which is the closer. Building the dict the other way costs you an inverted
@@ -157,14 +157,14 @@ class Solution:
   can't drift out of sync with the dict.
 - **Don't count brackets.** `"([)]"` has perfectly balanced counts. State it when asked
   why a counter isn't enough.
-- **An empty string is valid** — the loop doesn't run and `not []` is `True`. Free
+- **An empty string is valid**: the loop doesn't run and `not []` is `True`. Free
   correctness; check it rather than special-casing it.
 
 ## 🎤 Interview talking points
 - *"The top of the stack is the innermost unclosed bracket, and that's the only one a
   closer is allowed to match."*
 - *"There are three ways to fail: wrong type, wrong order, and an unclosed opener at the
-  end — the last one is why I return `not stack` rather than `True`."* ← say this
+  end, the last one is why I return `not stack` rather than `True`."* ← say this
   unprompted.
 - *"Counting doesn't work: `([)]` has balanced counts and is invalid."*
 - *"O(n) time, O(n) space in the worst case of all openers."*
@@ -174,12 +174,12 @@ class Solution:
 
 ## 🔗 Transfer
 EP58 cancelled equal characters; this cancels *matching* ones, which is why the pop
-needs a check. Tomorrow (EP60) is the deliberate outlier — a problem where a stack
-works perfectly and is still the wrong answer — and then EP61 opens the monotonic half
+needs a check. Tomorrow (EP60) is the deliberate outlier, a problem where a stack
+works perfectly and is still the wrong answer, and then EP61 opens the monotonic half
 of the pattern, where the pop stops being a cancellation and becomes the moment an
 answer is discovered.
 
 ## 📹 Metadata
-- **Title:** `Valid Parentheses — three ways to be invalid | Stack #2`
+- **Title:** `Valid Parentheses, three ways to be invalid | Stack #2`
 - **Thumbnail:** `RETURN NOT STACK` (red block)
 - **Short:** `"("` returning True with the wrong final line. 35s.

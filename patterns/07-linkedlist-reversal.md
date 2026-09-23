@@ -1,4 +1,4 @@
-# Pattern 07 — In-place Reversal of a LinkedList
+# Pattern 07: In-place Reversal of a LinkedList
 
 **6 episodes · EP 52–57**
 
@@ -6,15 +6,15 @@
 
 ## The one-sentence version
 
-Reversing a linked list is **three pointers and one fixed order of assignment** — save
-the next node, flip the current one backwards, step both forward — and every harder
+Reversing a linked list is **three pointers and one fixed order of assignment**: save
+the next node, flip the current one backwards, step both forward, and every harder
 variant is that same loop wrapped in bookkeeping about the node **before** the block and
 the node **after** it: **O(n) time, O(1) space**, no new nodes ever allocated.
 
 ## ELI5
 
 You're walking a chain of nodes, and each link points forward. To reverse it you flip
-each link to point backwards instead — but the instant you flip one, you've **destroyed
+each link to point backwards instead, but the instant you flip one, you've **destroyed
 your only way forward**. So you save it first:
 
 ```
@@ -29,7 +29,7 @@ your only way forward**. So you save it first:
 ```
 
 Four lines, always in that order. When `cur` falls off the end, `prev` is standing on
-the last node it flipped — which is the **new head**.
+the last node it flipped, which is the **new head**.
 
 ```python
 prev = None
@@ -108,7 +108,7 @@ boundaries come from the problem: positions in EP53, a computed offset in EP57.
 ### 3. Reverse every block, marching down the list (EP54, EP55, EP56)
 
 The loop above, run repeatedly, with `before` advancing to the block's **new tail** each
-time — which is the node you were holding *before* the reversal:
+time, which is the node you were holding *before* the reversal:
 
 ```python
 group_prev = dummy
@@ -119,7 +119,7 @@ while <another block exists>:
     group_prev = tail          # the next block hangs off here
 ```
 
-Getting `group_prev` wrong doesn't crash — it silently loses everything after the first
+Getting `group_prev` wrong doesn't crash, it silently loses everything after the first
 group, or builds a **cycle**. Print the list after each group when debugging; an
 infinite loop in the print is the diagnosis.
 
@@ -134,8 +134,8 @@ can't say why.
 
 | Problem | Time | Space |
 |---|---|---|
-| all six episodes | O(n) | **O(1)** — a handful of pointers |
-| EP55, EP56 | O(n) — each node is visited a constant number of times | O(1) |
+| all six episodes | O(n) | **O(1)**: a handful of pointers |
+| EP55, EP56 | O(n), each node is visited a constant number of times | O(1) |
 | the array version you're beating | O(n) | O(n) |
 
 If your solution allocates anything per node, it isn't this pattern.
@@ -155,10 +155,10 @@ If your solution allocates anything per node, it isn't this pattern.
 
 1. Why save `nxt` before flipping? *(`cur.next = prev` destroys the only pointer to the
    rest of the list.)*
-2. What do you return from the reversal loop, and why? *(`prev` — when `cur` is null,
+2. What do you return from the reversal loop, and why? *(`prev`, when `cur` is null,
    `prev` is the last flipped node, i.e. the new head. `head` is now the tail.)*
 3. What is the dummy node for? *(So "the node before the block" always exists, even when
-   the block starts at position 1 — it deletes every head special case.)*
+   the block starts at position 1, it deletes every head special case.)*
 4. After reversing a block, which node is its tail? *(The one that was its head. Wire
    that node to whatever followed the block, and wire `before` to the new head.)*
 5. Why is rotation in this pattern if nothing is reversed? *(Same pointer surgery: close

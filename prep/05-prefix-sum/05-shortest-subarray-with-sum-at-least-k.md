@@ -5,7 +5,7 @@
 ---
 
 ## 🎬 Hook
-> "This is EP22 — smallest subarray with a given sum — with four words added:
+> "This is EP22, smallest subarray with a given sum, with four words added:
 > *the array may contain negatives*. Those four words delete the sliding window
 > entirely, and this problem goes from Easy to Hard. Today is about what replaces it:
 > a queue of prefix sums that you keep **increasing**, and two pop rules, each of which
@@ -31,12 +31,12 @@ Input:  nums = [84, -37, 32, 40, 95], k = 167 -> 3    <- [32, 40, 95]
 **Look hard at `[84, −37, 32, 40, 95], k = 167`.** Run EP22's sliding window on it and
 it returns **5**, not 3. Here's why: the window only shrinks from the left while the sum
 still reaches `k`. It arrives at the full array with sum 214, drops the leading `84`,
-lands on 130 — below `k` — and stops, having recorded length 5. It never discovers that
+lands on 130, below `k`, and stops, having recorded length 5. It never discovers that
 dropping the *pair* `84, −37` costs only 47 and leaves `[32, 40, 95] = 167`.
 
 The `−37` is what breaks it: **removing an element can raise the remaining sum**, so
 "the sum fell below k" no longer means "I have shrunk as far as I can." Run that on
-camera before writing any deque code — a wrong answer from the previous pattern's tool
+camera before writing any deque code, a wrong answer from the previous pattern's tool
 is the best motivation for this one.
 
 `[2, −1, 2], k = 3` is the companion case: the answer is the **whole array**, negative
@@ -62,7 +62,7 @@ right, which is precisely why you need the 84 example to prove it wrong.
 >    the first `j` where it works, so any later `j` pairs with it more distantly. It can
 >    never give a shorter answer again. *(pop from the front)*
 > 2. **If an earlier `i` has a prefix `>= pre[j]`, throw it away too.** `j` is later
->    *and* smaller — better on both counts, for every future `j'`. It dominates. *(pop
+>    *and* smaller, better on both counts, for every future `j'`. It dominates. *(pop
 >    from the back)*
 >
 > What survives is a queue of positions whose prefix values strictly **increase**. The
@@ -70,7 +70,7 @@ right, which is precisely why you need the 84 example to prove it wrong.
 
 ## 🐌 Brute force (say it, don't type it)
 All O(n²) pairs of prefix positions, keep the shortest gap reaching `k`. Correct,
-trivially. Also worth naming the **wrong** O(n) attempt — the sliding window — because
+trivially. Also worth naming the **wrong** O(n) attempt, the sliding window, because
 the interviewer wants to hear you rule it out for a *reason*:
 
 > *"With negatives, the sum isn't monotonic in the window's length. Extending can lower
@@ -81,8 +81,8 @@ the interviewer wants to hear you rule it out for a *reason*:
 **Therefore:** prefix sums + a **monotonic deque of indices**, O(n).
 
 **Key insight:** a hash map is the wrong structure here and knowing *why* is the lesson
-of this episode. EP39–EP42 all asked **equality** questions — "have I seen exactly this
-key?" — which is all a dict can answer in O(1). This asks a **range** question:
+of this episode. EP39–EP42 all asked **equality** questions, "have I seen exactly this
+key?", which is all a dict can answer in O(1). This asks a **range** question:
 
 ```
 is there an earlier index i with  pre[i] <= pre[j] - k ?   and the LATEST such i
@@ -105,14 +105,14 @@ dq.append(j)
 
 Rule (1) before rule (2): a front element might complete an answer *with this very j*,
 so you must harvest before you prune. And the loop runs over the prefix array
-`0 .. n`, not the original array — `pre[0] = 0` is a legitimate left end.
+`0 .. n`, not the original array, `pre[0] = 0` is a legitimate left end.
 
-## 🔍 Dry run — `nums = [2, -1, 2]`, `k = 3`
+## 🔍 Dry run: `nums = [2, -1, 2]`, `k = 3`
 `pre = [0, 2, 1, 3]`, `dq = []`, `best = ∞`.
 
 | j | `pre[j]` | front pops (record) | back pops (dominated) | `dq` after | `best` |
 |---|---|---|---|---|---|
-| 0 | 0 | — | — | `[0]` | ∞ |
+| 0 | 0 | - | - | `[0]` | ∞ |
 | 1 | 2 | 2 − 0 = 2 < 3, no | `pre[0]=0 >= 2`? no | `[0, 1]` | ∞ |
 | 2 | 1 | 1 − 0 = 1 < 3, no | **`pre[1]=2 >= 1` → pop 1** | `[0, 2]` | ∞ |
 | 3 | 3 | **3 − pre[0] = 3 ≥ 3 → pop 0, best = 3 − 0 = 3**; then `3 − pre[2] = 2 < 3`, stop | `pre[2]=1 >= 3`? no | `[2, 3]` | **3** |
@@ -121,27 +121,27 @@ Answer **3** ✓
 
 Row `j = 2` is rule (2) earning its keep: position 1 holds prefix `2`, position 2 holds
 prefix `1`. Position 2 is later *and* smaller, so position 1 can never be part of a
-better answer and leaves. That pop is what keeps the deque increasing — and the deque
+better answer and leaves. That pop is what keeps the deque increasing, and the deque
 being increasing is what makes the front pop in row 3 safe to stop at the first failure.
 
-## 🔍 Dry run — `nums = [84, -37, 32, 40, 95]`, `k = 167`
+## 🔍 Dry run: `nums = [84, -37, 32, 40, 95]`, `k = 167`
 `pre = [0, 84, 47, 79, 119, 214]`.
 
 | j | `pre[j]` | front pops | back pops | `dq` after | `best` |
 |---|---|---|---|---|---|
-| 0 | 0 | — | — | `[0]` | ∞ |
+| 0 | 0 | - | - | `[0]` | ∞ |
 | 1 | 84 | 84 < 167 | no | `[0, 1]` | ∞ |
 | 2 | 47 | 47 < 167 | **`pre[1]=84 >= 47` → pop 1** | `[0, 2]` | ∞ |
 | 3 | 79 | 79 < 167 | `pre[2]=47 >= 79`? no | `[0, 2, 3]` | ∞ |
 | 4 | 119 | 119 < 167 | no | `[0, 2, 3, 4]` | ∞ |
 | 5 | 214 | **214 − 0 = 214 ≥ 167 → pop 0, best = 5**; **214 − 47 = 167 ≥ 167 → pop 2, best = 5 − 2 = 3**; 214 − 79 = 135 < 167, stop | `pre[4]=119 >= 214`? no | `[3, 4, 5]` | **3** |
 
-Answer **3** ✓ — the subarray `[32, 40, 95]`, indices 2..4.
+Answer **3** ✓, the subarray `[32, 40, 95]`, indices 2..4.
 
 Row `j = 5` pops the front **twice**, improving the answer from 5 to 3 in a single
 iteration. That is the rule-(1) loop doing its job: keep harvesting while the front
 still reaches `k`, because each pop is a *shorter* candidate than the last. And note
-`214 − 47 = 167` — the `>=` is inclusive, so an exact hit must count.
+`214 − 47 = 167`, the `>=` is inclusive, so an exact hit must count.
 
 ## ✅ Optimal solution
 ```python
@@ -151,8 +151,8 @@ class Solution:
     def shortestSubarray(self, nums: List[int], k: int) -> int:
         """Length of the shortest subarray with sum >= k. Negatives allowed.
 
-        Time:  O(n) — every index enters and leaves the deque at most once.
-        Space: O(n) — the prefix array and the deque.
+        Time:  O(n), every index enters and leaves the deque at most once.
+        Space: O(n), the prefix array and the deque.
         """
         n = len(nums)
         pre = [0] * (n + 1)
@@ -182,7 +182,7 @@ class Solution:
   have completed an answer with this `j` can be popped as "dominated" first. Order is
   correctness here, not style.
 - **Loop over `pre`, all `n + 1` of it.** `pre[0] = 0` must enter the deque or every
-  answer starting at index 0 is lost — the same empty-prefix idea as EP39, wearing a
+  answer starting at index 0 is lost, the same empty-prefix idea as EP39, wearing a
   deque instead of a map.
 - **The deque holds indices, not values.** You need `j − i` at the end. Storing values
   and losing the positions is the classic first-draft bug.
@@ -191,11 +191,11 @@ class Solution:
 - **Pop from the front *only* after recording.** `best = min(best, j - dq.popleft())` in
   one expression keeps that honest; splitting it across lines invites popping without
   measuring.
-- **The sentinel `best = n + 1`** and the final `if best <= n` — returning `-1` for
+- **The sentinel `best = n + 1`** and the final `if best <= n`, returning `-1` for
   "impossible" is part of the spec, and `float('inf')` works too as long as the return
   converts it.
 - **This is not EP22.** If every value is positive, the two-pointer window from EP22 is
-  simpler and also O(n) — say so. The deque is the price of negatives.
+  simpler and also O(n), say so. The deque is the price of negatives.
 
 ## 🎤 Interview talking points
 - *"Sliding window is out: with negatives the sum isn't monotonic in the window length,
@@ -213,11 +213,11 @@ class Solution:
 ## 🔗 Transfer
 This episode swapped the hash map for a structure that respects **order**, and tomorrow
 (EP44) pushes that one step further: counting how many earlier prefixes fall inside a
-*range* `[running − upper, running − lower]`, which needs sorting — a BIT or a merge
+*range* `[running − upper, running − lower]`, which needs sorting, a BIT or a merge
 sort. The monotonic deque itself comes back in Pattern 08 (Stack) for Sliding Window
 Maximum, where the same two-pop reasoning appears with the inequality flipped.
 
 ## 📹 Metadata
-- **Title:** `Shortest Subarray with Sum at Least K — when the window dies | Prefix Sum #5`
+- **Title:** `Shortest Subarray with Sum at Least K, when the window dies | Prefix Sum #5`
 - **Thumbnail:** `NEGATIVES KILL THE WINDOW` (red block)
-- **Short:** `[84,-37,32,40,95], k=167` — the window saying 5, the deque saying 3. 55s.
+- **Short:** `[84,-37,32,40,95], k=167`, the window saying 5, the deque saying 3. 55s.

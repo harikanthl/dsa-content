@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "There is no linked list in this problem. There are no pointers, no nodes, no
-> `.next`. And it is still a cycle-detection problem — you solve it with the exact
+> `.next`. And it is still a cycle-detection problem, you solve it with the exact
 > code from episode 13. Once you see why, you start seeing linked lists everywhere."
 
 ## 📋 Problem, in your words
@@ -14,8 +14,8 @@
 Start with a number. Replace it with the sum of the squares of its digits.
 Repeat.
 
-If you eventually reach 1, the number is "happy" — return true.
-If you never reach 1, you're stuck in a loop forever — return false.
+If you eventually reach 1, the number is "happy", return true.
+If you never reach 1, you're stuck in a loop forever, return false.
 ```
 
 ## 🔢 The example
@@ -31,11 +31,11 @@ Input:  2
 2 -> 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4 -> ...
                 ^                                        |
                 +----------------------------------------+
-Output: false   (back to 4 — it will go round forever)
+Output: false   (back to 4, it will go round forever)
 ```
 
 ## 🧸 ELI5
-> Every number points at exactly one other number — the sum of its squared digits.
+> Every number points at exactly one other number, the sum of its squared digits.
 > `19` points at `82`. `82` points at `68`. Nobody points at two places.
 >
 > That is *precisely* what a linked list is: a node with one `next`.
@@ -49,7 +49,7 @@ Output: false   (back to 4 — it will go round forever)
 
 **Why must it be one or the other?** Because the numbers can't run away from you. Any
 number below 1000 maps to at most 9² × 4 = 324, and anything bigger shrinks fast. So
-after a step or two you're trapped in a small finite set of values — and walking
+after a step or two you're trapped in a small finite set of values, and walking
 forever inside a finite set *must* repeat something. There is no third outcome.
 
 ## 🐌 Brute force (say it, don't type it)
@@ -65,35 +65,35 @@ return n == 1
 ```
 
 **O(log n) time, O(log n) space.** This is a perfectly good answer and you should say
-it first. It's also what most candidates stop at. The follow-up — *"can you do it in
-O(1) space?"* — is the actual interview question.
+it first. It's also what most candidates stop at. The follow-up, *"can you do it in
+O(1) space?"*, is the actual interview question.
 
 ## 💡 The pattern reveal
 **Signal:** a value maps to exactly one next value · repeat forever · "does it loop?"
-**Therefore:** Fast & Slow pointers, Shape A — on an *implicit* linked list.
+**Therefore:** Fast & Slow pointers, Shape A, on an *implicit* linked list.
 
 **Key insight:** a **function is a linked list**. `next(x) = sum_of_squared_digits(x)`
 is the `.next` pointer. You don't need nodes in memory to run Floyd's algorithm; you
 just need a rule that turns a position into the next position.
 
 **The one adaptation:** in episode 13, the walk ended when `fast` fell off the end
-(`None`). Here there is no end — the chain is infinite. The terminator is the value
+(`None`). Here there is no end, the chain is infinite. The terminator is the value
 `1`, because `1 → 1 → 1 → …` is itself a cycle of length one. So instead of checking
 `while fast and fast.next`, you check `while fast != 1`.
 
-## 🔍 Dry run — `n = 19` (happy)
+## 🔍 Dry run: `n = 19` (happy)
 | step | slow = sq(slow) | fast = sq(sq(fast)) | verdict |
 |---|---|---|---|
-| start | 19 | 19 | — |
+| start | 19 | 19 | - |
 | 1 | 82 | 68 | keep going |
 | 2 | 68 | **1** | `fast` reached 1 → return `True` |
 
-Note `fast` gets there first — that's the point of moving twice as fast.
+Note `fast` gets there first, that's the point of moving twice as fast.
 
-## 🔍 Dry run — `n = 2` (unhappy)
+## 🔍 Dry run: `n = 2` (unhappy)
 | step | slow | fast | verdict |
 |---|---|---|---|
-| start | 2 | 2 | — |
+| start | 2 | 2 | - |
 | 1 | 4 | 16 | |
 | 2 | 16 | 58 | |
 | 3 | 37 | 145 | |
@@ -111,9 +111,9 @@ class Solution:
     def isHappy(self, n: int) -> bool:
         """Is n happy? Floyd's cycle detection on an implicit linked list.
 
-        Time:  O(log n) — each step shrinks a large number sharply; the walk is
+        Time:  O(log n), each step shrinks a large number sharply; the walk is
                then confined to values below ~243, a constant-size set.
-        Space: O(1) — two integers. This is the whole point.
+        Space: O(1), two integers. This is the whole point.
         """
         def next_value(x: int) -> int:
             total = 0
@@ -136,17 +136,17 @@ class Solution:
 ### The digit loop, said out loud
 `divmod(x, 10)` peels the last digit and shifts the rest down. It's the arithmetic
 version of reading a number right to left. The `str(x)` version is one line and also
-fine — `sum(int(d)**2 for d in str(x))` — but mention that it allocates a string,
+fine, `sum(int(d)**2 for d in str(x))`, but mention that it allocates a string,
 and that an interviewer in C or Java will expect the arithmetic version.
 
 ## ⚠️ Gotchas
 - **Check `fast == 1` before `slow == fast`.** Once `fast` lands on 1 it stays there,
-  so `slow` will eventually meet it at 1 — and if you check the meeting first you
+  so `slow` will eventually meet it at 1, and if you check the meeting first you
   return `False` on a happy number. Order matters here.
 - **Only test `fast`, not `slow`, against 1.** `fast` is ahead; testing both is
   harmless but testing only `slow` makes the fast pointer pointless.
 - **Advance before comparing.** Both start at `n`, so comparing first returns
-  immediately on every input — the same bug as episode 13.
+  immediately on every input, the same bug as episode 13.
 - `n = 1` must return `True`. Trace it: `slow → 1`, `fast → 1`, the `fast == 1` check
   fires on the first iteration. Works, but check it on camera rather than assuming.
 - **No termination guard is needed and none should be added.** A `for _ in range(100)`
@@ -155,7 +155,7 @@ and that an interviewer in C or Java will expect the arithmetic version.
 
 ## 🎤 Interview talking points
 - *"A function that maps each value to exactly one next value is a linked list whose
-  pointers are computed rather than stored — so Floyd's applies unchanged."* ← this
+  pointers are computed rather than stored, so Floyd's applies unchanged."* ← this
   is the sentence the whole episode exists to teach.
 - *"It must terminate or cycle because the values are bounded: for a 3-digit number
   the maximum next value is 3 × 81 = 243, so the walk is confined to a finite set,
@@ -167,9 +167,9 @@ and that an interviewer in C or Java will expect the arithmetic version.
 Tomorrow (EP16, Find the Duplicate Number) is the same trick with a nastier disguise:
 `i → nums[i]` is the hidden linked list, and you need Floyd's **phase two** from EP14
 to find where the cycle starts. These two episodes together are the reason this
-pattern is worth knowing — they look nothing like linked lists and they are.
+pattern is worth knowing, they look nothing like linked lists and they are.
 
 ## 📹 Metadata
-- **Title:** `Happy Number — the linked list that isn't there | Fast & Slow #3`
+- **Title:** `Happy Number, the linked list that isn't there | Fast & Slow #3`
 - **Thumbnail:** `A FUNCTION IS A LIST` (teal block)
 - **Short:** The "19 → 82 → 68 → 100 → 1" chain drawn as arrows, then the reveal that arrows = `.next`.

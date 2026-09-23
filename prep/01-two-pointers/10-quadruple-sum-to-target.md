@@ -5,7 +5,7 @@
 ---
 
 ## 🎬 Hook
-> "By now you should be bored of this, and that's the point. 2Sum, 3Sum, 4Sum — it's
+> "By now you should be bored of this, and that's the point. 2Sum, 3Sum, 4Sum, it's
 > one recursive idea: fix a number, solve the smaller problem. Today I'll write 4Sum,
 > and then I'll write the version that solves *k*Sum for any k."
 
@@ -28,19 +28,19 @@ Output: [[-2,-1,1,2], [-2,0,0,2], [-1,0,0,1]]
 ## 🧸 ELI5
 > Splitting a restaurant bill four ways with exact change.
 >
-> Freeze one person's contribution. Now it's a three-way split of what remains —
+> Freeze one person's contribution. Now it's a three-way split of what remains,
 > which is 3Sum, which you did on day 5. Freeze a second person, and it's a two-way
-> split — the bookshelf trick from day 1.
+> split, the bookshelf trick from day 1.
 >
 > Two frozen people, two walking fingers. Every layer you freeze is one more `for`
 > loop, and the fingers at the bottom are always the same code.
 
 ## 🐌 Brute force (say it, don't type it)
-Four nested loops — **O(n⁴)**. At n = 200 that's 1.6 billion operations.
+Four nested loops, **O(n⁴)**. At n = 200 that's 1.6 billion operations.
 
 ## 💡 The pattern reveal
 **Signal:** find a k-tuple summing to a target.
-**Therefore:** the **kSum reduction** — sort once, fix (k−2) elements with nested
+**Therefore:** the **kSum reduction**: sort once, fix (k−2) elements with nested
 loops, converge two pointers at the bottom.
 
 **Key insight:** kSum is not k separate problems. It's one recursive definition:
@@ -50,7 +50,7 @@ base case: 2Sum on a sorted array = two pointers
 ```
 Complexity is **O(n^(k−1))**. 2Sum → O(n), 3Sum → O(n²), 4Sum → O(n³).
 
-## 🔍 Dry run — sorted `[-2, -1, 0, 0, 1, 2]`, target 0
+## 🔍 Dry run: sorted `[-2, -1, 0, 0, 1, 2]`, target 0
 | i | j | anchors | need | lo..hi | found |
 |---|---|---|---|---|---|
 | 0 | 1 | −2, −1 | +3 | lo=2(0), hi=5(2) → 2 ↑ … lo=4(1), hi=5(2) → **3** ✓ | `[-2,-1,1,2]` |
@@ -98,7 +98,7 @@ class Solution:
 ```
 **Time:** O(n³) · **Space:** O(1) beyond output and sort
 
-### The generalisation — show this at the end, it's the payoff
+### The generalisation: show this at the end, it's the payoff
 ```python
 def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:
     res = []
@@ -137,21 +137,21 @@ interviewer invents on the spot."* That's the moment the viewer subscribes.
   from `i` still falls short, only this anchor fails → `continue`. Getting these
   backwards is a silent wrong answer, not a crash.
 - Python ints are arbitrary precision, so no overflow. In Java/C++ you'd need `long`.
-  Mention it — interviewers in those languages will ask.
+  Mention it, interviewers in those languages will ask.
 - `range(n - 3)` and `range(i+1, n-2)`: you need three elements after `i` and two after `j`.
 
 ## 🎤 Interview talking points
 - *"kSum reduces to (k−1)Sum; the base case is 2Sum with two pointers. That gives
   O(n^(k−1))."*
-- *"The pruning steps aren't required for correctness but cut real runtime — and they
+- *"The pruning steps aren't required for correctness but cut real runtime, and they
   fall straight out of the array being sorted."*
 
 ## 🔗 Transfer
 This closes the kSum family (EP1, 5, 6, 7, 10). The recursive peel-one-off shape is
-also how you'll think about **backtracking** in Pattern 12 (EP 111–120) — Combination
+also how you'll think about **backtracking** in Pattern 12 (EP 111–120), Combination
 Sum is structurally this same recursion without the sorted two-pointer base case.
 
 ## 📹 Metadata
-- **Title:** `4Sum → kSum — one function for every "find k numbers" problem | Two Pointers #10`
+- **Title:** `4Sum → kSum, one function for every "find k numbers" problem | Two Pointers #10`
 - **Thumbnail:** `2SUM → 3SUM → kSUM` (blue block)
 - **Short:** The recursive kSum function, 60s. Strong standalone.

@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Four lines of code, and they only work in one order. The moment you flip a node's
-> pointer backwards you have destroyed your only route to the rest of the list — so the
+> pointer backwards you have destroyed your only route to the rest of the list, so the
 > first line saves it. Everybody can recite this loop; today is about being able to
 > *derive* it, because the next five episodes are this loop with bookkeeping around it."
 
@@ -48,12 +48,12 @@ Input:  1 -> None          -> 1 -> None
 >   4. cur = nxt          walk to the person I remembered
 > ```
 >
-> Repeat until `cur` walks off the end. Where's the new head? It's `prev` — the last
+> Repeat until `cur` walks off the end. Where's the new head? It's `prev`, the last
 > person you flipped. The original head is now standing at the **back** of the line.
 
 ## 🐌 Brute force (say it, don't type it)
 Walk the list into a Python list, reverse it, rebuild (or just rewrite the values).
-**O(n) time, O(n) space** — and for a linked list, allocating a parallel array is
+**O(n) time, O(n) space**: and for a linked list, allocating a parallel array is
 precisely what the question is testing you *not* to do. Say it in one sentence, name the
 space cost, move on.
 
@@ -65,27 +65,27 @@ space cost, move on.
 
 | pointer | means |
 |---|---|
-| `prev` | the part already reversed — starts as `None`, ends as the answer |
+| `prev` | the part already reversed, starts as `None`, ends as the answer |
 | `cur` | the node being flipped right now |
 | `nxt` | the untouched remainder, saved before the flip destroys the link |
 
 **🧨 The two traps of this episode.**
 
 1. **Order.** `cur.next = prev` before `nxt = cur.next` loses the rest of the list
-   instantly — you end up with a two-node list and no error message.
+   instantly, you end up with a two-node list and no error message.
 2. **`return prev`, not `return head`.** When the loop ends, `cur` is `None` and `prev`
-   is the last node flipped. `head` is still a valid node — it's the **tail** now — so
+   is the last node flipped. `head` is still a valid node, it's the **tail** now, so
    returning it gives you `1 -> None` and a wrong answer that looks almost right.
 
 And the reason `prev` starts at `None`: the old head becomes the new tail, and a tail
 points at nothing. Seeding `prev = head` builds a **cycle**, which hangs the next thing
 that walks the list.
 
-## 🔍 Dry run — `1 -> 2 -> 3 -> None`
+## 🔍 Dry run: `1 -> 2 -> 3 -> None`
 
 | step | `prev` | `cur` | `nxt` | list after the flip |
 |---|---|---|---|---|
-| start | `None` | `1` | — | `1 -> 2 -> 3 -> None` |
+| start | `None` | `1` | - | `1 -> 2 -> 3 -> None` |
 | 1 | `1` | `2` | `2` | `None <- 1`, `2 -> 3 -> None` |
 | 2 | `2` | `3` | `3` | `None <- 1 <- 2`, `3 -> None` |
 | 3 | `3` | `None` | `None` | `None <- 1 <- 2 <- 3` |
@@ -93,7 +93,7 @@ that walks the list.
 `cur` is `None`, so stop. `prev` is `3` → **return `3`**, and reading forward from it
 gives `3 -> 2 -> 1 -> None` ✓
 
-Narrate row 1 slowly on camera: after `cur.next = prev`, node `1` points at `None` — it
+Narrate row 1 slowly on camera: after `cur.next = prev`, node `1` points at `None`, it
 is *already* the tail, on the very first iteration. Everything after that is repetition.
 
 ## ✅ Optimal solution
@@ -102,8 +102,8 @@ class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         """Reverse a singly linked list in place.
 
-        Time:  O(n) — each node is visited once.
-        Space: O(1) — three pointers, nothing allocated.
+        Time:  O(n), each node is visited once.
+        Space: O(1), three pointers, nothing allocated.
         """
         prev = None          # the reversed part; the old head will point here
         cur = head
@@ -118,7 +118,7 @@ class Solution:
 ```
 **Time:** O(n) · **Space:** O(1)
 
-**The one-liner you'll see in other people's code** — same four steps, evaluated
+**The one-liner you'll see in other people's code**: same four steps, evaluated
 right-hand side first:
 
 ```python
@@ -126,7 +126,7 @@ while cur:
     cur.next, prev, cur = prev, cur, cur.next
 ```
 It's the idiom used back in EP18's palindrome check. Know it, be able to expand it into
-the four lines, and prefer the four lines on camera — the order is the lesson.
+the four lines, and prefer the four lines on camera, the order is the lesson.
 
 ## ⚠️ Gotchas
 - **`nxt = cur.next` must come first.** The other three lines can be re-derived; this
@@ -144,20 +144,20 @@ the four lines, and prefer the four lines on camera — the order is the lesson.
 - *"Three pointers: what's reversed, what I'm flipping, and what's left. The first line
   of the loop saves the remainder, because the second line destroys the link to it."*
 - *"I return `prev`, because when `cur` falls off the end, `prev` is the last node I
-  flipped — the new head."*
+  flipped, the new head."*
 - *"O(n) time, O(1) space. Copying into an array is O(n) space and defeats the point of
   the question."*
-- *"There's a recursive version — reverse the tail, then make `head.next.next = head` —
+- *"There's a recursive version, reverse the tail, then make `head.next.next = head`,
   but it's O(n) stack, so I'd only write it if you want to see recursion."* ← knowing
   its cost is the point.
 
 ## 🔗 Transfer
 This loop is the whole pattern. EP53 runs it on a **slice** of the list, which needs a
 dummy node and two rewires; EP54 and EP55 run it repeatedly on fixed-size blocks; EP56
-runs it on blocks that grow. Tomorrow (EP53) introduces the four-node picture —
-`before`, first, last, `after` — that every remaining episode uses.
+runs it on blocks that grow. Tomorrow (EP53) introduces the four-node picture,
+`before`, first, last, `after`, that every remaining episode uses.
 
 ## 📹 Metadata
-- **Title:** `Reverse a Linked List — four lines, one order | LinkedList Reversal #1`
+- **Title:** `Reverse a Linked List, four lines, one order | LinkedList Reversal #1`
 - **Thumbnail:** `SAVE · FLIP · ADVANCE` (green block)
 - **Short:** flipping the first link before saving `next`, and watching the list vanish. 40s.

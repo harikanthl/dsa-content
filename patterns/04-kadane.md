@@ -1,4 +1,4 @@
-# Pattern 04 — Kadane's Algorithm
+# Pattern 04: Kadane's Algorithm
 
 **6 episodes · EP 33–38**
 
@@ -7,7 +7,7 @@
 ## The one-sentence version
 
 For "best contiguous subarray" questions, walk the array once asking a single question
-at each element — **extend the run, or start a new one here?** — and keep the best
+at each element, **extend the run, or start a new one here?**: and keep the best
 answer you've ever seen: **O(n²) → O(n)**.
 
 ## ELI5
@@ -18,7 +18,7 @@ question:
 > *Is what I'm carrying actually helping me?*
 
 If your running total is positive, carry it forward and add the new element. If it's
-negative, **drop it** — a negative prefix can only drag down everything that follows,
+negative, **drop it**: a negative prefix can only drag down everything that follows,
 so you're better off starting fresh from where you stand.
 
 That's it. One comparison per element.
@@ -42,14 +42,14 @@ Confusing them is the source of nearly every Kadane bug.
 | a variant with one allowed modification | Subarray Sum with One Deletion (EP36) |
 | a **circular** array | Circular Subarray (EP38) |
 
-**Kadane vs Sliding Window** — this is the distinction to have ready:
+**Kadane vs Sliding Window**: this is the distinction to have ready:
 
 | | Sliding Window (P03) | Kadane (P04) |
 |---|---|---|
 | needs | all **positive** values | works **with negatives** |
 | keeps | an explicit `[lo, hi]` window | one running total, no window |
 | question | "should I shrink from the left?" | "should I abandon what I'm carrying?" |
-| breaks when | values go negative | — |
+| breaks when | values go negative | - |
 
 If the array has negatives and you reach for a sliding window, you will get a wrong
 answer. Notice the sign of the input before you choose.
@@ -66,7 +66,7 @@ def kadane(nums):
 ```
 
 **Why seed with `nums[0]` and not `0`:** an all-negative array like `[-3, -1, -2]` has
-answer `-1`, but seeding with `0` returns `0` — a subarray that doesn't exist. Empty
+answer `-1`, but seeding with `0` returns `0`, a subarray that doesn't exist. Empty
 subarrays are not allowed unless the problem says so. This is the single most common
 Kadane mistake and it appears in every episode of this pattern.
 
@@ -74,7 +74,7 @@ Kadane mistake and it appears in every episode of this pattern.
 
 ### 1. Track two states when negatives can flip things (EP35, EP37)
 
-For **products**, a large negative multiplied by a negative becomes a large positive —
+For **products**, a large negative multiplied by a negative becomes a large positive,
 so the minimum is as valuable as the maximum. Carry both:
 
 ```python
@@ -88,7 +88,7 @@ for x in nums[1:]:
 
 ### 2. Track a second "budget spent" state (EP36)
 
-When one modification is allowed, run two Kadanes side by side — one that hasn't used
+When one modification is allowed, run two Kadanes side by side, one that hasn't used
 the modification, one that has:
 
 ```python
@@ -98,7 +98,7 @@ delete = max(delete + x, keep)     # either continue a deleted run, or delete x 
 
 ### 3. Total minus the minimum (EP38)
 
-For a **circular** array, the answer either doesn't wrap (ordinary Kadane) or it does —
+For a **circular** array, the answer either doesn't wrap (ordinary Kadane) or it does,
 and a wrapping subarray is exactly `total − (some non-wrapping subarray)`. So maximise
 by *minimising* the part you throw away:
 
@@ -126,12 +126,12 @@ needs an array, you've over-thought it.
 | 34 | Minimum Subarray Sum | base, mirrored | Flip every max to a min. Proves you understood the shape. |
 | 35 | Maximum Product Subarray | two states | A negative swaps the roles of max and min. |
 | 36 | Maximum Subarray Sum with One Deletion | two states | "One allowed modification" = a second parallel state. |
-| 37 | Maximum Absolute Sum | two states | `max(max_sum, |min_sum|)` — run both Kadanes. |
+| 37 | Maximum Absolute Sum | two states | `max(max_sum, |min_sum|)`, run both Kadanes. |
 | 38 | Maximum Sum Circular Subarray | total − min | The wrap case, and the all-negative trap. |
 
 ## What "knowing this in your sleep" means
 
-1. What exactly does `current` mean? *(The best subarray ENDING at this index — not the
+1. What exactly does `current` mean? *(The best subarray ENDING at this index, not the
    best so far.)*
 2. Why seed with `nums[0]` rather than `0`? *(All-negative arrays; an empty subarray is
    not a legal answer.)*
@@ -141,4 +141,4 @@ needs an array, you've over-thought it.
    budget, updated from the first.)*
 5. Why does the circular answer equal `total − min_subarray`? *(Whatever wraps is the
    complement of something that doesn't. And if everything is negative, that complement
-   is empty — which is why that case needs its own guard.)*
+   is empty, which is why that case needs its own guard.)*

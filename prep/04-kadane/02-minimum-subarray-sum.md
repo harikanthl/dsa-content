@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Same algorithm, every comparison flipped. This looks like a throwaway episode and it
-> isn't — inverting a algorithm you 'know' is the fastest way to find out whether you
+> isn't, inverting a algorithm you 'know' is the fastest way to find out whether you
 > actually understood it or just memorised the shape of the code."
 
 ## 📋 Problem, in your words
@@ -32,8 +32,8 @@ Output: 1        <- all positive, so the answer is the smallest single element
 > collecting **penalties** and you want the worst possible run.
 >
 > The question at each step is the same shape: *is the penalty I'm carrying making this
-> worse?* If your running total is **positive**, it's helping — which is exactly what
-> you don't want — so drop it and start fresh.
+> worse?* If your running total is **positive**, it's helping, which is exactly what
+> you don't want, so drop it and start fresh.
 >
 > Every "keep the bigger" becomes "keep the smaller." That's the whole edit.
 
@@ -55,7 +55,7 @@ best    = min(best, current)       # was max
 
 Two tokens changed. Nothing else about the reasoning moves.
 
-**The transferable trick — the one worth the episode:** you don't have to write this at
+**The transferable trick, the one worth the episode:** you don't have to write this at
 all. Negate the array, run the maximum version, negate the answer:
 
 ```python
@@ -66,7 +66,7 @@ Because `min(S) = −max(−S)`. That identity is worth saying out loud in an in
 shows you see the problem as an instance of a family rather than as a new thing. (It
 costs O(n) extra space for the copy, or none if you negate as you go.)
 
-## 🔍 Dry run — `[3, -4, 2, -3, -1, 7, -5]`
+## 🔍 Dry run: `[3, -4, 2, -3, -1, 7, -5]`
 Seed: `current = best = 3`.
 
 | i | x | `current + x` | `x` | `current` = min | `best` |
@@ -78,7 +78,7 @@ Seed: `current = best = 3`.
 | 5 | 7 | 1 | 7 | **1** (extend) | −6 |
 | 6 | −5 | −4 | −5 | **−5** (start fresh) | −6 |
 
-Return **−6** — the run `[−4, 2, −3, −1]`.
+Return **−6**: the run `[−4, 2, −3, −1]`.
 
 Row 1 is the mirror of yesterday's key move: the running total was `+3`, which *helps*
 a sum go up, so it was dropped. Row 6 does it again from `+1`.
@@ -110,12 +110,12 @@ def smallestSumSubarray(self, nums: List[int]) -> int:
         best = max(best, current)
     return -best                            # min(S) = -max(-S)
 ```
-Same thing with no new code path. Show it — but write the direct version as the
+Same thing with no new code path. Show it, but write the direct version as the
 answer, because it reads better and doesn't make a reviewer check your signs.
 
 ## ⚠️ Gotchas
 - **Seed with `nums[0]`, not `0`.** On an all-positive array like `[2, 6, 8, 1, 4]`, a
-  zero seed returns `0` — the empty subarray again. The answer is `1`. Same bug as
+  zero seed returns `0`, the empty subarray again. The answer is `1`. Same bug as
   EP33, mirrored, and it's worth failing on camera a second time precisely because it
   *is* the same bug: seeding with a hopeful value instead of a real one.
 - **Flip *both* comparisons.** Changing `current` to `min` but leaving `best` as `max`
@@ -129,17 +129,17 @@ answer, because it reads better and doesn't make a reviewer check your signs.
 ## 🎤 Interview talking points
 - *"It's Kadane with the comparisons mirrored: `current` is now the smallest sum ending
   here, and I abandon the running total when it's positive."*
-- *"Equivalently, `min(S) = −max(−S)` — I could negate the input, run the maximum
+- *"Equivalently, `min(S) = −max(−S)`, I could negate the input, run the maximum
   version, and negate the result."* ← the sentence that shows you see the family.
 - *"Seeding matters in the opposite direction: an all-positive array is what breaks a
   zero seed here."*
 
 ## 🔗 Transfer
-This mirror is not busywork — **EP37 (Maximum Absolute Sum) runs both versions at once**
+This mirror is not busywork, **EP37 (Maximum Absolute Sum) runs both versions at once**
 and takes `max(max_sum, |min_sum|)`, and **EP38 (Circular Subarray)** needs the minimum
 subarray to compute the wrapping case. Today's four lines get used directly, twice.
 
 ## 📹 Metadata
-- **Title:** `Minimum Subarray Sum — Kadane in a mirror | Kadane #2`
+- **Title:** `Minimum Subarray Sum, Kadane in a mirror | Kadane #2`
 - **Thumbnail:** `FLIP EVERY MAX` (green block)
 - **Short:** `min(S) = -max(-S)` shown as one line of code. 35s.

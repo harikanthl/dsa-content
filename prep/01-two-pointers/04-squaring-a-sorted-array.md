@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Square a sorted array and it stops being sorted. Negative numbers ruin everything.
-> But here's the thing — the biggest square is *always* at one of the two ends. So
+> But here's the thing, the biggest square is *always* at one of the two ends. So
 > build the answer backwards, and it's one pass."
 
 ## 📋 Problem, in your words
@@ -29,9 +29,9 @@ they understand why this isn't a one-liner.
 
 ## 🧸 ELI5
 > Think of the number line as a road, and **0 is your house**. Squaring a number just
-> asks *"how far is it from my house?"* — direction stops mattering, only distance.
+> asks *"how far is it from my house?"*, direction stops mattering, only distance.
 >
-> The array is sorted, so the numbers furthest from home are at the **two ends** —
+> The array is sorted, so the numbers furthest from home are at the **two ends**,
 > the most negative on the left, the most positive on the right. You don't know which
 > of those two is further, so you check both.
 >
@@ -46,19 +46,19 @@ return sorted(x * x for x in nums)     # O(n log n)
 Honest note for the video: **this passes on LeetCode.** Say so. Then say why the
 interviewer doesn't want it: the input was handed to you already sorted, and this
 throws that information away and pays to rebuild it. The follow-up is always
-*"can you do it in O(n)?"* — and the answer is today's episode.
+*"can you do it in O(n)?"*, and the answer is today's episode.
 
 ## 💡 The pattern reveal
 **Signal:** sorted input, negatives present, "return sorted output."
-**Therefore:** Two Pointers, Shape A — converging from the ends, but **writing
+**Therefore:** Two Pointers, Shape A, converging from the ends, but **writing
 backwards**.
 
 **Key insight:** squaring is a *distance from zero*. On a sorted array, the maximum
-distance from zero lives at one of the two extremes — never in the middle. So the
+distance from zero lives at one of the two extremes, never in the middle. So the
 largest element of the answer is decidable in O(1), and you can fill the result
 right-to-left.
 
-## 🔍 Dry run — `[-4, -1, 0, 3, 10]`
+## 🔍 Dry run: `[-4, -1, 0, 3, 10]`
 | step | lo | hi | \|nums[lo]\| vs \|nums[hi]\| | winner | write | result |
 |---|---|---|---|---|---|---|
 | 1 | 0 | 4 | 4 vs 10 | right | `100` at idx 4 | `[_,_,_,_,100]` |
@@ -86,25 +86,25 @@ class Solution:
 
         return result
 ```
-**Time:** O(n) · **Space:** O(n) for the output — which is required, not overhead.
+**Time:** O(n) · **Space:** O(n) for the output, which is required, not overhead.
 If asked "can you do O(1) space?", the answer is no: you must return a new array, and
 you can't safely overwrite the input because the value you'd clobber may still be needed.
 
 ## ⚠️ Gotchas
 - **Fill backwards.** The instinct is to write left-to-right, but you can only cheaply
   identify the *largest* remaining square, not the smallest. Trying to go forwards
-  means comparing toward the middle, where the smallest lives — and you don't know
+  means comparing toward the middle, where the smallest lives, and you don't know
   where that is without a search.
 - Compare the **squares**, not the raw values. `-4 < 3` is true but `16 > 9`. If you
   compare raw values you get it backwards for negatives. (You can also compare
-  `abs()`, which some find clearer — mention both.)
+  `abs()`, which some find clearer, mention both.)
 - `while lo <= hi` / `range(n-1, -1, -1)` must include the final single element.
   Stopping at `lo < hi` drops one value and returns a zero in slot 0.
 
 ## 🎤 Interview talking points
 - *"Squaring maps the array to distance-from-zero, so sortedness is preserved on each
   side of zero but the array folds at zero. The two pointers are effectively merging
-  two sorted sequences — the negatives descending and the positives ascending."*
+  two sorted sequences, the negatives descending and the positives ascending."*
   ← That merge framing is the elegant version. It directly connects to merge sort.
 - *"I fill the output from the back because the max is O(1) to find and the min isn't."*
 
@@ -112,9 +112,9 @@ you can't safely overwrite the input because the value you'd clobber may still b
 This is secretly the **merge step of merge sort** on two sorted runs. That framing
 comes back in EP 99 (Merge K Sorted Arrays) and in the two-heap problems. Also: the
 "fill backwards to avoid overwriting" trick is the exact technique in Merge Sorted
-Array (LC 88) — worth a mention as homework.
+Array (LC 88), worth a mention as homework.
 
 ## 📹 Metadata
-- **Title:** `Squares of a Sorted Array — why you must build it backwards | Two Pointers #4`
+- **Title:** `Squares of a Sorted Array, why you must build it backwards | Two Pointers #4`
 - **Thumbnail:** `BUILD IT BACKWARDS` (blue block)
-- **Short:** Beat 3 — show `[16,1,0,9,100]` and ask "why isn't this sorted?"
+- **Short:** Beat 3, show `[16,1,0,9,100]` and ask "why isn't this sorted?"

@@ -5,7 +5,7 @@
 ---
 
 ## 🎬 Hook
-> "This array is sorted — and almost everybody ignores that. That one word is the
+> "This array is sorted, and almost everybody ignores that. That one word is the
 > entire problem. Ignore it and you write O(n²). Use it and you write O(n) with two
 > variables and no extra memory."
 
@@ -14,7 +14,7 @@
 Given an array of numbers that is ALREADY SORTED in increasing order,
 find the two numbers that add up to a given target.
 
-Return their positions, 1-indexed (not 0-indexed — LeetCode is being annoying).
+Return their positions, 1-indexed (not 0-indexed, LeetCode is being annoying).
 Exactly one answer exists. You may not use the same element twice.
 ```
 
@@ -37,7 +37,7 @@ Why:    numbers[0] + numbers[1] = 2 + 7 = 9. In 1-indexed terms, positions 1 and
 > Two fingers, one walk down the shelf, done.
 
 ## 🐌 Brute force (say it, don't type it)
-Two nested loops: try every pair, check if it hits the target — **O(n²)**.
+Two nested loops: try every pair, check if it hits the target, **O(n²)**.
 
 Why it's wasteful: when `2 + 15 = 17` overshoots a target of 9, the brute force
 goes on to test `7 + 15` and `11 + 15`. But those are *bigger*. The array is sorted,
@@ -46,7 +46,7 @@ sorted order told us for free.
 
 ## 💡 The pattern reveal
 **Signal:** the word *sorted* in the problem statement, plus "find a pair."
-**Therefore:** Two Pointers, Shape A — converging from opposite ends.
+**Therefore:** Two Pointers, Shape A, converging from opposite ends.
 
 **Key insight:** from the two ends, the sum can only move in one direction per
 pointer. `lo` can only ever *increase* the sum; `hi` can only ever *decrease* it.
@@ -57,7 +57,7 @@ There's never a guess.
 > hash map. Mention this. It's the #1 confusion for beginners and a great 45-second
 > Short on its own.
 
-## 🔍 Dry run — `[2, 7, 11, 15]`, target 9
+## 🔍 Dry run: `[2, 7, 11, 15]`, target 9
 | step | lo | hi | numbers[lo] + numbers[hi] | vs 9 | action |
 |---|---|---|---|---|---|
 | 1 | 0 | 3 | 2 + 15 = 17 | too big | `hi -= 1` → kill 15 forever |
@@ -83,8 +83,8 @@ class Solution:
 
         return []                             # unreachable: problem guarantees a solution
 ```
-**Time:** O(n) — each pointer moves at most n times and never backwards, so ≤ 2n steps.
-**Space:** O(1) — two integers, regardless of input size.
+**Time:** O(n), each pointer moves at most n times and never backwards, so ≤ 2n steps.
+**Space:** O(1), two integers, regardless of input size.
 
 ## ⚠️ Gotchas
 - **1-indexed return.** `[lo + 1, hi + 1]`. This is the single most common wrong
@@ -98,7 +98,7 @@ class Solution:
 ## 🎤 Interview talking points
 - *"Because it's sorted, I can eliminate a candidate with every comparison instead of
   testing every pair."*
-- *"Each pointer is monotonic — `lo` only increases, `hi` only decreases — so the
+- *"Each pointer is monotonic, `lo` only increases, `hi` only decreases, so the
   total work is bounded by n, not n²."*
 - Proof of correctness, if pushed: *"If `numbers[lo] + numbers[hi] < target`, then
   `numbers[lo]` paired with any index ≤ `hi` is also < target, since everything at or
@@ -111,6 +111,6 @@ EP7 (Triplets with Smaller Sum) and EP10 (4Sum). Those problems are just *"fix o
 number, then run today's code on the rest."* If today lands, the next week is easy.
 
 ## 📹 Metadata
-- **Title:** `Two Sum II — the "sorted" trick almost nobody uses | Two Pointers #1`
+- **Title:** `Two Sum II, the "sorted" trick almost nobody uses | Two Pointers #1`
 - **Thumbnail:** `SORTED = FREE INFO` (blue block)
-- **Short:** Beat 4 — the bookshelf analogy, 50 seconds vertical.
+- **Short:** Beat 4, the bookshelf analogy, 50 seconds vertical.

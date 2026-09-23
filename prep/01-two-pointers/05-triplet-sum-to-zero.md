@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "3Sum is just Two Sum with a for-loop wrapped around it. That part takes ninety
-> seconds. The reason it's rated Medium is the duplicates — and that's where I'm
+> seconds. The reason it's rated Medium is the duplicates, and that's where I'm
 > going to spend most of this video, because that's where everybody loses the offer."
 
 ## 📋 Problem, in your words
@@ -24,12 +24,12 @@ Input:  [-1, 0, 1, 2, -1, -4]
 Sorted: [-4, -1, -1, 0, 1, 2]
 Output: [[-1, -1, 2], [-1, 0, 1]]
 
-Note: [-1, 0, 1] can be formed from index (1,3,4) AND index (2,3,4) — two different
+Note: [-1, 0, 1] can be formed from index (1,3,4) AND index (2,3,4), two different
 index sets, same triplet. We report it ONCE. That's the whole difficulty.
 ```
 
 ## 🧸 ELI5
-> You want three numbers that cancel out to zero — like three people settling a debt
+> You want three numbers that cancel out to zero, like three people settling a debt
 > so nobody owes anything.
 >
 > Sort everyone by how much they owe (most-owed to most-owing). Now **pick one person
@@ -40,7 +40,7 @@ index sets, same triplet. We report it ONCE. That's the whole difficulty.
 > Unfreeze, freeze the next person, repeat.
 >
 > The duplicate rule: if the next person you'd freeze owes *exactly the same* as the
-> one you just did, skip them — you'd find the identical set of settlements again.
+> one you just did, skip them, you'd find the identical set of settlements again.
 
 ## 🐌 Brute force (say it, don't type it)
 Three nested loops, **O(n³)**, plus a set to de-duplicate. For n = 3000 that's 27
@@ -49,14 +49,14 @@ rather than a fix.
 
 ## 💡 The pattern reveal
 **Signal:** find a *triplet* summing to a target.
-**Therefore:** sort, then **fix one + two pointers** — the standard kSum reduction.
+**Therefore:** sort, then **fix one + two pointers**: the standard kSum reduction.
 
 **Key insight:** k-Sum reduces to (k−1)-Sum by fixing one element. 3Sum → fix `i`,
 solve 2Sum on `nums[i+1:]` with target `-nums[i]`. 4Sum → fix two, solve 2Sum.
-**Sorting is not optional here** — it's what makes both the two-pointer scan *and*
+**Sorting is not optional here**: it's what makes both the two-pointer scan *and*
 the duplicate-skipping possible.
 
-## 🔍 Dry run — sorted `[-4, -1, -1, 0, 1, 2]`
+## 🔍 Dry run: sorted `[-4, -1, -1, 0, 1, 2]`
 | i | nums[i] | need | lo..hi scan | result |
 |---|---|---|---|---|
 | 0 | −4 | +4 | (−1,2)=1 ↑, (−1,... ) never reaches 4 | none |
@@ -72,7 +72,7 @@ positive and can never sum to zero. Free early exit.
 ```python
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        nums.sort()                                   # O(n log n) — enables everything
+        nums.sort()                                   # O(n log n), enables everything
         n, res = len(nums), []
 
         for i in range(n - 2):
@@ -99,32 +99,32 @@ class Solution:
                         hi -= 1
         return res
 ```
-**Time:** O(n²) — n anchors × O(n) scan; the O(n log n) sort is dominated.
+**Time:** O(n²), n anchors × O(n) scan; the O(n log n) sort is dominated.
 **Space:** O(1) beyond the output (or O(log n) for the sort's stack).
 
-## ⚠️ Gotchas — this is the video
+## ⚠️ Gotchas: this is the video
 There are **three separate** duplicate skips and they are not interchangeable:
 
-1. **`i > 0 and nums[i] == nums[i-1]`** — skips duplicate *anchors*. The `i > 0`
+1. **`i > 0 and nums[i] == nums[i-1]`**: skips duplicate *anchors*. The `i > 0`
    guard is essential; without it, `i=0` reads `nums[-1]` (the last element) and you
    silently skip a valid first anchor.
-2. **`nums[lo] == nums[lo-1]`** — skips duplicate left values, **only after a hit**.
+2. **`nums[lo] == nums[lo-1]`**: skips duplicate left values, **only after a hit**.
    Doing it before a hit is wrong: you'd skip values you never evaluated.
-3. **`nums[hi] == nums[hi+1]`** — same, on the right.
+3. **`nums[hi] == nums[hi+1]`**: same, on the right.
 
 Other traps:
 - After recording a hit you must move **both** pointers. Moving one guarantees the
-  next sum misses (you changed one addend against a fixed target) — it terminates,
+  next sum misses (you changed one addend against a fixed target), it terminates,
   but it's a wasted iteration and it signals you don't know why it works.
 - `range(n - 2)`, not `range(n)`. You need two elements to the right of the anchor.
 - Don't use a `set` of tuples to de-dup. It works, it's O(n) memory, and every
   interviewer reads it as "didn't understand the sorted structure."
 
 ## 🎤 Interview talking points
-- *"kSum reduces to (k−1)Sum by fixing an element — so 3Sum is 2Sum in a loop."*
+- *"kSum reduces to (k−1)Sum by fixing an element, so 3Sum is 2Sum in a loop."*
 - *"Sorting buys me two things: the two-pointer convergence, and duplicate handling
   by adjacency instead of by hash set."*
-- *"O(n²) is optimal for 3Sum — there's no known subquadratic algorithm."* (True, and
+- *"O(n²) is optimal for 3Sum, there's no known subquadratic algorithm."* (True, and
   a strong thing to know.)
 
 ## 🔗 Transfer
@@ -133,6 +133,6 @@ the `else` branch changed. EP10 (4Sum) adds one more nested anchor. Once today l
 those three are ~20-minute problems.
 
 ## 📹 Metadata
-- **Title:** `3Sum — it's just Two Sum in a loop (the hard part is duplicates) | Two Pointers #5`
+- **Title:** `3Sum, it's just Two Sum in a loop (the hard part is duplicates) | Two Pointers #5`
 - **Thumbnail:** `THE DUPLICATE TRAP` (blue block)
 - **Short:** The three duplicate-skips, 60 seconds. This will do well on its own.

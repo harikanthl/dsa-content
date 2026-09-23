@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Finding *that* there's a loop was yesterday. Finding *where* it starts looks like
-> it should need extra memory — and it doesn't. Four lines of algebra prove that if
+> it should need extra memory, and it doesn't. Four lines of algebra prove that if
 > you just reset one pointer to the head, the two will collide exactly at the
 > entrance. This is the prettiest result in the whole pattern."
 
@@ -23,13 +23,13 @@ Do not modify the list. Follow-up: O(1) memory.
 3 -> 2 -> 0 -> -4
      ^           |
      +-----------+
-Output: the node with value 2   (index 1 — where the loop re-enters)
+Output: the node with value 2   (index 1, where the loop re-enters)
 ```
 
 ## 🧸 ELI5
 > Picture a lasso: a straight rope (the **tail**) leading into a loop.
 >
-> Yesterday's runners meet somewhere *inside* the loop — but not usually at the knot
+> Yesterday's runners meet somewhere *inside* the loop, but not usually at the knot
 > where the rope joins it. You want the knot.
 >
 > Here's the trick. It turns out the distance from the **start of the rope** to the
@@ -40,14 +40,14 @@ Output: the node with value 2   (index 1 — where the loop re-enters)
 > It feels like magic. It's actually just one equation.
 
 ## 🐌 Brute force (say it, don't type it)
-Hash set again — walk the list, and the **first** node you see twice *is* the cycle
+Hash set again, walk the list, and the **first** node you see twice *is* the cycle
 entrance. O(n) time, O(n) space. Honest and clear. Then go for O(1).
 
 ## 💡 The pattern reveal
 **Signal:** cycle + "where does it start" + O(1) space.
-**Therefore:** Floyd's **two-phase** algorithm — detection, then entrance.
+**Therefore:** Floyd's **two-phase** algorithm, detection, then entrance.
 
-**Key insight — the algebra. Put this on screen.**
+**Key insight, the algebra. Put this on screen.**
 
 Let `F` = head → entrance, `a` = entrance → meeting point, `C` = cycle length.
 
@@ -65,13 +65,13 @@ Simplify:
 
 **Read that last line out loud:** the distance from the head to the entrance equals
 the distance from the meeting point forward to the entrance (plus whole laps, which
-don't matter). So two pointers walking at equal speed — one from the head, one from
-the meeting point — arrive together. At the entrance.
+don't matter). So two pointers walking at equal speed, one from the head, one from
+the meeting point, arrive together. At the entrance.
 
-## 🔍 Dry run — `3 → 2 → 0 → -4 → (back to 2)`
+## 🔍 Dry run: `3 → 2 → 0 → -4 → (back to 2)`
 Nodes A(3) B(2) C(0) D(-4). Entrance is **B**. `F = 1`, `C = 3`.
 
-**Phase 1 — detect:**
+**Phase 1, detect:**
 
 | step | slow | fast |
 |---|---|---|
@@ -81,7 +81,7 @@ Nodes A(3) B(2) C(0) D(-4). Entrance is **B**. `F = 1`, `C = 3`.
 
 Meeting point D, so `a = 2` (B → C → D). Check: `F = nC − a` → `1 = 1·3 − 2` ✓
 
-**Phase 2 — find the entrance:**
+**Phase 2, find the entrance:**
 
 | step | slow (from head) | fast (from meet) |
 |---|---|---|
@@ -96,7 +96,7 @@ class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
         slow = fast = head
 
-        # phase 1 — is there a cycle, and where do they meet?
+        # phase 1, is there a cycle, and where do they meet?
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
@@ -107,7 +107,7 @@ class Solution:
         if not (fast and fast.next):
             return None                  # belt and braces for the break-less exit
 
-        # phase 2 — reset one to head, walk BOTH at the same speed
+        # phase 2, reset one to head, walk BOTH at the same speed
         slow = head
         while slow is not fast:
             slow = slow.next
@@ -115,7 +115,7 @@ class Solution:
 
         return slow                      # == fast == the cycle entrance
 ```
-**Time:** O(n) — phase 1 is ≤ n, phase 2 is ≤ n.
+**Time:** O(n), phase 1 is ≤ n, phase 2 is ≤ n.
 **Space:** O(1) ✓
 
 > The `while ... else` is a genuinely nice Python detail worth explaining on camera:
@@ -124,27 +124,27 @@ class Solution:
 
 ## ⚠️ Gotchas
 - **Reset `slow` to `head`, and move both by ONE.** The single most common error is
-  leaving `fast` on double speed in phase 2 — then they meet somewhere arbitrary.
+  leaving `fast` on double speed in phase 2, then they meet somewhere arbitrary.
 - **Don't reset `fast`.** It must stay parked at the meeting point; that's the whole
   premise of the equation.
 - **`while slow is not fast`, checked *before* stepping.** If the entrance is the
   head itself (`F = 0`), they're already equal and the answer is `head` with zero
   steps. Stepping first overshoots by a full lap.
-- Return `None`, not `False` — the problem wants a node or null.
+- Return `None`, not `False`, the problem wants a node or null.
 
 ## 🎤 Interview talking points
 - Recite the derivation. *"`slow` walks `F + a`, `fast` walks `F + a + nC`, and
-  `fast` walks double — so `F = nC − a`, which means head-to-entrance equals
+  `fast` walks double, so `F = nC − a`, which means head-to-entrance equals
   meeting-point-to-entrance."* **This is the answer that gets you hired on this
   question.** Everyone can memorise "reset to head"; almost nobody can say why.
 - *"It's O(1) space, versus O(n) for the hash-set version."*
 
 ## 🔗 Transfer
-EP16 (Find the Duplicate Number) is *this exact algorithm* on an array — the hard
+EP16 (Find the Duplicate Number) is *this exact algorithm* on an array, the hard
 part there is only seeing that `i → nums[i]` is a linked list. If phase 2 lands
 today, EP16 is a 10-minute problem.
 
 ## 📹 Metadata
-- **Title:** `Linked List Cycle II — the algebra behind "just reset to head" | Fast & Slow #2`
+- **Title:** `Linked List Cycle II, the algebra behind "just reset to head" | Fast & Slow #2`
 - **Thumbnail:** `F = nC − a` (teal block)
 - **Short:** The four-line derivation. Whiteboard it. Great standalone.

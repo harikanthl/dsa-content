@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Insert one interval into a list that's already sorted and already disjoint. The lazy
-> answer is 'append it and run yesterday's merge' — correct, and O(n log n) for a
+> answer is 'append it and run yesterday's merge', correct, and O(n log n) for a
 > problem that is O(n). The input being sorted is a gift, and the whole episode is about
 > not throwing it away."
 
@@ -47,17 +47,17 @@ Input:  intervals = [[1,5]], new = [2,3] -> [[1,5]]     <- contained; nothing ch
 >             untouched   merge into one        untouched
 > ```
 >
-> 1. **Before** — ends before the new one starts. Copy them across, unchanged.
-> 2. **Absorb** — starts before (or when) the new one ends. Swallow it: stretch the new
+> 1. **Before**: ends before the new one starts. Copy them across, unchanged.
+> 2. **Absorb**: starts before (or when) the new one ends. Swallow it: stretch the new
 >    interval to cover it.
-> 3. **After** — everything left. Copy across, unchanged.
+> 3. **After**: everything left. Copy across, unchanged.
 >
-> Three `while` loops, in that order, and you're done. No sorting — the list was already
+> Three `while` loops, in that order, and you're done. No sorting, the list was already
 > sorted, and the answer stays sorted because you never reorder anything.
 
 ## 🐌 Brute force (say it, don't type it)
 `intervals.append(new)`, then EP45's sort-and-merge. **O(n log n)**, three lines, and
-completely correct — say it, *then* say why you won't: the input's sortedness is already
+completely correct, say it, *then* say why you won't: the input's sortedness is already
 paid for, and re-sorting throws it away. An interviewer asking this question rather than
 EP45 is asking exactly this.
 
@@ -66,7 +66,7 @@ EP45 is asking exactly this.
 **Therefore:** a three-phase linear scan. O(n), no sort.
 
 **Key insight:** because the list is disjoint and sorted, the intervals that overlap the
-new one form a **contiguous block**. You never have to come back — once you've passed an
+new one form a **contiguous block**. You never have to come back, once you've passed an
 interval it is settled forever. That is what turns "merge everything" into "find the
 block, collapse it".
 
@@ -86,31 +86,31 @@ inequality and `[[1,3]] + [3,5]` gives `[[1,3],[3,5]]` instead of `[[1,5]]`.
 **🧨 The trap: the new interval is appended in phase 2's place, not before it.** The
 merged interval belongs *between* the "before" group and the "after" group. Append it
 too early and the output isn't sorted; forget to append it at all when nothing overlaps
-(both `while` loops fall straight through) and it vanishes — which is the case
+(both `while` loops fall straight through) and it vanishes, which is the case
 `intervals = [[1,2]], new = [5,7]`.
 
-## 🔍 Dry run — `intervals = [[1,2], [3,5], [6,7], [8,10], [12,16]]`, `new = [4,8]`
+## 🔍 Dry run: `intervals = [[1,2], [3,5], [6,7], [8,10], [12,16]]`, `new = [4,8]`
 `s, e = 4, 8`, `out = []`, `i = 0`.
 
-**Phase 1 — copy everything ending before 4:**
+**Phase 1, copy everything ending before 4:**
 
 | i | `intervals[i]` | `end < 4`? | action |
 |---|---|---|---|
 | 0 | `[1,2]` | 2 < 4 ✓ | copy → `out = [[1,2]]` |
 | 1 | `[3,5]` | 5 < 4 ✗ | stop |
 
-**Phase 2 — absorb everything starting at or before 8:**
+**Phase 2, absorb everything starting at or before 8:**
 
 | i | `intervals[i]` | `start <= 8`? | `s = min(...)` | `e = max(...)` |
 |---|---|---|---|---|
 | 1 | `[3,5]` | 3 ≤ 8 ✓ | min(4, **3**) = **3** | max(8, 5) = 8 |
 | 2 | `[6,7]` | 6 ≤ 8 ✓ | 3 | max(8, 7) = 8 |
 | 3 | `[8,10]` | 8 ≤ 8 ✓ | 3 | max(8, **10**) = **10** |
-| 4 | `[12,16]` | 12 ≤ 8 ✗ | — | stop |
+| 4 | `[12,16]` | 12 ≤ 8 ✗ | - | stop |
 
 Append the merged `[3, 10]` → `out = [[1,2], [3,10]]`.
 
-**Phase 3 — copy the rest:** `out = [[1,2], [3,10], [12,16]]` ✓
+**Phase 3, copy the rest:** `out = [[1,2], [3,10], [12,16]]` ✓
 
 Two rows do the teaching. **`[3,5]`** is why `s = min(s, ...)` exists: the merged
 interval starts at 3, *earlier* than the interval you were told to insert. And
@@ -123,8 +123,8 @@ class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
         """Insert one interval into a sorted, disjoint list, merging as needed.
 
-        Time:  O(n) — one pass, no sort: the input is already ordered.
-        Space: O(n) — the output.
+        Time:  O(n), one pass, no sort: the input is already ordered.
+        Space: O(n), the output.
         """
         out = []
         i, n = 0, len(intervals)
@@ -153,7 +153,7 @@ class Solution:
 - **Don't sort.** If you reach for `.sort()` you've turned an O(n) problem into
   O(n log n) and missed the point of the question being asked.
 - **`min` on the start as well as `max` on the end.** The new interval can be swallowed
-  *from the left* — `[[1,5]] + [2,3]` must stay `[[1,5]]`, and only the `min`/`max` pair
+  *from the left*, `[[1,5]] + [2,3]` must stay `[[1,5]]`, and only the `min`/`max` pair
   gets that right.
 - **Append the merged interval exactly once, between phases 2 and 3.** If both loops
   fall through (the new interval sits in a gap), that single append is the only thing
@@ -161,12 +161,12 @@ class Solution:
 - **`<` in phase 1, `<=` in phase 2.** They're comparing different ends. Test
   `[[1,3]] + [3,5]` → must be `[[1,5]]`.
 - **Empty input.** Both loops do nothing, the append fires, `extend` adds nothing:
-  `[[5,7]]` ✓. No special case needed — verify that rather than adding a guard.
+  `[[5,7]]` ✓. No special case needed, verify that rather than adding a guard.
 - **Return type is a list of lists**, and phase 3's `extend` shares the original row
   objects. Fine for LeetCode; worth a comment in real code.
 
 ## 🎤 Interview talking points
-- *"The list is already sorted and disjoint, so I won't re-sort — that's O(n log n) work
+- *"The list is already sorted and disjoint, so I won't re-sort, that's O(n log n) work
   the input already paid for."* ← say this first.
 - *"The intervals that overlap the new one are contiguous, so it's three phases: copy
   before, absorb the block, copy after."*
@@ -180,6 +180,6 @@ the input sorted but doubles it: **two** sorted lists, walked with two pointers,
 the question stops being "what merges" and becomes "what do they have in common".
 
 ## 📹 Metadata
-- **Title:** `Insert Interval — three phases, no sort | Merge Intervals #2`
+- **Title:** `Insert Interval, three phases, no sort | Merge Intervals #2`
 - **Thumbnail:** `BEFORE · ABSORB · AFTER` (green block)
 - **Short:** `[4,8]` swallowing three intervals at once on the timeline. 40s.

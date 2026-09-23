@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Yesterday we found triplets that hit zero exactly. Today there might not *be* an
-> exact hit — so we take the closest. It's the same code with one branch swapped, and
+> exact hit, so we take the closest. It's the same code with one branch swapped, and
 > it teaches a move you'll use for the rest of your career: track the best-so-far."
 
 ## 📋 Problem, in your words
@@ -27,25 +27,25 @@ Why:    (-1) + 1 + 2 = 2. Distance from target is |2 - 1| = 1.
 
 ## 🧸 ELI5
 > You're throwing darts and aiming for a specific number. You probably won't hit it
-> dead on — so you keep a note of *the best throw so far*, and every new throw you
+> dead on, so you keep a note of *the best throw so far*, and every new throw you
 > compare against that note. At the end, the note is your answer.
 >
 > The walking-two-fingers part is identical to yesterday. The only new idea is
 > carrying the note.
 
 ## 🐌 Brute force (say it, don't type it)
-Three nested loops tracking the minimum distance — **O(n³)**. Correct, too slow.
+Three nested loops tracking the minimum distance, **O(n³)**. Correct, too slow.
 
 ## 💡 The pattern reveal
 **Signal:** *triplet* + *closest to* (not *equal to*).
-**Therefore:** identical skeleton to 3Sum — sort, fix one, converge two — with the
+**Therefore:** identical skeleton to 3Sum, sort, fix one, converge two, with the
 equality branch replaced by a **best-so-far** comparison.
 
 **Key insight:** the pointer-movement rule doesn't change at all. `total < target`
 still means "I need a bigger sum, move `lo` right." Closeness doesn't affect *where
 you walk*; it only affects *what you remember while walking*.
 
-## 🔍 Dry run — sorted `[-4, -1, 1, 2]`, target 1
+## 🔍 Dry run: sorted `[-4, -1, 1, 2]`, target 1
 | i | anchor | lo | hi | total | \|total−1\| | best |
 |---|---|---|---|---|---|---|
 | 0 | −4 | 1 | 3 | −4−1+2 = −3 | 4 | −3 |
@@ -70,7 +70,7 @@ class Solution:
                 if abs(total - target) < abs(best - target):
                     best = total
 
-                if total == target:                    # can't beat exact — bail out
+                if total == target:                    # can't beat exact, bail out
                     return total
                 if total < target:
                     lo += 1
@@ -85,18 +85,18 @@ class Solution:
 - **Seed `best` with an actual triplet**, `nums[0]+nums[1]+nums[2]`. Seeding with
   `0`, `float('inf')` or `None` is the classic bug: `inf` isn't a reachable sum, and
   `0` may be closer to target than any real triplet, so you return a sum that doesn't
-  exist in the array. Say this out loud — it's a subtle, very common wrong answer.
+  exist in the array. Say this out loud, it's a subtle, very common wrong answer.
 - **Early return on exact.** Distance 0 is unbeatable. It's a small optimisation but
   interviewers notice you noticed.
 - **No duplicate-skipping needed.** Unlike 3Sum, you return a *number*, not a list of
-  triplets, so a duplicate triplet is harmless — it just recomputes the same distance.
+  triplets, so a duplicate triplet is harmless, it just recomputes the same distance.
   Explaining *why* you dropped yesterday's de-dup logic shows you understand it rather
   than having memorised it.
 - Use `abs()` on both sides. Comparing raw `total - target` breaks when one is
   negative.
 
 ## 🎤 Interview talking points
-- *"The traversal is unchanged from 3Sum — I'm only changing what I record. Optimising
+- *"The traversal is unchanged from 3Sum, I'm only changing what I record. Optimising
   a target becomes tracking a running best."*
 - *"I seed the best with a real triplet so the answer is always achievable."*
 
@@ -107,6 +107,6 @@ Water, it's the diameter accumulator in Tree problems (EP 142). Name it on camer
 a **named technique**, not a one-off.
 
 ## 📹 Metadata
-- **Title:** `3Sum Closest — same code, one branch changed | Two Pointers #6`
+- **Title:** `3Sum Closest, same code, one branch changed | Two Pointers #6`
 - **Thumbnail:** `TRACK THE BEST` (blue block)
-- **Short:** The seeding bug — "why `best = 0` gives you a wrong answer."
+- **Short:** The seeding bug, "why `best = 0` gives you a wrong answer."

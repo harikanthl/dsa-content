@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Turn `/a/./b/../../c/` into `/c`. Everyone reaches for the stack immediately and gets
-> it right — and then loses ten minutes to `//`, to a trailing slash, to `..` at the
+> it right, and then loses ten minutes to `//`, to a trailing slash, to `..` at the
 > root, and to a directory that is *literally named* `...`. The stack is four lines. The
 > episode is about **tokenising first** so those four lines are all you need."
 
@@ -54,13 +54,13 @@ That last one catches anyone who wrote `if part.startswith("..")`.
 >
 > Then print it: `"/" + "/".join(stack)` → `/c`.
 >
-> The empty strings come from splitting on every slash — the leading one, the trailing
+> The empty strings come from splitting on every slash, the leading one, the trailing
 > one, and each extra one in `//`. They're all noise, all handled by the same line, and
 > once you see that, every "edge case" in this problem is already covered.
 
 ## 🐌 Brute force (say it, don't type it)
 Repeatedly find a `x/..` and delete it with string surgery, plus a separate cleanup pass
-for `.` and `//`. **O(n²)** and horrible to get right — the ordering of the passes
+for `.` and `//`. **O(n²)** and horrible to get right, the ordering of the passes
 matters and it's easy to build a version that's wrong on `/a/../../b`. It's a good
 30-second argument for tokenising instead.
 
@@ -68,15 +68,15 @@ matters and it's easy to build a version that's wrong on `/a/../../b`. It's a go
 **Signal:** a path / an undo history · "go up one" · canonical form.
 **Therefore:** split into tokens, push names, `..` pops.
 
-**Key insight — do the parsing before the algorithm.** `path.split("/")` converts every
+**Key insight, do the parsing before the algorithm.** `path.split("/")` converts every
 slash problem into an empty-string token, and then there are exactly four cases:
 
 | token | meaning | action |
 |---|---|---|
-| `""` | a slash artefact — leading, trailing, or doubled | **skip** |
+| `""` | a slash artefact, leading, trailing, or doubled | **skip** |
 | `"."` | current directory | **skip** |
 | `".."` | parent directory | `stack.pop()` **if the stack is non-empty** |
-| anything else | a directory name — including `"..."` | `stack.append(token)` |
+| anything else | a directory name, including `"..."` | `stack.append(token)` |
 
 Four cases, four lines, no regexes and no index arithmetic:
 
@@ -104,7 +104,7 @@ for part in path.split("/"):
 Also worth noticing: the input is guaranteed **absolute** (it starts with `/`), so
 there's no relative-path case to handle. Read the constraints and say so.
 
-## 🔍 Dry run — `"/a/./b/../../c/"`
+## 🔍 Dry run: `"/a/./b/../../c/"`
 `split("/")` → `["", "a", ".", "b", "..", "..", "c", ""]`
 
 | token | case | action | stack |
@@ -120,7 +120,7 @@ there's no relative-path case to handle. Read the constraints and say so.
 
 Output `"/" + "c"` → **`"/c"`** ✓
 
-## 🔍 Dry run — `"/../"` (the root guard)
+## 🔍 Dry run: `"/../"` (the root guard)
 `split("/")` → `["", "..", ""]`
 
 | token | action | stack |
@@ -129,7 +129,7 @@ Output `"/" + "c"` → **`"/c"`** ✓
 | `".."` | stack is **empty** → do nothing | `[]` |
 | `""` | skip | `[]` |
 
-Output `"/" + "/".join([])` = `"/" + ""` → **`"/"`** ✓ — the root, produced by the
+Output `"/" + "/".join([])` = `"/" + ""` → **`"/"`** ✓, the root, produced by the
 join of an empty list rather than by a special case.
 
 ## ✅ Optimal solution
@@ -138,8 +138,8 @@ class Solution:
     def simplifyPath(self, path: str) -> str:
         """Canonical form of an absolute Unix path.
 
-        Time:  O(n) — one split, one pass over the tokens.
-        Space: O(n) — the tokens and the stack.
+        Time:  O(n), one split, one pass over the tokens.
+        Space: O(n), the tokens and the stack.
         """
         stack = []
 
@@ -163,14 +163,14 @@ class Solution:
 - **`"/" + "/".join(stack)` for the output.** It gives `"/"` for an empty stack and
   never leaves a trailing slash. Don't hand-roll it.
 - **`split("/")` produces empty strings** for the leading slash, the trailing slash and
-  every doubled slash — one `continue` covers all three.
+  every doubled slash, one `continue` covers all three.
 - **Don't strip or pre-clean the input.** Tokenising makes every whitespace-free
   cleanup unnecessary; extra preprocessing is where bugs move in.
 - **The path is absolute** by constraint, so there's no `.` -relative start to handle.
   Check the constraints and say it out loud.
 
 ## 🎤 Interview talking points
-- *"I split on `/` first, which turns every slash oddity — leading, trailing, doubled —
+- *"I split on `/` first, which turns every slash oddity, leading, trailing, doubled,
   into an empty token I skip. After that there are only four cases."* ← the framing that
   makes this easy.
 - *"`..` pops, but only if the stack is non-empty: you can't go above the root."*
@@ -180,13 +180,13 @@ class Solution:
 - *"O(n) time and space; the space is the token list."*
 
 ## 🔗 Transfer
-This is the cancelling stack at its most literal — `..` annihilates the entry below it,
+This is the cancelling stack at its most literal, `..` annihilates the entry below it,
 exactly as `)` annihilated `(` in EP59. Tomorrow (EP66) closes Pattern 08 by putting the
 two halves together: a **monotonic** stack whose pops are limited by a budget, where the
 greedy decision, the leftover budget, and the output formatting each need their own
 line.
 
 ## 📹 Metadata
-- **Title:** `Simplify Path — tokenise first, then the stack is four lines | Stack #8`
+- **Title:** `Simplify Path, tokenise first, then the stack is four lines | Stack #8`
 - **Thumbnail:** `SPLIT ON /` (green block)
-- **Short:** `"/..."` — the directory called dot-dot-dot that breaks `startswith`. 40s.
+- **Short:** `"/..."`, the directory called dot-dot-dot that breaks `startswith`. 40s.

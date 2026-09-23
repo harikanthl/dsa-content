@@ -5,7 +5,7 @@
 ---
 
 ## 🎬 Hook
-> "The word *absolute* makes this look like a new problem. It isn't — it's a signal
+> "The word *absolute* makes this look like a new problem. It isn't, it's a signal
 > that you need to look in **both directions at once**. The biggest absolute value is
 > either the most positive sum or the most negative one, so run both Kadanes and take
 > whichever is further from zero."
@@ -35,7 +35,7 @@ maximum-only Kadane never even looks at it.
 
 ## 🧸 ELI5
 > You're measuring how far a needle swings from centre, and it doesn't matter which
-> way it swings — only how far.
+> way it swings, only how far.
 >
 > So you watch for **two** things: the biggest swing to the right, and the biggest swing
 > to the left. At the end, whichever swing was longer is your answer.
@@ -50,7 +50,7 @@ pattern.
 **Signal:** contiguous subarray · **absolute** value of a sum.
 **Therefore:** Kadane run in **both directions**, combined at the end.
 
-**Key insight:** `|s|` is maximised by whichever is extreme — so
+**Key insight:** `|s|` is maximised by whichever is extreme, so
 
 ```
 answer = max( max_subarray_sum , |min_subarray_sum| )
@@ -58,12 +58,12 @@ answer = max( max_subarray_sum , |min_subarray_sum| )
 
 These are EP33 and EP34, run simultaneously over the same pass, and never interacting.
 Unlike EP35 (where the two states swap roles) and EP36 (where one feeds the other),
-here they are genuinely independent. Say that contrast out loud — three consecutive
+here they are genuinely independent. Say that contrast out loud, three consecutive
 episodes track two states for three different reasons.
 
 **The one detail that differs from EP33/34:** this problem **allows the empty
 subarray**, whose sum is 0. So both running states can be seeded at `0` rather than
-`nums[0]` — and here that's correct rather than a bug. The constraint changed, so the
+`nums[0]`, and here that's correct rather than a bug. The constraint changed, so the
 seed changes with it. Read the statement; don't apply the previous episode's rule by
 reflex.
 
@@ -89,7 +89,7 @@ return hi - lo
 Show this second. It's shorter, it's a genuinely different insight, and it's the
 natural bridge into Pattern 05.
 
-## 🔍 Dry run — `[2, -5, 1, -4, 3, -2]`
+## 🔍 Dry run: `[2, -5, 1, -4, 3, -2]`
 Running both Kadanes, seeded at 0 (empty subarray allowed).
 
 | i | x | `cur_max` | `best_max` | `cur_min` | `best_min` |
@@ -101,7 +101,7 @@ Running both Kadanes, seeded at 0 (empty subarray allowed).
 | 4 | 3 | max(3, 0) = **3** | **3** | min(3, −5) = **−5** | −8 |
 | 5 | −2 | max(−2, 1) = **1** | 3 | min(−2, −7) = **−7** | −8 |
 
-`answer = max(3, |−8|) = ` **8** ✓ — the run `[−5, 1, −4]`.
+`answer = max(3, |−8|) = ` **8** ✓, the run `[−5, 1, −4]`.
 
 Note how `best_max` peaked at a modest 3 while `best_min` reached −8. Tracking only the
 maximum returns 3, which is wrong by more than a factor of two.
@@ -112,7 +112,7 @@ class Solution:
     def maxAbsoluteSum(self, nums: List[int]) -> int:
         """Largest |sum| over all subarrays (the empty one, sum 0, is allowed).
 
-        Time:  O(n) — one pass, two independent Kadanes.
+        Time:  O(n), one pass, two independent Kadanes.
         Space: O(1).
         """
         cur_max = best_max = 0
@@ -146,7 +146,7 @@ class Solution:
         return highest - lowest
 ```
 Same O(n)/O(1), four lines, and a completely different argument. Worth being able to
-derive both — an interviewer who's seen the Kadane answer twenty times will sit up for
+derive both, an interviewer who's seen the Kadane answer twenty times will sit up for
 this one.
 
 ## ⚠️ Gotchas
@@ -155,11 +155,11 @@ this one.
   by reflex is wrong. Read the constraint each time. (If a variant forbids the empty
   subarray, seed both at `nums[0]` and the code is otherwise unchanged.)
 - **`abs(best_min)`, not `-best_min`,** unless you're certain `best_min ≤ 0`. It is,
-  given the 0 seed — but writing `abs` costs nothing and can't be wrong.
+  given the 0 seed, but writing `abs` costs nothing and can't be wrong.
 - **The two Kadanes must not share state.** Unlike EP35, there is no swapping. If you
   find yourself writing `if x < 0: swap`, you've imported the wrong episode.
 - In the prefix version, **`highest` and `lowest` both start at 0**, representing the
-  empty prefix — exactly the same role `pre[0] = 0` plays in EP28.
+  empty prefix, exactly the same role `pre[0] = 0` plays in EP28.
 - Don't compute `max(abs(x) for subarray sums)` by taking `abs` inside the loop; `abs`
   is not compatible with the running recurrence and you'll get nonsense. Take it once,
   at the end.
@@ -170,16 +170,16 @@ this one.
 - *"There's a neater argument: every subarray sum is a difference of two prefix sums,
   so the answer is `max(prefix) − min(prefix)`. Four lines and no Kadane."* ← this is
   the answer that gets remembered.
-- *"The empty subarray is allowed here, so I seed at zero — which is the opposite of
+- *"The empty subarray is allowed here, so I seed at zero, which is the opposite of
   what I'd do on plain Maximum Subarray."*
 
 ## 🔗 Transfer
 The prefix-sum framing here is a direct trailer for **Pattern 05 (EP39–44)**, where
 "every range sum is a difference of two prefix values" is the entire pattern. Tomorrow
 (EP38) closes Kadane with the circular variant, which also needs both the maximum and
-minimum subarray — so today's two-Kadane pass gets reused immediately.
+minimum subarray, so today's two-Kadane pass gets reused immediately.
 
 ## 📹 Metadata
-- **Title:** `Maximum Absolute Sum — run Kadane both ways | Kadane #5`
+- **Title:** `Maximum Absolute Sum, run Kadane both ways | Kadane #5`
 - **Thumbnail:** `BOTH DIRECTIONS` (green block)
 - **Short:** `max(prefix) − min(prefix)` in four lines, as the "wait, that's it?" reveal. 45s.

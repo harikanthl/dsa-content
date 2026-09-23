@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Yesterday's problem had a variable we had to argue was safe despite being stale.
-> Today the alphabet shrinks to two symbols — and that entire argument disappears,
+> Today the alphabet shrinks to two symbols, and that entire argument disappears,
 > because now you can just count the zeros. Same window, no defending required."
 
 ## 📋 Problem, in your words
@@ -42,7 +42,7 @@ zeros, length 6.** That framing is the solution.
 > batteries**. Each battery turns one dead light on.
 >
 > Keep walking right. Every time you pass a dead light, spend a battery. When you run
-> out, you have to move your starting point forward — and you only get a battery back
+> out, you have to move your starting point forward, and you only get a battery back
 > when a **dead** light drops off the left end.
 >
 > The longest stretch you ever hold is the answer.
@@ -56,7 +56,7 @@ Every start index, walk right counting zeros, stop when the count passes k.
 **Therefore:** Sliding Window, Shape B.
 
 **Key insight:** with only two symbols, *"how many characters must I replace?"* has a
-direct answer — **the number of zeros in the window** — so there's nothing to
+direct answer, **the number of zeros in the window**: so there's nothing to
 approximate and nothing to keep stale. The validity test is simply `zeros <= k`.
 
 **The reframe worth saying out loud:** the problem is not "flip k zeros." It is
@@ -73,7 +73,7 @@ EP26:  (hi - lo + 1) - max_count  <=  k        # "how many aren't the winner"
 EP27:               zeros         <=  k        # the same thing, two symbols
 ```
 
-## 🔍 Dry run — `[1,1,1,0,0,0,1,1,1,1,0]`, k = 2
+## 🔍 Dry run: `[1,1,1,0,0,0,1,1,1,1,0]`, k = 2
 | hi | val | zeros | zeros ≤ 2? | action | window (lo..hi) | len | best |
 |---|---|---|---|---|---|---|---|
 | 0 | 1 | 0 | ✓ | | 0..0 | 1 | 1 |
@@ -88,7 +88,7 @@ EP27:               zeros         <=  k        # the same thing, two symbols
 | 9 | 1 | 2 | ✓ | | 4..9 | **6** | **6** |
 | 10 | 0 | 3 | ✗ | drop `nums[4]`=0 → zeros 2 ✓, lo=5 | 5..10 | 6 | 6 |
 
-Return **6** — the window `4..9`, which is `[0,0,1,1,1,1]` with both zeros flipped.
+Return **6**: the window `4..9`, which is `[0,0,1,1,1,1]` with both zeros flipped.
 
 Row `hi=5` is the teaching moment: **three removals did nothing** because they were all
 ones. You only get a battery back when a zero leaves. That's why it's a `while`.
@@ -99,8 +99,8 @@ class Solution:
     def longestOnes(self, nums: List[int], k: int) -> int:
         """Longest window containing at most k zeros.
 
-        Time:  O(n) amortised — lo only moves forward.
-        Space: O(1) — one counter.
+        Time:  O(n) amortised, lo only moves forward.
+        Space: O(1), one counter.
         """
         lo = 0
         zeros = 0
@@ -133,23 +133,23 @@ return len(nums) - lo
 ```
 Same trick as EP26: the window never shrinks, so its final length is its maximum. It's
 four lines and slightly magic. Show it *after* the honest version, and say which one
-you'd write in an interview — the readable one, unless asked.
+you'd write in an interview, the readable one, unless asked.
 
 ## ⚠️ Gotchas
 - **`while`, not `if`** in the honest version. Removing a one doesn't refund anything;
   you may need several removals before a zero leaves. Row `hi=5` proves it.
 - **Only decrement `zeros` when the departing element is a zero.** Decrementing
   unconditionally gives you free batteries and a wildly inflated answer.
-- **Measure after the while loop** — Shape B. Inside, you'd be measuring invalid
+- **Measure after the while loop**: Shape B. Inside, you'd be measuring invalid
   windows.
 - **`k = 0`** reduces to "longest run of consecutive ones," and the same code handles
-  it — no special case. Good test.
+  it, no special case. Good test.
 - **`k >= number of zeros`** returns `len(nums)`. Also no special case.
 - The array is binary by the constraints. For a general array with "at most k elements
   not equal to `x`," the identical code works with `value != x`.
 
 ## 🎤 Interview talking points
-- *"I reframe it as 'longest window with at most k zeros' — flipping is a story, the
+- *"I reframe it as 'longest window with at most k zeros', flipping is a story, the
   window condition is the algorithm."*
 - *"This is the k-replacement problem with a two-symbol alphabet, so the most-frequent
   count becomes the count of ones and the validity test simplifies to counting
@@ -158,12 +158,12 @@ you'd write in an interview — the readable one, unless asked.
   between them."*
 
 ## 🔗 Transfer
-This closes the "longest window" run (EP23–27) — five problems, one skeleton, different
+This closes the "longest window" run (EP23–27), five problems, one skeleton, different
 validity tests. Next (EP28) we go back to *shortest* windows and, on the way, look at
 the same problem from EP22 through a completely different lens: prefix sums. That's the
 bridge into Pattern 05.
 
 ## 📹 Metadata
-- **Title:** `Max Consecutive Ones III — count the zeros, forget the flips | Sliding Window #7`
+- **Title:** `Max Consecutive Ones III, count the zeros, forget the flips | Sliding Window #7`
 - **Thumbnail:** `k BATTERIES` (amber block)
-- **Short:** Row `hi=5` — three removals, no refund, "this is why it's a while loop." 45s.
+- **Short:** Row `hi=5`, three removals, no refund, "this is why it's a while loop." 45s.

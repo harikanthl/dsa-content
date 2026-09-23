@@ -1,4 +1,4 @@
-# Pattern 14 — Graphs
+# Pattern 14: Graphs
 
 **20 episodes · EP 152–171**
 
@@ -6,7 +6,7 @@
 
 ## The one-sentence version
 
-Every graph problem is the same loop — **visit nodes along edges without revisiting** —
+Every graph problem is the same loop, **visit nodes along edges without revisiting**,
 and the only thing that changes is *what you keep the frontier in*: a **stack** gives you
 DFS, a **queue** gives you BFS and shortest paths in steps, a **priority queue** gives you
 Dijkstra and shortest paths in weight. Pick the container and the algorithm writes itself.
@@ -42,16 +42,16 @@ is almost never in the problem statement; the *shape* is.
 | the path cost is the **maximum** edge, not the sum | Min Effort (EP166), Swim in Rising Water (EP167) |
 | **negative** weights, or "at most k stops / edges" | Bellman-Ford (EP168), Cheapest Flights (EP169) |
 | "connect all of them at minimum total cost" | Prim's MST (EP170) |
-| nodes aren't listed — you have to *generate* neighbours | Word Ladder (EP171): neighbours are one-letter edits |
+| nodes aren't listed, you have to *generate* neighbours | Word Ladder (EP171): neighbours are one-letter edits |
 
 **Two questions pick the algorithm.** Do I need distances at all? No → DFS (components,
 cycles, flood fill, topo order). Yes → unweighted is BFS, non-negative weights is
 Dijkstra, negative weights or an edge-count bound is Bellman-Ford.
 
 **The anti-signal:** a tree is a graph with no cycles and one parent per node, so if the
-input is a `TreeNode` you don't need `visited` — that's Pattern 13.
+input is a `TreeNode` you don't need `visited`, that's Pattern 13.
 
-## Shape A — Representation
+## Shape A: Representation
 
 Before any algorithm: turn the input into "give me the neighbours of `u`".
 
@@ -76,7 +76,7 @@ visited = set()               # or a 2-D bool grid, or overwrite the cell in pla
 Say three things out loud first: **directed?** **weighted?** (then store `(v, w)` pairs)
 and is the node set **explicit** (an edge list) or **implicit** (grid cells, words)?
 
-## Shape B — DFS: components and flood fill
+## Shape B: DFS: components and flood fill
 
 ```python
 def dfs(u):
@@ -95,14 +95,14 @@ for u in nodes:
 The outer `for` is the part people forget. One DFS explores **one** component; counting
 islands (EP155) or provinces (EP156) is counting how many times you had to start over.
 
-The iterative form is the BFS code below with `stack.pop()` instead of `popleft()` —
+The iterative form is the BFS code below with `stack.pop()` instead of `popleft()`,
 use it past ~10⁴ nodes, where Python's recursion limit bites.
 
-**Flood fill from the border (EP162):** don't test each region for an escape route —
+**Flood fill from the border (EP162):** don't test each region for an escape route,
 flood from every `O` on the grid's edge and mark what you reach as safe. Everything
 unmarked is surrounded. Starting at the boundary turns a hard question into plain DFS.
 
-## Shape C — BFS: levels and shortest paths in steps
+## Shape C: BFS: levels and shortest paths in steps
 
 ```python
 from collections import deque
@@ -120,7 +120,7 @@ while q:
 BFS visits in rings of equal distance, so the first arrival at a node **is** its shortest
 path (EP163). No relaxation, no comparison.
 
-**Level loop** — when you need "how many rounds", process a whole ring per iteration:
+**Level loop**: when you need "how many rounds", process a whole ring per iteration:
 
 ```python
 q = deque(all_rotten)          # multi-source: seed the queue with EVERY source (EP157)
@@ -136,16 +136,16 @@ while q:
 ```
 
 Multi-source BFS is BFS with several things in the queue at the start. Rotten Oranges is
-not "BFS from each rotten one" (O(n²)) — seed them all and run once.
+not "BFS from each rotten one" (O(n²)), seed them all and run once.
 
 **Implicit graph (EP171):** in Word Ladder nodes are words and an edge is "differs by one
-letter". Don't compare every pair. Bucket words by wildcard pattern — `hot` → `*ot`,
-`h*t`, `ho*` — and a word's neighbours are everything sharing one of its patterns. The
+letter". Don't compare every pair. Bucket words by wildcard pattern, `hot` → `*ot`,
+`h*t`, `ho*`, and a word's neighbours are everything sharing one of its patterns. The
 buckets *are* the adjacency list; the graph is never built.
 
-## Shape D — Cycles, ordering, colouring
+## Shape D: Cycles, ordering, colouring
 
-**Undirected cycle (EP158):** a visited neighbour means a cycle — *unless it's the node
+**Undirected cycle (EP158):** a visited neighbour means a cycle, *unless it's the node
 you just came from*. Pass the parent.
 
 ```python
@@ -159,7 +159,7 @@ def has_cycle(u, parent):
     return False
 ```
 
-**Directed cycle (EP159):** the parent trick is not enough — `A→B, A→C, B→C` reaches C
+**Directed cycle (EP159):** the parent trick is not enough, `A→B, A→C, B→C` reaches C
 twice with no cycle. Three colours: WHITE unvisited, **GRAY on the current path**, BLACK
 finished. Set `GRAY` on entry, `BLACK` on exit; meeting a GRAY neighbour is a cycle,
 meeting a BLACK one is just a shared descendant.
@@ -182,9 +182,9 @@ Cycle detection comes free: a short order means something never reached in-degre
 
 **Bipartite (EP161)** is 2-colouring by BFS: every neighbour gets the opposite colour,
 and a neighbour that already has *your* colour is the failure. Start from every
-uncoloured node — the graph may be disconnected.
+uncoloured node, the graph may be disconnected.
 
-## Shape E — Weighted shortest paths
+## Shape E: Weighted shortest paths
 
 **Dijkstra (EP164):** BFS with a heap keyed on distance, plus one guard.
 
@@ -209,7 +209,7 @@ the `continue` on a stale entry is what keeps the running time honest.
 - **Network Delay (EP165):** run Dijkstra, answer is `max(dist.values())`, or `-1` if
   some node was never reached.
 - **Min Effort (EP166), Swim in Rising Water (EP167):** a path costs its **worst edge**,
-  not the sum. One line changes: `nd = max(d, w)` instead of `d + w`. Say that out loud —
+  not the sum. One line changes: `nd = max(d, w)` instead of `d + w`. Say that out loud,
   it's the whole insight.
 
 **Bellman-Ford (EP168):** relax every edge, V−1 times. Slower, but it survives negative
@@ -226,7 +226,7 @@ for _ in range(n - 1):
 instead of V−1. The snapshot is mandatory here: relaxing in place lets one round chain
 several edges and blows the limit.
 
-## Shape F — Minimum spanning tree
+## Shape F: Minimum spanning tree
 
 **Prim's (EP170)** is Dijkstra with one word changed: the heap is keyed on the
 **edge weight** to reach a node, not the total path length.
@@ -250,14 +250,14 @@ Same loop, different key.
 
 Mark at *dequeue* and several neighbours can enqueue the same node first. On a grid the
 queue holds each cell up to four times and the level count (EP157) goes wrong. Mark it
-the moment you enqueue it. Dijkstra is the exception — there you decide at pop, which is
+the moment you enqueue it. Dijkstra is the exception, there you decide at pop, which is
 what the stale-entry check is for.
 
 ### 2. Forgetting the parent in undirected cycle detection
 
 Every undirected edge is two directed edges, so where you came from is always "already
 visited". Without `v != parent`, a graph with one edge reports a cycle. And the trick is
-undirected-only — directed needs GRAY/BLACK.
+undirected-only, directed needs GRAY/BLACK.
 
 ### 3. Bellman-Ford relaxing in place
 
@@ -269,14 +269,14 @@ where a path of more than K+1 edges gets counted. Copy `dist` at the top of ever
 
 | Problem | Time | Space |
 |---|---|---|
-| DFS / BFS on an adjacency list | O(V + E) | O(V) — visited + stack/queue |
-| DFS / BFS on a grid | O(R·C) — V = R·C, E ≤ 4V | O(R·C) |
+| DFS / BFS on an adjacency list | O(V + E) | O(V), visited + stack/queue |
+| DFS / BFS on a grid | O(R·C), V = R·C, E ≤ 4V | O(R·C) |
 | Kahn's topological sort, bipartite | O(V + E) | O(V) |
 | Dijkstra, Prim's (binary heap) | O((V + E) log V) | O(V + E) |
 | Bellman-Ford | O(V · E) | O(V) |
 | Cheapest Flights, K stops | O(K · E) | O(V) |
-| Word Ladder with pattern buckets | O(N · L²) — L = word length | O(N · L) |
-| recursive DFS you should be nervous about | — | O(V) call stack; go iterative past ~10⁴ |
+| Word Ladder with pattern buckets | O(N · L²), L = word length | O(N · L) |
+| recursive DFS you should be nervous about | - | O(V) call stack; go iterative past ~10⁴ |
 
 ## The episodes
 
@@ -296,7 +296,7 @@ where a path of more than K+1 edges gets counted. Copy `dist` at the top of ever
 | 163 | Shortest Path, Unweighted | BFS | First arrival is the shortest. No relaxation needed. |
 | 164 | Dijkstra's Algorithm | heap | BFS with a heap; the stale-entry `continue`. |
 | 165 | Network Delay Time | Dijkstra | Answer is `max(dist)`; `-1` if anything unreached. |
-| 166 | Path With Minimum Effort | Dijkstra, max-cost | `nd = max(d, w)` — the only line that changes. |
+| 166 | Path With Minimum Effort | Dijkstra, max-cost | `nd = max(d, w)`, the only line that changes. |
 | 167 | Swim in Rising Water | Dijkstra, max-cost | Same as EP166 with the cell value as the edge weight. |
 | 168 | Bellman-Ford | relaxation | V−1 rounds from a snapshot; negative weights are fine. |
 | 169 | Cheapest Flights Within K Stops | Bellman-Ford | K stops = K+1 rounds, and the snapshot is mandatory. |
@@ -305,11 +305,11 @@ where a path of more than K+1 edges gets counted. Copy `dist` at the top of ever
 
 ## What "knowing this in your sleep" means
 
-1. Stack, queue, or priority queue — and why? *(Stack: I only need reachability or
+1. Stack, queue, or priority queue, and why? *(Stack: I only need reachability or
    structure. Queue: I need fewest steps. Priority queue: edges have weights.)*
 2. Where exactly do I mark `visited`? *(At push for BFS and iterative DFS; at pop for
    Dijkstra, with the stale-entry check.)*
-3. How do I detect a cycle — and does the answer change if the graph is directed?
+3. How do I detect a cycle, and does the answer change if the graph is directed?
    *(Undirected: parent check. Directed: GRAY/BLACK, or Kahn's order coming up short.)*
 4. What's the one line that turns Dijkstra into Min Effort, and into Prim's?
    *(`max(d, w)` for the path cost; `w` alone for the heap key.)*

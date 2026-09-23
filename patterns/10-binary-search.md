@@ -1,4 +1,4 @@
-# Pattern 10 — Binary Search
+# Pattern 10: Binary Search
 
 **23 episodes · EP 71–93**
 
@@ -6,8 +6,8 @@
 
 ## The one-sentence version
 
-Whenever you can ask a **yes/no question that flips exactly once** across a range —
-false, false, false, **true**, true, true — you can find the flip point by halving the
+Whenever you can ask a **yes/no question that flips exactly once** across a range,
+false, false, false, **true**, true, true, you can find the flip point by halving the
 range instead of walking it: **O(n) → O(log n)**. The array being sorted is just the
 most common reason the question flips once; it is not the pattern.
 
@@ -24,8 +24,8 @@ switch you're on.
 
 Now notice: nothing about that required a *sorted array*. It required a **question that
 switches once**. "Can Koko finish the bananas eating at speed `x`?" is no, no, no, yes,
-yes, yes as `x` grows. Same game, same seven guesses. That realisation — that the thing
-you binary search over can be **the answer itself** — is what turns this from a
+yes, yes as `x` grows. Same game, same seven guesses. That realisation, that the thing
+you binary search over can be **the answer itself**: is what turns this from a
 first-week technique into one you use on hard problems.
 
 ## How to recognise it
@@ -37,7 +37,7 @@ first-week technique into one you use on hard problems.
 | "**rotated** sorted array", "mountain array", "peak" | EP76–80 |
 | "**minimum** speed / capacity / days / pages such that…" | Koko (EP81), Ship Packages (EP86), Book Allocation (EP87) |
 | "**maximum** distance / candies such that…" | Aggressive Cows (EP83), Candies (EP85) |
-| the constraints say n ≤ 10⁵ but the answer range is ≤ 10⁹ | any Shape C problem — n log(range) is the intended complexity |
+| the constraints say n ≤ 10⁵ but the answer range is ≤ 10⁹ | any Shape C problem, n log(range) is the intended complexity |
 | "kth smallest" in something sorted in **two directions** | Kth Smallest in Sorted Matrix (EP91), Multiplication Table (EP92) |
 | "median of two sorted arrays" in O(log) | EP93 |
 
@@ -46,13 +46,13 @@ or *largest x such that* and checking a single candidate `x` is easy (a linear s
 If you can write `feasible(x)` in five lines and it's monotonic, you're done thinking.
 
 **The anti-signal:** the predicate does **not** flip exactly once. An unsorted array
-with "find the target" — the question "is target to my left?" has no monotonic answer,
+with "find the target", the question "is target to my left?" has no monotonic answer,
 so binary search is simply invalid. That's a hash map or a linear scan. If you can't
 argue *why* the predicate is monotonic, don't binary search.
 
 ## The three shapes (and a fourth)
 
-### Shape A — Lower bound on a sorted array
+### Shape A: Lower bound on a sorted array
 
 Learn **one** template and derive everything from it. `lower_bound(x)` returns the index
 of the first element `>= x`, or `n` if none. Half-open: `lo` is a valid answer, `hi` is
@@ -83,16 +83,16 @@ Everything in EP71–75 is a one-liner on top of it:
 
 **Why it's correct:** the invariant is "the answer is in `[lo, hi]`". When `arr[mid] < x`
 the answer can't be at or before `mid`, so `lo = mid + 1` keeps the invariant. When
-`arr[mid] >= x`, `mid` itself might be the answer, so `hi = mid` — never `mid - 1`. The
+`arr[mid] >= x`, `mid` itself might be the answer, so `hi = mid`, never `mid - 1`. The
 range shrinks by at least one each step, so it terminates; when `lo == hi` there's one
 candidate left and the invariant says it's the answer.
 
-### Shape B — Search on a condition, not a value
+### Shape B: Search on a condition, not a value
 
 The array isn't sorted, but **some predicate over indices is monotonic**. Find the
 predicate, then it's Shape A.
 
-**Mountain / peak (EP76, EP77):** the predicate is `arr[mid] < arr[mid + 1]` — "am I
+**Mountain / peak (EP76, EP77):** the predicate is `arr[mid] < arr[mid + 1]`, "am I
 still climbing?" That's true, true, true, false, false. The peak is the first `false`.
 
 ```python
@@ -106,11 +106,11 @@ while lo < hi:
 return lo
 ```
 
-**Rotated sorted array (EP78, EP79, EP80):** the predicate is `arr[mid] > arr[hi]` —
+**Rotated sorted array (EP78, EP79, EP80):** the predicate is `arr[mid] > arr[hi]`,
 "am I in the left (rotated-up) half?" True, true, false, false. The minimum (EP78) is
 the first `false`. The rotation count (EP79) is that same index. For search (EP80),
 compare `arr[mid]` with `arr[lo]` to decide **which half is sorted**, then check whether
-the target lies inside the sorted half — if yes, go there; if no, go to the other.
+the target lies inside the sorted half, if yes, go there; if no, go to the other.
 
 ```
 [4, 5, 6, 7, 0, 1, 2]   target 0
@@ -121,7 +121,7 @@ is 0 in [4, 7]?  no      -> go right
 
 One comparison to find the sorted half, one range check. That's the whole episode.
 
-### Shape C — Binary search on the answer
+### Shape C: Binary search on the answer
 
 The problem asks for **the smallest (or largest) x such that `feasible(x)`**. You don't
 search an array at all. You search the **range of possible answers**.
@@ -142,7 +142,7 @@ Three decisions, in this order, every time:
 | decision | ask | example |
 |---|---|---|
 | **what is `x`?** | the quantity being minimised/maximised | Koko: eating speed. Ship: capacity. Cows: min gap. |
-| **what is `feasible(x)`?** | a greedy O(n) check — "with this x, can I do it?" | Koko: `sum(ceil(p / x)) <= h`. Ship: greedily fill days, count `<= d` |
+| **what is `feasible(x)`?** | a greedy O(n) check, "with this x, can I do it?" | Koko: `sum(ceil(p / x)) <= h`. Ship: greedily fill days, count `<= d` |
 | **what is the range?** | pull `lo` and `hi` **from the data**, not from `int max` | Koko: `[1, max(piles)]`. Ship: `[max(w), sum(w)]`. Cows: `[1, max - min]` |
 
 **Min vs max.** Koko, bouquets (EP82), ship (EP86), books (EP87), split array (EP88) are
@@ -155,7 +155,7 @@ reuse the template. Pick one and never improvise it live.
 **H-Index II (EP84)** is the bridge between Shape A and C: the array is sorted and the
 predicate is `citations[i] >= n - i`. Both readings work; noticing that is the episode.
 
-### Shape D — Two dimensions and "kth smallest"
+### Shape D: Two dimensions and "kth smallest"
 
 **Search a 2-D Matrix (EP89):** rows sorted, each row starts after the previous ends →
 it's a sorted 1-D array in disguise. Index `k` maps to `matrix[k // cols][k % cols]`.
@@ -164,24 +164,24 @@ Shape A, one line of arithmetic.
 **Search a 2-D Matrix II (EP90):** rows and columns sorted independently, but the
 flattening trick fails. Start at the **top-right** corner: if the cell is too big, move
 left; too small, move down. Each step eliminates a row or a column → O(m + n). This is
-the *staircase* and it is technically two pointers, not binary search — knowing that is
+the *staircase* and it is technically two pointers, not binary search, knowing that is
 the point of the episode.
 
 **Kth Smallest in Sorted Matrix (EP91) / Multiplication Table (EP92):** Shape C on the
-**value**, not the index. `feasible(x)` = "are there at least k values `<= x`?" — and
+**value**, not the index. `feasible(x)` = "are there at least k values `<= x`?", and
 counting them uses the staircase (EP91) or `sum(min(x // i, n))` per row (EP92) in
 O(n). Range: `[matrix[0][0], matrix[-1][-1]]`. Answer: the smallest `x` with count
-`>= k`. It is guaranteed to be an actual matrix value — say why in the interview (if
+`>= k`. It is guaranteed to be an actual matrix value, say why in the interview (if
 `x` weren't present, `x - 1` would have the same count).
 
 **Median of Two Sorted Arrays (EP93):** binary search on **how many elements to take
 from the shorter array** into the left half. The predicate: "is the partition valid?"
 (`a[i-1] <= b[j]` and `b[j-1] <= a[i]`). O(log min(m, n)). It's Shape C where `x` is a
-cut position — the hardest problem in the pattern and still the same template.
+cut position, the hardest problem in the pattern and still the same template.
 
 ## The three things that go wrong
 
-### 1. `lo < hi` with `hi = mid`, or `lo <= hi` with `hi = mid - 1` — never mix
+### 1. `lo < hi` with `hi = mid`, or `lo <= hi` with `hi = mid - 1`: never mix
 
 Two consistent styles exist. The half-open one above (`hi = n`, `lo < hi`, `hi = mid`)
 never skips the answer and never loops forever, because `mid < hi` always so `hi = mid`
@@ -202,14 +202,14 @@ lo=1 hi=1  stop -> 1   correct
 The instinct is to compare `arr[mid]` with `target`. Wrong: in a rotated array that
 tells you nothing about direction. Compare `arr[mid]` with `arr[lo]` (or `arr[hi]`) to
 find **which half is sorted**, then range-check the target against that half. With
-duplicates (`[1, 1, 1, 0, 1]`) even that breaks — `arr[lo] == arr[mid] == arr[hi]` — and
+duplicates (`[1, 1, 1, 0, 1]`) even that breaks, `arr[lo] == arr[mid] == arr[hi]`, and
 the honest answer is `lo += 1` and O(n) worst case. Say so.
 
 ### 3. The predicate isn't monotonic, so the search is meaningless
 
 Binary search on the answer *always compiles*. It returns *something*. If `feasible(x)`
 is true, false, true as `x` grows, that something is garbage. Before writing the loop,
-say out loud why "bigger `x` makes it easier (or harder)" — "more capacity means fewer
+say out loud why "bigger `x` makes it easier (or harder)", "more capacity means fewer
 days, so if `x` works, `x + 1` works". If you can't say it, the problem isn't Shape C.
 
 ## Complexity
@@ -219,19 +219,19 @@ days, so if `x` works, `x + 1` works". If you can't say it, the problem isn't Sh
 | Shape A (EP71–75) | O(log n) | O(1) |
 | EP75 infinite array | O(log p) where p is the target's position | O(1) |
 | Shape B (EP76–80) | O(log n) | O(1) |
-| Shape C (EP81–88) | O(n · log(range)) — the check is linear, the range is halved | O(1) |
+| Shape C (EP81–88) | O(n · log(range)), the check is linear, the range is halved | O(1) |
 | EP89 flattened matrix | O(log(m·n)) | O(1) |
-| EP90 staircase | O(m + n) — **not** logarithmic | O(1) |
+| EP90 staircase | O(m + n), **not** logarithmic | O(1) |
 | EP91, EP92 kth in matrix | O(n · log(max − min)) | O(1) |
 | EP93 median | O(log min(m, n)) | O(1) |
-| linear scan you're beating | O(n), or O(n · range) for Shape C | — |
+| linear scan you're beating | O(n), or O(n · range) for Shape C | - |
 
 ## The episodes
 
 | EP | Problem | Family | The thing it teaches |
 |---|---|---|---|
 | 71 | Binary Search Basic | A | The half-open template. `lo < hi`, `hi = mid`. |
-| 72 | Upper Bound / Ceiling | A | `lower_bound(x)` vs `lower_bound(x + 1)` — one template, two answers. |
+| 72 | Upper Bound / Ceiling | A | `lower_bound(x)` vs `lower_bound(x + 1)`, one template, two answers. |
 | 73 | First and Last Position | A | First is `lower_bound(x)`; last is `lower_bound(x + 1) - 1`. |
 | 74 | Count Occurrences | A | The difference of two lower bounds. |
 | 75 | Search in Infinite Sorted Array | A | Find the right edge by doubling, then search. |
@@ -258,11 +258,11 @@ days, so if `x` works, `x + 1` works". If you can't say it, the problem isn't Sh
 
 1. What is the predicate, and why does it flip exactly once? *(Say it before typing.
    "Bigger capacity → fewer days, so feasibility is monotone.")*
-2. Which template — `lo < hi` with `hi = mid`, or `lo <= hi` with `hi = mid - 1`? *(Pick
+2. Which template, `lo < hi` with `hi = mid`, or `lo <= hi` with `hi = mid - 1`? *(Pick
    one for life. Know how it handles "not found".)*
 3. Minimise or maximise? *(Minimise: `if feasible: hi = mid`. Maximise: flip the
    branches and round `mid` up.)*
-4. Where do `lo` and `hi` come from? *(From the data — `max(piles)`, `sum(weights)`,
+4. Where do `lo` and `hi` come from? *(From the data, `max(piles)`, `sum(weights)`,
    `matrix[-1][-1]`. Never a magic constant.)*
 5. Why is the answer to a value-search guaranteed to be a real element? *(If `x`
    weren't present, `x - 1` would have the same count, so `x` wouldn't be minimal.)*

@@ -41,7 +41,7 @@ that must not corrupt anything.
 >              ^      [ the block to reverse ]
 > ```
 >
-> Reverse the block on its own — `2 -> 3 -> 4` becomes `4 -> 3 -> 2` — and you're left
+> Reverse the block on its own, `2 -> 3 -> 4` becomes `4 -> 3 -> 2`, and you're left
 > holding a loose piece:
 >
 > ```
@@ -50,8 +50,8 @@ that must not corrupt anything.
 >
 > Two rewires and it's done:
 >
-> 1. `before.next = last` — the list now runs into the reversed block from the left.
-> 2. `first.next = after` — **the old first node is the block's tail now**, so it's the
+> 1. `before.next = last`, the list now runs into the reversed block from the left.
+> 2. `first.next = after`, **the old first node is the block's tail now**, so it's the
 >    one that must point at what came after.
 >
 > That second one is the whole episode. `first` looks like a head and behaves like a
@@ -67,7 +67,7 @@ version, so name the array one, name its space cost, and move on.
 **Therefore:** dummy node, walk to `before`, run EP52's loop exactly `right − left + 1`
 times, rewire two links.
 
-**Key insight — the dummy node.** When `left = 1` there *is* no node before the block,
+**Key insight, the dummy node.** When `left = 1` there *is* no node before the block,
 so every "is this the head?" branch you'd otherwise need disappears if you invent one:
 
 ```python
@@ -79,7 +79,7 @@ for _ in range(left - 1):      # walk to the node just before position `left`
 return dummy.next              # the head, whether or not it moved
 ```
 
-**The reversal is unchanged from EP52** — it just runs a counted number of times instead
+**The reversal is unchanged from EP52**: it just runs a counted number of times instead
 of until the end:
 
 ```python
@@ -93,24 +93,23 @@ for _ in range(right - left + 1):
 ```
 
 When that loop finishes, **`prev` is the block's new head and `cur` is the node after
-the block** — both handed to you for free. That's why the counted loop is worth
+the block**: both handed to you for free. That's why the counted loop is worth
 preferring over a "walk to position right" approach: it leaves the two values you need
 sitting in the two variables you already have.
 
-**🧨 The trap: the order of the two rewires.** Write them like this —
-
+**🧨 The trap: the order of the two rewires.** Write them like this,
 ```python
 before.next.next = cur     # `before.next` is STILL the old first node -> point it at `after`
 before.next = prev         # ...and only NOW move `before` onto the new head
-```
+```,
 
-— and you never need a separate `first` variable. Swap those two lines and
+and you never need a separate `first` variable. Swap those two lines and
 `before.next` has already been reassigned, so the first line wires the *new* head to
 `after`, producing `1 -> 4 -> 5` and losing two nodes. If that's confusing, save
 `first = before.next` before the reversal and write the two rewires with explicit names.
 Both are fine; mixing them is not.
 
-## 🔍 Dry run — `1 -> 2 -> 3 -> 4 -> 5`, `left = 2`, `right = 4`
+## 🔍 Dry run: `1 -> 2 -> 3 -> 4 -> 5`, `left = 2`, `right = 4`
 `dummy -> 1 -> 2 -> 3 -> 4 -> 5`. Walk `left − 1 = 1` step: `before = 1`.
 
 Reverse `right − left + 1 = 3` nodes, starting at `cur = 2`, `prev = None`:
@@ -141,8 +140,8 @@ class Solution:
     def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
         """Reverse positions left..right (1-indexed) in place, one pass.
 
-        Time:  O(n) — walk to `left`, reverse the block, done.
-        Space: O(1) — a dummy node and three pointers.
+        Time:  O(n), walk to `left`, reverse the block, done.
+        Space: O(1), a dummy node and three pointers.
         """
         if not head or left == right:
             return head                   # nothing to reverse
@@ -174,13 +173,13 @@ class Solution:
   `right - left + 1` nodes in the block. Off-by-one here reverses the wrong slice, which
   looks plausible and is wrong.
 - **The dummy node handles `left = 1`.** Without it you need a separate "the head moved"
-  branch — write it once to see how ugly it is, then never again.
+  branch, write it once to see how ugly it is, then never again.
 - **`left == right`** must return the list untouched; the early return is cheaper than
   trusting the loop.
 - **Return `dummy.next`, not `head`.** When `left = 1`, `head` is the tail of the
   reversed block.
 - **`cur` may legitimately be `None`** when `right` is the last position. `first.next =
-  None` is correct — don't guard against it.
+  None` is correct, don't guard against it.
 
 ## 🎤 Interview talking points
 - *"I use a dummy node so the node before the block always exists, even when the block
@@ -193,13 +192,13 @@ class Solution:
   but that isn't the exercise."*
 
 ## 🔗 Transfer
-The four-node picture — `before`, first, last, `after` — is now fixed, and the next
+The four-node picture, `before`, first, last, `after`, is now fixed, and the next
 three episodes reuse it verbatim, just with the block boundaries decided differently:
 fixed at 2 (EP54), fixed at k (EP55), growing (EP56). Tomorrow (EP54) runs it in a loop
 for the first time, which introduces the other half of the bookkeeping: where `before`
 moves to for the *next* block.
 
 ## 📹 Metadata
-- **Title:** `Reverse a Sub-list — the first node becomes the tail | LinkedList Reversal #2`
+- **Title:** `Reverse a Sub-list, the first node becomes the tail | LinkedList Reversal #2`
 - **Thumbnail:** `BEFORE · BLOCK · AFTER` (green block)
 - **Short:** the two rewires in the wrong order, dropping half the list. 45s.

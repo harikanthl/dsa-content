@@ -1,4 +1,4 @@
-# Pattern 05 — Prefix Sum
+# Pattern 05: Prefix Sum
 
 **6 episodes · EP 39–44**
 
@@ -7,7 +7,7 @@
 ## The one-sentence version
 
 Every range sum is the **difference of two prefix sums**, so "find a subarray whose sum
-does X" becomes "find a **pair of prefix values** whose difference does X" — and a hash
+does X" becomes "find a **pair of prefix values** whose difference does X", and a hash
 map answers pair questions in O(1): **O(n²) → O(n)**.
 
 ## ELI5
@@ -69,7 +69,7 @@ def count_subarrays_summing_to(nums, k):
 ```
 
 **Why `seen = {0: 1}` and not `{}`:** a subarray that starts at index 0 has no earlier
-element in front of it — its "left prefix" is the empty one, worth 0. Leave `0` out of
+element in front of it, its "left prefix" is the empty one, worth 0. Leave `0` out of
 the map and every answer beginning at the first element is silently dropped. This is the
 Pattern 05 equivalent of Kadane's *"seed with `nums[0]`, never `0`"*, and it is the
 single most common bug in these six problems.
@@ -92,7 +92,7 @@ running += 1 if x == 1 else -1   # EP42: equal running sums <=> equal counts of 
 
 Both problems look nothing like EP39 and are the same three lines underneath.
 
-### 2. Store a count, or store the first index — never both (EP39/41 vs EP42)
+### 2. Store a count, or store the first index: never both (EP39/41 vs EP42)
 
 | the question is | the map value is | on a repeat key |
 |---|---|---|
@@ -105,7 +105,7 @@ window that is too short.
 
 ### 3. When the question isn't equality, you need order, not a map (EP43, EP44)
 
-A hash map cannot answer "is there an earlier prefix **at most** `p − k`?" — that's a
+A hash map cannot answer "is there an earlier prefix **at most** `p − k`?", that's a
 range query. Two tools:
 
 ```python
@@ -126,9 +126,9 @@ lookup structure gets upgraded from a dict to something that keeps order.
 
 | Problem | Time | Space |
 |---|---|---|
-| EP39, EP41, EP42 | O(n) | O(n) — the map |
-| EP40 | O(n) | **O(1)** — no map at all |
-| EP43 | O(n) | O(n) — the deque |
+| EP39, EP41, EP42 | O(n) | O(n), the map |
+| EP40 | O(n) | **O(1)**: no map at all |
+| EP43 | O(n) | O(n), the deque |
 | EP44 | O(n log n) | O(n) |
 | brute force you're beating | O(n²) | O(1) |
 
@@ -157,5 +157,5 @@ ask about *any* earlier position in O(1).
 4. Why can't you slide a window over an array with negatives? *(Growing the window can
    shrink the sum, so neither pointer is monotonic and shrinking proves nothing.)*
 5. What do you reach for when the question is a range rather than an exact value?
-   *(An ordered structure — monotonic deque, BIT, or merge sort — because a hash map
+   *(An ordered structure, monotonic deque, BIT, or merge sort, because a hash map
    only answers exact keys.)*

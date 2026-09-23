@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "You can't ask a linked list how long it is. So how do you find its middle without
-> walking it twice? You send a second runner at double speed — when he hits the end,
+> walking it twice? You send a second runner at double speed, when he hits the end,
 > the slow one is standing exactly halfway. One pass, no counting."
 
 ## 📋 Problem, in your words
@@ -22,14 +22,14 @@ Input:  1 -> 2 -> 3 -> 4 -> 5
 Output:           3 -> 4 -> 5        (the node 3, and everything after it)
 
 Input:  1 -> 2 -> 3 -> 4 -> 5 -> 6
-Output:                4 -> 5 -> 6   (the SECOND middle, 4 — not 3)
+Output:                4 -> 5 -> 6   (the SECOND middle, 4, not 3)
 ```
 
 ## 🧸 ELI5
 > Two people start at the front of a queue. One walks, one runs at double speed.
 >
 > When the runner reaches the back of the queue, how far has the walker got? Exactly
-> half as far — because he's been moving at exactly half the speed for exactly the
+> half as far, because he's been moving at exactly half the speed for exactly the
 > same amount of time.
 >
 > Half the distance is the middle. You didn't count anybody.
@@ -49,7 +49,7 @@ for _ in range(n // 2): cur = cur.next
 return cur
 ```
 
-**O(n) time, O(1) space** — and honestly, this is fine. It's the same complexity class
+**O(n) time, O(1) space**: and honestly, this is fine. It's the same complexity class
 as the optimal answer. The two-pointer version is better because it's **one pass**,
 which matters when the data is a stream you can only read once, and because it's the
 building block the next two problems need.
@@ -66,7 +66,7 @@ speeds 1 and 2, and when the fast one has covered the whole list, the slow one h
 covered exactly half of it. The middle falls out of the arithmetic; you never measure
 anything.
 
-## 🔍 Dry run — odd length, `1 → 2 → 3 → 4 → 5`
+## 🔍 Dry run: odd length, `1 → 2 → 3 → 4 → 5`
 Loop condition is `while fast and fast.next`.
 
 | step | slow | fast | `fast and fast.next`? |
@@ -77,7 +77,7 @@ Loop condition is `while fast and fast.next`.
 
 Return `slow` = **3**. ✓ (Odd length always lands cleanly on the single middle.)
 
-## 🔍 Dry run — even length, `1 → 2 → 3 → 4 → 5 → 6`
+## 🔍 Dry run: even length, `1 → 2 → 3 → 4 → 5 → 6`
 | step | slow | fast | `fast and fast.next`? |
 |---|---|---|---|
 | start | 1 | 1 | yes |
@@ -85,7 +85,7 @@ Return `slow` = **3**. ✓ (Odd length always lands cleanly on the single middle
 | 2 | 3 | 5 | yes |
 | 3 | **4** | `None` | `fast` is `None` → stop |
 
-Return `slow` = **4** — the *second* middle, which is what this problem wants. ✓
+Return `slow` = **4**: the *second* middle, which is what this problem wants. ✓
 
 Put these two tables side by side on screen. The same four lines of code produce both
 answers, and knowing which one you get is the whole skill.
@@ -96,8 +96,8 @@ class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         """Return the middle node; the second middle when the length is even.
 
-        Time:  O(n) — fast traverses the list once, slow does half of it.
-        Space: O(1) — two references.
+        Time:  O(n), fast traverses the list once, slow does half of it.
+        Space: O(1), two references.
         """
         slow = fast = head
 
@@ -121,22 +121,22 @@ while fast and fast.next:
 return slow
 ```
 
-Neither is "the right answer" — the problem decides. Say which one you're writing and
+Neither is "the right answer", the problem decides. Say which one you're writing and
 why, every time. This one-line difference is the single most common bug in episodes 18
 and 19, so burn it in now.
 
 ## ⚠️ Gotchas
-- **`while fast and fast.next`** — the same two-link dereference as EP13. `while fast`
+- **`while fast and fast.next`**: the same two-link dereference as EP13. `while fast`
   alone crashes on even-length lists.
 - **Second vs first middle.** `fast = head` gives the second; `fast = head.next` gives
   the first. Decide deliberately, don't discover it from a failing test.
 - **Single node** returns itself: the guard fails immediately, `slow` is still `head`.
   Correct with no special case.
-- **Empty list** returns `None`, also with no special case — but only because `slow`
+- **Empty list** returns `None`, also with no special case, but only because `slow`
   was initialised to `head`. If you'd written `slow = head.next` anywhere, this
   throws. Trace it on camera.
 - The problem asks for the **node**, not its value, and returning a node returns the
-  whole tail with it. That's expected — don't "fix" it.
+  whole tail with it. That's expected, don't "fix" it.
 
 ## 🎤 Interview talking points
 - *"Distance is speed times time. Equal time at half the speed means half the
@@ -144,7 +144,7 @@ and 19, so burn it in now.
 - *"Counting first is also O(n) and perfectly acceptable; I'm using two pointers
   because it's single-pass, which matters if the list is a stream, and because the
   same shape is how I'd split a list for merge sort or a palindrome check."*
-- If asked for the first middle: change `fast` to start at `head.next` — and say it
+- If asked for the first middle: change `fast` to start at `head.next`, and say it
   out loud rather than silently editing.
 
 ## 🔗 Transfer
@@ -154,6 +154,6 @@ the second half, and interleaves. **Merge sort on a linked list** splits at the 
 the same way. Get the off-by-one right here and the next two episodes are assembly.
 
 ## 📹 Metadata
-- **Title:** `Middle of a Linked List — one pass, no counting | Fast & Slow #5`
+- **Title:** `Middle of a Linked List, one pass, no counting | Fast & Slow #5`
 - **Thumbnail:** `HALF SPEED = HALFWAY` (teal block)
-- **Short:** The two dry-run tables side by side — odd lands on the middle, even lands on the second.
+- **Short:** The two dry-run tables side by side, odd lands on the middle, even lands on the second.

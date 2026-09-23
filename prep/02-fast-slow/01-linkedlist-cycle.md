@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Two runners on a track, one twice as fast as the other. If the track loops, the
-> fast one *has* to lap the slow one — it's not luck, it's arithmetic. That single
+> fast one *has* to lap the slow one, it's not luck, it's arithmetic. That single
 > fact replaces a whole hash set and drops this to constant memory."
 
 ## 📋 Problem, in your words
@@ -39,7 +39,7 @@ Output: false
 > If the path is a **loop**, your friend keeps going round and round, and eventually
 > comes up behind you and taps you on the shoulder. They *must*, because every step
 > they close the gap between you by exactly one. A gap that shrinks by one each time
-> can't jump over zero — it lands on it.
+> can't jump over zero, it lands on it.
 >
 > So the question "is there a loop?" becomes "did they tap my shoulder?"
 
@@ -57,7 +57,7 @@ return False
 ```
 
 **O(n) time, O(n) space.** This is correct and readable, and you should absolutely
-say it out loud — it's the natural first answer. Then: *"but the follow-up asks for
+say it out loud, it's the natural first answer. Then: *"but the follow-up asks for
 O(1) memory, and that's the real question."*
 
 ## 💡 The pattern reveal
@@ -71,12 +71,12 @@ If both pointers are inside the loop, `fast` gains exactly **one** position on `
 per iteration. So the gap goes `k, k-1, k-2, … 1, 0`. It can never skip 0, which is
 why a meeting is guaranteed rather than likely.
 
-## 🔍 Dry run — `3 → 2 → 0 → -4 → (back to 2)`
+## 🔍 Dry run: `3 → 2 → 0 → -4 → (back to 2)`
 Label the nodes A(3) B(2) C(0) D(-4), with `D.next = B`.
 
 | step | slow | fast | met? |
 |---|---|---|---|
-| start | A | A | — |
+| start | A | A | - |
 | 1 | B | C | no |
 | 2 | C | B | no *(fast went D → B)* |
 | 3 | D | D | **yes** → return `True` |
@@ -85,7 +85,7 @@ And on `1 → 2 → null`:
 
 | step | slow | fast | note |
 |---|---|---|---|
-| start | 1 | 1 | — |
+| start | 1 | 1 | - |
 | 1 | 2 | null | `fast` fell off → loop exits → return `False` |
 
 ## ✅ Optimal solution
@@ -94,7 +94,7 @@ class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         slow = fast = head
 
-        while fast and fast.next:        # fast takes 2 steps — both must exist
+        while fast and fast.next:        # fast takes 2 steps, both must exist
             slow = slow.next             # 1 step
             fast = fast.next.next        # 2 steps
             if slow is fast:             # identity, not equality
@@ -102,17 +102,17 @@ class Solution:
 
         return False                     # fast ran off the end: no cycle
 ```
-**Time:** O(n) — `slow` visits each node at most once before a meeting.
+**Time:** O(n), `slow` visits each node at most once before a meeting.
 **Space:** O(1) ✓
 
 ## ⚠️ Gotchas
 - **`while fast and fast.next`, not `while fast`.** You dereference *two* links
   (`fast.next.next`), so both must exist. Writing `while fast` throws
   `AttributeError: 'NoneType' object has no attribute 'next'` on any list with an
-  even number of nodes. This is *the* bug on this problem — let it happen on camera.
+  even number of nodes. This is *the* bug on this problem, let it happen on camera.
 - **`is`, not `==`.** You're comparing node *identity*, not values. Two different
   nodes can both hold the value `2`; `==` on custom objects without `__eq__` happens
-  to fall back to identity in Python, so it works by accident — but say `is`, because
+  to fall back to identity in Python, so it works by accident, but say `is`, because
   it states what you mean and it's what you'd need in a language with value equality.
 - **Advance before comparing.** Both start at `head`, so checking `slow is fast`
   *before* moving returns `True` on every list immediately.
@@ -126,7 +126,7 @@ class Solution:
   iteration, so the gap decrements to zero rather than skipping it."* ← say this; it
   proves you know *why* rather than having memorised the shape.
 - If asked about speeds other than 2: *"Any speeds p > q work for detection, but 2
-  and 1 are what make the second phase — finding the cycle's start — come out to a
+  and 1 are what make the second phase, finding the cycle's start, come out to a
   clean equation."*
 
 ## 🔗 Transfer
@@ -135,6 +135,6 @@ this on problems with **no linked list at all**, which is the real payoff of the
 pattern.
 
 ## 📹 Metadata
-- **Title:** `Linked List Cycle — why the fast runner ALWAYS catches up | Fast & Slow #1`
+- **Title:** `Linked List Cycle, why the fast runner ALWAYS catches up | Fast & Slow #1`
 - **Thumbnail:** `NO HASH SET NEEDED` (teal block)
 - **Short:** The gap-shrinks-by-one argument, 45s.

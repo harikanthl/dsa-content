@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Rotate the list right by k. It's the last episode of a reversal pattern and **nothing
-> gets reversed** — that's why it's here. Close the list into a ring, walk to the new
+> gets reversed**: that's why it's here. Close the list into a ring, walk to the new
 > tail, cut. Two things will try to trip you: `k` can be larger than the list, and the
 > new tail is counted from the **front**, not the back."
 
@@ -34,7 +34,7 @@ Input:  None, k = 3                        Output: None
 ## 🧸 ELI5
 > Don't think about moving `k` nodes. Think about where the list **breaks**.
 >
-> Rotating right by 2 means the last two nodes go to the front — which means the list
+> Rotating right by 2 means the last two nodes go to the front, which means the list
 > now starts at node 4 and ends at node 3:
 >
 > ```
@@ -43,7 +43,7 @@ Input:  None, k = 3                        Output: None
 > ```
 >
 > So the whole problem is: *find the new tail, cut there.* And the new tail is
-> `n − k` nodes from the front — position 3 of 5, when k = 2.
+> `n − k` nodes from the front, position 3 of 5, when k = 2.
 >
 > The tidiest way to do the surgery is to **join the tail to the head first**, making a
 > ring:
@@ -61,18 +61,18 @@ Input:  None, k = 3                        Output: None
 
 ## 🐌 Brute force (say it, don't type it)
 Rotate by one, k times: each rotation walks to the last node and moves it. **O(n·k)**,
-and with `k = 2 × 10⁹` — which the constraints allow — it never finishes. Say the
+and with `k = 2 × 10⁹`, which the constraints allow, it never finishes. Say the
 complexity out loud; it's the motivation for the modulo.
 
 ## 💡 The pattern reveal
 **Signal:** a linked list · "rotate" / "shift" by k · in place.
 **Therefore:** measure, close the ring, walk `n − k%n`, cut. One and a bit passes.
 
-**Key insight #1 — `k %= n`, always.** Rotating by the length is a no-op, so only the
+**Key insight #1, `k %= n`, always.** Rotating by the length is a no-op, so only the
 remainder matters. This is where the O(n·k) brute force collapses to O(n), and it's the
 first thing to write after you've counted the nodes.
 
-**Key insight #2 — count from the front, not the back.** Singly linked lists can't walk
+**Key insight #2, count from the front, not the back.** Singly linked lists can't walk
 backwards, so "the k-th node from the end" has to be re-expressed from the head:
 
 ```
@@ -83,7 +83,7 @@ new head = new_tail.next
 
 With `n = 5, k = 2`: new tail is node 3, reached in 2 steps from the head. ✓
 
-**Key insight #3 — measure and close in the same pass.** Walking to the tail to count
+**Key insight #3, measure and close in the same pass.** Walking to the tail to count
 `n` leaves you standing on the tail, so tie it to the head right there:
 
 ```python
@@ -95,7 +95,7 @@ tail.next = head        # close the ring while you're here
 ```
 
 **🧨 The trap: `k % n == 0` after the modulo.** If `k` is a multiple of `n`, the list is
-unchanged — but if you've already closed the ring, returning `head` returns a **circular
+unchanged, but if you've already closed the ring, returning `head` returns a **circular
 list**, and whatever prints it hangs. Either check before closing the ring, or cut at
 the original tail. Return early and be explicit:
 
@@ -106,12 +106,12 @@ if k == 0:
 ```
 
 **Why this is in a reversal pattern.** It isn't a reversal, and that's the point. The
-instinct — reverse the whole list, reverse the first k, reverse the rest, as you'd do
-for an *array* rotation — produces a **left** rotation of the wrong thing and costs
+instinct, reverse the whole list, reverse the first k, reverse the rest, as you'd do
+for an *array* rotation, produces a **left** rotation of the wrong thing and costs
 three passes. Recognising that the same pointer surgery answers it in one is the skill
 this episode tests.
 
-## 🔍 Dry run — `1 -> 2 -> 3 -> 4 -> 5`, `k = 2`
+## 🔍 Dry run: `1 -> 2 -> 3 -> 4 -> 5`, `k = 2`
 
 | step | what happens | state |
 |---|---|---|
@@ -124,7 +124,7 @@ this episode tests.
 
 Answer **`4 -> 5 -> 1 -> 2 -> 3`** ✓
 
-## 🔍 Dry run — `0 -> 1 -> 2`, `k = 4` (the modulo)
+## 🔍 Dry run: `0 -> 1 -> 2`, `k = 4` (the modulo)
 
 | step | what happens | state |
 |---|---|---|
@@ -137,7 +137,7 @@ Answer **`4 -> 5 -> 1 -> 2 -> 3`** ✓
 Answer **`2 -> 0 -> 1`** ✓
 
 Run it once with `k = 4` and no modulo on camera: the walk loop runs past the end of
-what you expected, and on a ring it keeps going quite happily — landing somewhere
+what you expected, and on a ring it keeps going quite happily, landing somewhere
 arbitrary. A wrong answer with no crash, courtesy of the ring you just built.
 
 ## ✅ Optimal solution
@@ -146,7 +146,7 @@ class Solution:
     def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         """Rotate the list right by k places.
 
-        Time:  O(n) — one pass to measure, a partial pass to the cut point.
+        Time:  O(n), one pass to measure, a partial pass to the cut point.
         Space: O(1).
         """
         if not head or not head.next or k == 0:
@@ -181,13 +181,13 @@ class Solution:
 ## ⚠️ Gotchas
 - **`k %= n` before anything else.** Constraints allow `k` up to 2×10⁹; without the
   modulo the walk is either astronomically slow or lands in the wrong place on the ring.
-- **Handle `k % n == 0` before closing the ring** — or you return a circular list and
+- **Handle `k % n == 0` before closing the ring**: or you return a circular list and
   the test harness hangs instead of failing.
 - **`n - k - 1` steps, not `n - k`.** You want to *land on* the new tail, and you start
   already standing on node 1. Check it against the example: `n=5, k=2` → 2 steps → node
   3 ✓.
 - **Right, not left.** Rotating right by k moves the **last** k nodes to the front.
-  Rotating left by k is `n - k` to the right — read the statement twice.
+  Rotating left by k is `n - k` to the right, read the statement twice.
 - **`new_tail.next = None` is mandatory.** Forgetting it leaves the ring intact and the
   list infinite.
 - **Empty or single-node lists** return immediately; there's nothing the ring logic
@@ -196,7 +196,7 @@ class Solution:
 ## 🎤 Interview talking points
 - *"Rotating right by k means the list breaks between node n−k and node n−k+1, so I find
   that cut point rather than moving anything."* ← reframe first.
-- *"`k %= n`, because rotating by the length changes nothing — that's what turns the
+- *"`k %= n`, because rotating by the length changes nothing, that's what turns the
   naive O(n·k) into O(n)."*
 - *"I close the list into a ring while I'm counting, walk `n − k − 1` from the head, and
   cut. One and a bit passes, O(1) space."*
@@ -205,13 +205,13 @@ class Solution:
   shows you know why this problem is grouped where it is.
 
 ## 🔗 Transfer
-That closes Pattern 07 — and it closes it on the reminder that a pattern is a *shape*,
+That closes Pattern 07, and it closes it on the reminder that a pattern is a *shape*,
 not a keyword: five reversal problems and one that only looks like one. The dummy node
 and the save-before-you-overwrite discipline carry straight into Pattern 08 (Stack,
 EP58–66), where the structure keeps the bookkeeping for you instead of you holding it in
 three named pointers.
 
 ## 📹 Metadata
-- **Title:** `Rotate List — close the ring, then cut | LinkedList Reversal #6`
+- **Title:** `Rotate List, close the ring, then cut | LinkedList Reversal #6`
 - **Thumbnail:** `k %= n` (green block)
 - **Short:** `k = 4` on a 3-node list, with and without the modulo. 40s.

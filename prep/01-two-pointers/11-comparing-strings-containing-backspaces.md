@@ -5,7 +5,7 @@
 ---
 
 ## 🎬 Hook
-> "Everyone solves this with a stack, and the stack is fine — it's O(n) time. But the
+> "Everyone solves this with a stack, and the stack is fine, it's O(n) time. But the
 > follow-up asks for O(1) space, and the answer is genuinely clever: you read both
 > strings **backwards**. Because a backspace only ever affects what's to its left."
 
@@ -14,7 +14,7 @@
 Two strings where '#' means backspace (delete the previous character).
 Return true if they produce the same final text.
 
-'#' on an empty string does nothing — it doesn't error.
+'#' on an empty string does nothing, it doesn't error.
 Follow-up: can you do it in O(n) time and O(1) space?
 ```
 
@@ -30,7 +30,7 @@ Output: true
 ```
 
 ## 🧸 ELI5
-> Reading a string **forwards**, you can never be sure a character survives — a `#`
+> Reading a string **forwards**, you can never be sure a character survives, a `#`
 > might be coming up later that erases it. You're always in suspense.
 >
 > Reading **backwards**, the suspense is gone. You see the `#` *before* you see the
@@ -54,7 +54,7 @@ def build(s):
 return build(s) == build(t)
 ```
 **O(n) time, O(n) space.** This is a perfectly good answer and you should write it on
-camera first — it's readable and it passes. Then say: *"the follow-up wants O(1)
+camera first, it's readable and it passes. Then say: *"the follow-up wants O(1)
 space, and that's the real question."*
 
 ## 💡 The pattern reveal
@@ -67,12 +67,12 @@ right-to-left operator, so scanning right-to-left makes it a simple counter inst
 a data structure. Whenever an operation refers to "the previous thing," ask whether
 reversing the scan turns state into a count.
 
-## 🔍 Dry run — `s = "ab#c"`, `t = "ad#c"`
+## 🔍 Dry run: `s = "ab#c"`, `t = "ad#c"`
 | i (s) | j (t) | skipS | skipT | resolved chars | verdict |
 |---|---|---|---|---|---|
 | 3 | 3 | 0 | 0 | `c` vs `c` | match, step both |
-| 2 | 2 | — | — | both are `#` → `skip=1`, step both | — |
-| 1 | 1 | 1 | 1 | `b`/`d` consumed by skip → `skip=0`, step both | — |
+| 2 | 2 | - | - | both are `#` → `skip=1`, step both | - |
+| 1 | 1 | 1 | 1 | `b`/`d` consumed by skip → `skip=0`, step both | - |
 | 0 | 0 | 0 | 0 | `a` vs `a` | match, step both |
 | −1 | −1 | | | both exhausted | **true** |
 
@@ -122,13 +122,13 @@ class Solution:
 
 ## ⚠️ Gotchas
 - **`while i >= 0 or j >= 0`**, not `and`. With `and`, you exit as soon as one string
-  is exhausted — so `"a"` vs `"ab"` wrongly returns true.
+  is exhausted, so `"a"` vs `"ab"` wrongly returns true.
 - **Three states in the inner loop**, in this order: is it a `#` (bank a skip)?
   do I owe a skip (spend it)? otherwise it's a survivor (stop). Reordering these
   breaks it.
 - The final `elif i >= 0 or j >= 0: return False` is the length check. Without it,
   a string with leftover characters compares equal. Easy to forget, easy to spot in
-  testing — good place to let the test fail on camera and then fix it.
+  testing, good place to let the test fail on camera and then fix it.
 - `'#'` on empty does nothing: naturally handled, since `i` just walks off the end.
 
 ## 🎤 Interview talking points
@@ -136,14 +136,14 @@ class Solution:
   space if asked."* ← This is exactly the right interview instinct, and saying it out
   loud is worth more than jumping straight to the clever one.
 - *"Backspace is a backwards-looking operator, so I scan backwards. That converts
-  'remember what I've seen' into 'count what I owe' — state becomes a counter."*
+  'remember what I've seen' into 'count what I owe', state becomes a counter."*
 
 ## 🔗 Transfer
-The stack version is a warm-up for **Pattern 7: Stack** (EP 65–73) — Remove All
+The stack version is a warm-up for **Pattern 7: Stack** (EP 65–73), Remove All
 Adjacent Duplicates is literally this. The "scan in the direction the operator
 points" idea shows up again in Next Greater Element and Daily Temperatures.
 
 ## 📹 Metadata
-- **Title:** `Backspace String Compare — O(1) space by reading backwards | Two Pointers #11`
+- **Title:** `Backspace String Compare, O(1) space by reading backwards | Two Pointers #11`
 - **Thumbnail:** `READ IT BACKWARDS` (blue block)
-- **Short:** "Why backwards?" — the suspense analogy, 45s.
+- **Short:** "Why backwards?", the suspense analogy, 45s.

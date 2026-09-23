@@ -35,7 +35,7 @@ working solution from one that merely passes the first test.
 > You're walking along the array with a running score, and at every step you ask one
 > question: **is my score helping me?**
 >
-> If you're carrying +7 and the next number is −1, keep going — you're at +6, still
+> If you're carrying +7 and the next number is −1, keep going, you're at +6, still
 > better than starting over at −1.
 >
 > If you're carrying −4 and the next number is 2, **drop the −4**. Nothing you add to a
@@ -56,11 +56,11 @@ for i in range(len(nums)):
         best = max(best, total)
 ```
 
-**O(n²).** (The truly naive version with an inner `sum()` is O(n³) — worth mentioning
+**O(n²).** (The truly naive version with an inner `sum()` is O(n³), worth mentioning
 as the thing *not* to write.) The waste: the subarray starting at `i+1` is the one
 starting at `i` minus one element, and this learns nothing from that.
 
-There's also a **divide and conquer** solution at O(n log n) — split, solve both halves,
+There's also a **divide and conquer** solution at O(n log n), split, solve both halves,
 and handle the subarray crossing the middle. It's a genuinely nice answer and worth
 naming, because the follow-up on LeetCode explicitly asks for it. But it's beaten by
 the linear scan.
@@ -87,9 +87,9 @@ never does.
 
 **Why dropping a negative prefix is always right:** if `current < 0`, then for any
 future element `x` we have `current + x < x`. Keeping it is strictly worse, always. No
-cleverness needed — it's an inequality.
+cleverness needed, it's an inequality.
 
-## 🔍 Dry run — `[-2, 1, -3, 4, -1, 2, 1, -5, 4]`
+## 🔍 Dry run: `[-2, 1, -3, 4, -1, 2, 1, -5, 4]`
 Seed: `current = best = -2`.
 
 | i | x | `current + x` | `x` | `current` = max | `best` |
@@ -103,7 +103,7 @@ Seed: `current = best = -2`.
 | 7 | −5 | 1 | −5 | **1** (extend) | 6 |
 | 8 | 4 | 5 | 4 | **5** (extend) | 6 |
 
-Return **6** — the run `[4, −1, 2, 1]`, which is exactly the stretch where `current`
+Return **6**: the run `[4, −1, 2, 1]`, which is exactly the stretch where `current`
 climbed from 4 to 6.
 
 Look at rows 1 and 3: both times the running total had gone negative, so the algorithm
@@ -115,8 +115,8 @@ class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         """Largest sum of any non-empty contiguous subarray.
 
-        Time:  O(n) — one pass, one comparison per element.
-        Space: O(1) — two integers.
+        Time:  O(n), one pass, one comparison per element.
+        Space: O(1), two integers.
         """
         best = current = nums[0]           # seed with a REAL element, never 0
 
@@ -140,23 +140,23 @@ for i, x in enumerate(nums[1:], 1):
     if current > best:
         best, best_start, best_end = current, start, i
 ```
-Worth having ready — interviewers often follow up with *"now return the subarray
+Worth having ready, interviewers often follow up with *"now return the subarray
 itself."* The only new idea is remembering where the current run started.
 
 ## ⚠️ Gotchas
 - **Seed with `nums[0]`, never `0`.** On `[-3, -1, -2]` a zero seed returns `0`, which
-  corresponds to the empty subarray — not allowed. **This is the bug of the episode.**
+  corresponds to the empty subarray, not allowed. **This is the bug of the episode.**
   Write the zero version first on camera, run the all-negative test, watch it fail.
 - **`current` and `best` are different variables with different meanings.** `current`
   is "ending here"; `best` is "anywhere". Using one variable returns the sum of the
   final run instead of the maximum.
-- **Update `best` after `current`,** every iteration — not only when you extend.
+- **Update `best` after `current`,** every iteration, not only when you extend.
 - **Empty input.** `nums[0]` raises `IndexError`. LeetCode guarantees at least one
   element; a production function should say what it does.
-- If a variant *does* allow the empty subarray, the answer is `max(best, 0)` — one
+- If a variant *does* allow the empty subarray, the answer is `max(best, 0)`, one
   character of difference, so read the statement rather than assuming.
 - Don't reach for a sliding window here. With negatives, "shrink from the left while
-  the sum is too big" isn't a valid move — see the EP28 discussion.
+  the sum is too big" isn't a valid move, see the EP28 discussion.
 
 ## 🎤 Interview talking points
 - *"`current` is the best subarray ending at this index. At each element I either
@@ -165,8 +165,8 @@ itself."* The only new idea is remembering where the current run started.
   `current + x < x` for every future `x`, so carrying it is strictly worse."*
 - *"I seed with the first element rather than zero so all-negative arrays return the
   largest element rather than an empty subarray."*
-- *"There's an O(n log n) divide-and-conquer solution — split, recurse, handle the
-  crossing subarray — which is what the follow-up asks for, but O(n) beats it."*
+- *"There's an O(n log n) divide-and-conquer solution, split, recurse, handle the
+  crossing subarray, which is what the follow-up asks for, but O(n) beats it."*
 
 ## 🔗 Transfer
 The next five episodes are all this loop with one thing changed: mirrored to a minimum
@@ -176,6 +176,6 @@ The `current` vs `best` distinction also reappears throughout Pattern 15 (DP), w
 it's the difference between a local and a global optimum.
 
 ## 📹 Metadata
-- **Title:** `Maximum Subarray (Kadane's) — one question per element | Kadane #1`
+- **Title:** `Maximum Subarray (Kadane's), one question per element | Kadane #1`
 - **Thumbnail:** `DROP THE NEGATIVE` (green block)
 - **Short:** `[-3,-1,-2]` returning 0 instead of −1, then the one-token fix. 40s.

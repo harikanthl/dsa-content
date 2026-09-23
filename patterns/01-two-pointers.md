@@ -1,4 +1,4 @@
-# Pattern 01 — Two Pointers
+# Pattern 01: Two Pointers
 
 **12 episodes · EP 1–12**
 
@@ -23,7 +23,7 @@ Every slide **permanently eliminates an entire book** from consideration, becaus
 sorting guarantees everything past it is worse in the same direction. You never
 back up. Two fingers, one pass down the shelf.
 
-The naive way is to compare every book against every other book — that's the nested
+The naive way is to compare every book against every other book, that's the nested
 loop. The sorted order is the free information that lets you skip almost all of it.
 
 ## How to recognise it
@@ -46,7 +46,7 @@ if you need order for another reason (like skipping duplicates in 3Sum).
 
 Nearly every problem in this pattern is one of these.
 
-### Shape A — Opposite ends (converging)
+### Shape A: Opposite ends (converging)
 For sorted arrays and palindromes. The window shrinks from both sides.
 
 ```python
@@ -62,10 +62,10 @@ while lo < hi:
 ```
 
 **Why it's correct:** when `cur < target`, `arr[lo]` paired with *anything* at or
-below `hi` is still too small. So `lo` can never be part of an answer — discard it
+below `hi` is still too small. So `lo` can never be part of an answer, discard it
 forever. Each step kills one candidate, so the loop runs at most n times.
 
-### Shape B — Fast / slow, same direction (read & write)
+### Shape B: Fast / slow, same direction (read & write)
 For in-place filtering. `slow` marks where the next keeper goes; `fast` scans.
 
 ```python
@@ -80,7 +80,7 @@ return slow              # length of the cleaned prefix
 **Mental model:** `slow` is the boundary of the "finished" region. Everything left
 of `slow` is final and correct. You are compacting the array in place.
 
-### Shape C — Three regions (Dutch National Flag)
+### Shape C: Three regions (Dutch National Flag)
 For partitioning into 3 buckets in one pass.
 
 ```python
@@ -96,16 +96,16 @@ while mid <= high:
 
 **The trap everyone hits:** after swapping with `high`, you do *not* advance `mid`.
 The value you just pulled in from the right is unexamined. Say this out loud on
-camera — it's the whole reason this one is a Medium.
+camera, it's the whole reason this one is a Medium.
 
 ## Complexity you should be able to state cold
 
 | Shape | Time | Space |
 |---|---|---|
-| A — converging on sorted input | O(n) | O(1) |
-| A — after you sort it yourself | O(n log n) | O(1) or O(n) depending on sort |
-| B — read/write | O(n) | O(1) |
-| C — DNF | O(n) | O(1) |
+| A, converging on sorted input | O(n) | O(1) |
+| A, after you sort it yourself | O(n log n) | O(1) or O(n) depending on sort |
+| B, read/write | O(n) | O(1) |
+| C, DNF | O(n) | O(1) |
 | kSum (k pointers, sort + nested converge) | O(n^(k−1)) | O(1) extra |
 
 ## The episodes
@@ -132,9 +132,9 @@ You should be able to answer these without hesitating:
 1. Why does `lo += 1` not lose a valid answer? *(Sorted order guarantees every pair
    using `arr[lo]` is ≤ the current sum.)*
 2. Why is it O(n) and not O(n²)? *(`lo` and `hi` each move at most n times total,
-   and never backwards — so ≤ 2n steps.)*
+   and never backwards, so ≤ 2n steps.)*
 3. When do you skip duplicates, and where exactly? *(After recording a hit, and on
-   the outer fixed index — before the inner loop starts.)*
+   the outer fixed index, before the inner loop starts.)*
 4. What breaks Two Pointers? *(Unsorted input, or negative numbers in a
-   product/sum-window problem — negatives destroy monotonicity, which is why
+   product/sum-window problem, negatives destroy monotonicity, which is why
    Subarray Product Less Than K requires all-positive input.)*

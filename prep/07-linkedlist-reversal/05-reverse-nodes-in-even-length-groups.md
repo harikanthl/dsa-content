@@ -7,7 +7,7 @@
 ## 🎬 Hook
 > "Split the list into groups of 1, 2, 3, 4, … and reverse only the groups with an
 > **even** number of nodes. The machinery is yesterday's, unchanged. What's new is that
-> the last group can be short — so a group nominally of size 5 might really be 3, and
+> the last group can be short, so a group nominally of size 5 might really be 3, and
 > whether it gets reversed depends on the **actual** count, not the intended one.
 > Everything hinges on that distinction."
 
@@ -39,7 +39,7 @@ groups: [2] [1]              <- last group wanted 2, got 1: ODD, so untouched
 Output: 2 -> 1
 ```
 Those last two examples are the episode. `[6]` and `[1]` are short final groups whose
-*real* length is odd, so nothing happens to them — even though the group they belong to
+*real* length is odd, so nothing happens to them, even though the group they belong to
 was supposed to be even-sized in one case.
 
 ## 🧸 ELI5
@@ -55,7 +55,7 @@ was supposed to be even-sized in one case.
 > ```
 >
 > At each group, **count what you actually got** before deciding anything. The list runs
-> out when it runs out — the final group takes the remainder, which may be less than it
+> out when it runs out, the final group takes the remainder, which may be less than it
 > wanted.
 >
 > Then one question: *is the count I actually got even?* If yes, reverse exactly that
@@ -63,15 +63,15 @@ was supposed to be even-sized in one case.
 
 ## 🐌 Brute force (say it, don't type it)
 Values into an array, slice it into 1, 2, 3, … chunks, reverse the even-length ones,
-write back. **O(n) space** and much easier to reason about — genuinely the right answer
+write back. **O(n) space** and much easier to reason about, genuinely the right answer
 if someone hands you this in production. The pointer version is the exercise.
 
 ## 💡 The pattern reveal
 **Signal:** groups of **varying** size · a condition deciding which groups change.
-**Therefore:** EP55's loop with two changes — measure the real length, and make the
+**Therefore:** EP55's loop with two changes, measure the real length, and make the
 reversal conditional.
 
-**Key insight — nominal vs actual length.** This is the only genuinely new idea in the
+**Key insight, nominal vs actual length.** This is the only genuinely new idea in the
 episode, and it deserves to be said twice:
 
 ```python
@@ -83,10 +83,10 @@ while node and length < size:      # stop at the list's end OR the group's size
 ```
 
 `size` is what the group wanted. `length` is what it got. The reversal decision uses
-`length % 2 == 0` — **never** `size % 2 == 0`.
+`length % 2 == 0`, **never** `size % 2 == 0`.
 
 The two readings agree far more often than they disagree, which is why the bug survives.
-On `[1,1,0,6]` the last group wants 3 and gets 1 — odd either way, same answer. The
+On `[1,1,0,6]` the last group wants 3 and gets 1, odd either way, same answer. The
 smallest input that separates them is five nodes:
 
 ```
@@ -96,11 +96,11 @@ smallest input that separates them is five nodes:
   size   % 2  ->  3 is odd   ->  leave    ->  1 -> 3 -> 2 -> 4 -> 5   ✗
 ```
 
-**And notice what else that walk gives you:** `node` is the node *after* the group —
+**And notice what else that walk gives you:** `node` is the node *after* the group,
 exactly the `group_next` sentinel EP55 needed. One walk, two facts, again.
 
 **🧨 The trap: advancing `group_prev` in the odd case.** When a group is reversed, the
-bookkeeping is EP55's — `group_prev` moves to the old head. When a group is **not**
+bookkeeping is EP55's, `group_prev` moves to the old head. When a group is **not**
 reversed, you must still walk `group_prev` past it, one node at a time:
 
 ```python
@@ -109,11 +109,11 @@ else:
         group_prev = group_prev.next
 ```
 
-Forget that branch and `group_prev` sits still while `size` keeps growing — you'll
+Forget that branch and `group_prev` sits still while `size` keeps growing, you'll
 re-measure the same nodes with a bigger size each round, and the output is quietly
 wrong (or the loop never terminates).
 
-## 🔍 Dry run — `5 -> 2 -> 6 -> 3 -> 9 -> 1 -> 7 -> 3 -> 8 -> 4`
+## 🔍 Dry run: `5 -> 2 -> 6 -> 3 -> 9 -> 1 -> 7 -> 3 -> 8 -> 4`
 `group_prev = dummy`, `size = 1`.
 
 | round | `size` | nodes in group | actual `length` | even? | action | list after |
@@ -122,11 +122,11 @@ wrong (or the loop never terminates).
 | 2 | 2 | `[2, 6]` | 2 | **✓** | **reverse** → `6, 2` | `5 · 6 2 · 3 9 1 7 3 8 4` |
 | 3 | 3 | `[3, 9, 1]` | 3 | ✗ | walk past | unchanged |
 | 4 | 4 | `[7, 3, 8, 4]` | 4 | **✓** | **reverse** → `4, 8, 3, 7` | `5 · 6 2 · 3 9 1 · 4 8 3 7` |
-| 5 | 5 | — | `group_prev.next` is `None` | — | loop ends | — |
+| 5 | 5 | - | `group_prev.next` is `None` | - | loop ends | - |
 
 Answer **`5 -> 6 -> 2 -> 3 -> 9 -> 1 -> 4 -> 8 -> 3 -> 7`** ✓
 
-## 🔍 Dry run — `1 -> 1 -> 0 -> 6` (the short final group)
+## 🔍 Dry run: `1 -> 1 -> 0 -> 6` (the short final group)
 
 | round | `size` | group | actual `length` | even? | action |
 |---|---|---|---|---|---|
@@ -139,7 +139,7 @@ Answer **`1 -> 0 -> 1 -> 6`** ✓
 Say the third row out loud: *"this group wanted three nodes and got one; one is odd, so
 nothing happens."*
 
-Note that `size % 2` gives the **same** answer on this input — both readings call the
+Note that `size % 2` gives the **same** answer on this input, both readings call the
 last group odd. To show the bug on camera you need an input where they disagree, and
 `1..9` is the clearest:
 
@@ -155,7 +155,7 @@ class Solution:
     def reverseEvenLengthGroups(self, head: Optional[ListNode]) -> Optional[ListNode]:
         """Groups of size 1, 2, 3, ...; reverse those whose ACTUAL length is even.
 
-        Time:  O(n) — each node is measured once and reversed at most once.
+        Time:  O(n), each node is measured once and reversed at most once.
         Space: O(1).
         """
         dummy = ListNode(0, head)
@@ -199,7 +199,7 @@ class Solution:
   decides. This is the bug this problem exists to catch.
 - **The odd branch still advances `group_prev`.** By `length` nodes, one at a time.
   Omitting it re-processes the same nodes with a growing `size`.
-- **The measuring loop needs both conditions** — `node and length < size` — to stop at
+- **The measuring loop needs both conditions**: `node and length < size`, to stop at
   the end of the list *or* the end of the group.
 - **`group_prev.next = prev`** in the reversed branch (`prev` is the new head), and
   `tail` must be saved before that assignment. Same discipline as EP55.
@@ -210,7 +210,7 @@ class Solution:
 
 ## 🎤 Interview talking points
 - *"Group sizes are 1, 2, 3, … but the last group takes what's left, so I measure the
-  actual length before deciding — and the measuring walk also gives me the node after
+  actual length before deciding, and the measuring walk also gives me the node after
   the group."* ← the whole answer.
 - *"The reversal is the k-group reversal with the sentinel seed; only the decision and
   the group size changed."* ← names the reuse.
@@ -220,10 +220,10 @@ class Solution:
 ## 🔗 Transfer
 That's the reversal family complete: whole list, one block, fixed blocks, growing
 blocks. Tomorrow (EP57) closes Pattern 07 with the problem that *looks* like it belongs
-and isn't — rotation reverses nothing at all. It's here to test whether you recognise
+and isn't, rotation reverses nothing at all. It's here to test whether you recognise
 the pattern or just pattern-match on the words "linked list" and "rearrange".
 
 ## 📹 Metadata
-- **Title:** `Reverse Nodes in Even Length Groups — count what you GOT | LinkedList Reversal #5`
+- **Title:** `Reverse Nodes in Even Length Groups, count what you GOT | LinkedList Reversal #5`
 - **Thumbnail:** `ACTUAL ≠ NOMINAL` (green block)
-- **Short:** `1..9` — `length % 2` vs `size % 2`, the last three nodes flipped or not. 50s.
+- **Short:** `1..9`, `length % 2` vs `size % 2`, the last three nodes flipped or not. 50s.

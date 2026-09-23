@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Count the subarrays whose sum lands between `lower` and `upper`. Same opening move as
-> every episode this week — it's a question about **pairs of prefix sums** — but the
+> every episode this week, it's a question about **pairs of prefix sums**: but the
 > condition is a *range*, not an exact value, and a hash map cannot answer a range. This
 > is the episode where the dictionary finally runs out, and sorting takes over."
 
@@ -47,7 +47,7 @@ Input:  nums = [0], lower = 0, upper = 0     -> 1
 > lower <= running − earlier <= upper
 > ```
 >
-> Rearrange it so the unknown is alone — this one line is the whole episode:
+> Rearrange it so the unknown is alone, this one line is the whole episode:
 >
 > ```
 > running − upper  <=  earlier  <=  running − lower
@@ -57,7 +57,7 @@ Input:  nums = [0], lower = 0, upper = 0     -> 1
 > written down fall inside this window of values?"**
 >
 > A dictionary answers *"is this exact number present?"*. This question is *"how many
-> numbers lie between these two bounds?"* — and for that you need them in **sorted
+> numbers lie between these two bounds?"*, and for that you need them in **sorted
 > order**, not scattered in a hash table. That's the upgrade.
 
 ## 🐌 Brute force (say it, don't type it)
@@ -67,7 +67,7 @@ inner loop with a counted range query.
 
 ## 💡 The pattern reveal
 **Signal:** count subarrays · sum in a **range** · negatives.
-**Therefore:** prefix sums + an **ordered** structure — sorted list, BIT, or merge sort.
+**Therefore:** prefix sums + an **ordered** structure, sorted list, BIT, or merge sort.
 
 **Key insight:** the inequality rearrangement above. Say it slowly on camera, because
 everything else is bookkeeping:
@@ -78,10 +78,10 @@ lower <= pre[j] - pre[i] <= upper
 ```
 
 Two `bisect` calls on a sorted collection of the earlier prefixes give the count
-directly — `bisect_right(seen, running - lower) − bisect_left(seen, running - upper)`.
+directly, `bisect_right(seen, running - lower) − bisect_left(seen, running - upper)`.
 Note which bound gets which: **`upper` produces the lower bound** on `pre[i]`, because
 subtracting a larger number gives a smaller result. Getting these crossed is the bug of
-the episode, and it is silent — you get a plausible wrong count.
+the episode, and it is silent, you get a plausible wrong count.
 
 **Which structure?** Both are worth knowing, and they answer different interview moods:
 
@@ -97,7 +97,7 @@ the right-half values satisfying `p + lower <= pre[j] <= p + upper` form a *cont
 run*, and because both halves are sorted, the two pointers bounding that run only ever
 move forward. That's the O(n) merge step, O(n log n) overall.
 
-## 🔍 Dry run — `nums = [-2, 5, -1]`, `lower = -2`, `upper = 2`
+## 🔍 Dry run: `nums = [-2, 5, -1]`, `lower = -2`, `upper = 2`
 Sorted-list version. Start `seen = [0]` (the empty prefix), `running = 0`, `count = 0`.
 
 | i | x | `running` | window `[run−upper, run−lower]` | `seen` before | in window | `count` |
@@ -111,17 +111,17 @@ Answer **3** ✓
 Read the hits back:
 
 - `i = 0` matched the seeded `0` → the subarray `[−2]`, sum −2, which is exactly
-  `lower`. **Inclusive bounds matter** — `bisect_right` on the upper side and
+  `lower`. **Inclusive bounds matter**: `bisect_right` on the upper side and
   `bisect_left` on the lower side are what keep an exact-boundary sum counted.
 - `i = 2` matched **two** earlier prefixes: `0` (the empty prefix → `[−2, 5, −1] = 2`)
-  and `3` (after index 1 → `[−1] = −1`). Two hits, one step, `count += 2` — the same
+  and `3` (after index 1 → `[−1] = −1`). Two hits, one step, `count += 2`, the same
   "add, don't flag" rule as EP39.
 
 Row `i = 1` is the one to narrate: the window `[1, 5]` sits entirely *above* everything
 in `seen`. Nothing matches, and the structure told you so in O(log n) without looking at
 the elements one by one. That is the whole reason it's sorted.
 
-## ✅ Solution — sorted list + binary search (the readable one)
+## ✅ Solution: sorted list + binary search (the readable one)
 ```python
 from sortedcontainers import SortedList
 
@@ -129,8 +129,8 @@ class Solution:
     def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
         """Count subarrays whose sum lies in [lower, upper].
 
-        Time:  O(n log n) — one insert and two binary searches per element.
-        Space: O(n) — the sorted prefixes.
+        Time:  O(n log n), one insert and two binary searches per element.
+        Space: O(n), the sorted prefixes.
         """
         seen = SortedList([0])         # the EMPTY prefix
         running = count = 0
@@ -144,7 +144,7 @@ class Solution:
         return count
 ```
 
-## ✅ Solution — merge sort (stdlib only, the one to write if asked)
+## ✅ Solution: merge sort (stdlib only, the one to write if asked)
 ```python
 class Solution:
     def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
@@ -187,10 +187,10 @@ class Solution:
 - **Seed with the empty prefix `0`.** Fourth episode in a row. Without it, `[0]` with
   `lower = upper = 0` returns 0 instead of 1.
 - **`i` and `j` must not be reset inside the merge loop.** They advance monotonically
-  across the *whole* left half — that's what makes the step O(n) instead of O(n²). If
+  across the *whole* left half, that's what makes the step O(n) instead of O(n²). If
   you find yourself writing `i = mid` inside the `for`, you've lost the complexity.
 - **Overflow.** Python is immune; C++/Java need `long long` for the prefix sums given
-  the stated constraints. Mention it — it's the kind of detail this problem is set to
+  the stated constraints. Mention it, it's the kind of detail this problem is set to
   probe.
 - **`sortedcontainers` is available on LeetCode but is not stdlib.** Say which one
   you're using and why, and have the merge-sort version ready for "without libraries".
@@ -210,13 +210,13 @@ class Solution:
 
 ## 🔗 Transfer
 This closes Pattern 05, and it closes it on the honest boundary: the prefix insight is
-universal, but the lookup structure scales with the question — a dict for equality
+universal, but the lookup structure scales with the question, a dict for equality
 (EP39–42), a monotonic deque for a one-sided threshold (EP43), an ordered structure for
 a two-sided range (EP44). The merge-sort counting trick returns for inversion counting,
 and the Fenwick tree reappears in Pattern 11. Next is **Pattern 06 (Merge Intervals,
 EP45–51)**, which leaves running totals behind entirely and sorts by start time instead.
 
 ## 📹 Metadata
-- **Title:** `Count of Range Sum — when the hash map runs out | Prefix Sum #6`
+- **Title:** `Count of Range Sum, when the hash map runs out | Prefix Sum #6`
 - **Thumbnail:** `run − upper ≤ earlier ≤ run − lower` (green block)
 - **Short:** the rearranged inequality in one shot, then the two bisect calls. 50s.

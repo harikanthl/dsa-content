@@ -6,7 +6,7 @@
 
 ## 🎬 Hook
 > "Swap every two adjacent nodes. Blocks of size two are small enough that you can skip
-> the reversal loop entirely and just rewire three pointers by hand — which makes this
+> the reversal loop entirely and just rewire three pointers by hand, which makes this
 > the cleanest possible place to learn the *other* half of the bookkeeping: after you
 > finish a block, where does `before` move to? Get that wrong and you build a cycle."
 
@@ -41,7 +41,7 @@ Input:  None                  Output: None
 > before -> [ b -> a ] -> rest
 > ```
 >
-> Then — and this is the bit people drop — the **next** pair hangs off `a`, because `a`
+> Then, and this is the bit people drop, the **next** pair hangs off `a`, because `a`
 > is now the second node of this pair. So `before = a`, not `before = b`, and definitely
 > not `before = before.next` after the rewire.
 >
@@ -51,7 +51,7 @@ Input:  None                  Output: None
 > ```
 
 ## 🐌 Brute force (say it, don't type it)
-Walk the list swapping `.val` in pairs. **O(n) time, O(1) space** — and it genuinely
+Walk the list swapping `.val` in pairs. **O(n) time, O(1) space**: and it genuinely
 works here. Say it, then say why it's not the answer: the problem explicitly asks for
 node swaps, and in real code the nodes may carry more than a single value (or be
 immutable). This is one of the few episodes where the "wrong" answer is worth
@@ -89,13 +89,13 @@ attribute 'next'`.
 
 **🧨 The trap: `prev = a`.** After the swap, the pair reads `b -> a`, so `a` is its
 tail. Writing `prev = b` puts you back at the front of the pair you just swapped and the
-loop swaps it again, forever — the classic infinite loop of this pattern. If your test
+loop swaps it again, forever, the classic infinite loop of this pattern. If your test
 run hangs, this line is why.
 
-## 🔍 Dry run — `1 -> 2 -> 3 -> 4`
+## 🔍 Dry run: `1 -> 2 -> 3 -> 4`
 `dummy -> 1 -> 2 -> 3 -> 4`, `prev = dummy`.
 
-**Round 1** — `a = 1`, `b = 2`:
+**Round 1**: `a = 1`, `b = 2`:
 
 | step | assignment | list now |
 |---|---|---|
@@ -104,7 +104,7 @@ run hangs, this line is why.
 | 3 | `prev.next = b` → `dummy -> 2` | `dummy -> 2 -> 1 -> 3 -> 4` ✓ |
 | 4 | `prev = a` | `prev` is node `1` |
 
-**Round 2** — `prev.next = 3` and `prev.next.next = 4`, so a full pair remains.
+**Round 2**: `prev.next = 3` and `prev.next.next = 4`, so a full pair remains.
 `a = 3`, `b = 4`:
 
 | step | assignment | list now |
@@ -114,15 +114,15 @@ run hangs, this line is why.
 | 3 | `prev.next = b` → `1 -> 4` | `dummy -> 2 -> 1 -> 4 -> 3` ✓ |
 | 4 | `prev = a` | `prev` is node `3` |
 
-**Round 3** — `prev.next` is `None`, so the loop stops.
+**Round 3**: `prev.next` is `None`, so the loop stops.
 
 Answer **`2 -> 1 -> 4 -> 3`** ✓
 
-## 🔍 Dry run — `1 -> 2 -> 3` (the odd leftover)
+## 🔍 Dry run: `1 -> 2 -> 3` (the odd leftover)
 Round 1 swaps to `dummy -> 2 -> 1 -> 3`, `prev = 1`. Round 2 checks:
 `prev.next` is node `3` ✓, `prev.next.next` is `None` ✗ → **stop**.
 
-Answer **`2 -> 1 -> 3`** ✓ — the lone `3` is untouched, which is exactly what the second
+Answer **`2 -> 1 -> 3`** ✓, the lone `3` is untouched, which is exactly what the second
 half of the loop condition is for.
 
 ## ✅ Optimal solution
@@ -131,8 +131,8 @@ class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         """Swap every two adjacent NODES (not values), in place.
 
-        Time:  O(n) — each node is rewired once.
-        Space: O(1) — a dummy node and three pointers.
+        Time:  O(n), each node is rewired once.
+        Space: O(1), a dummy node and three pointers.
         """
         dummy = ListNode(0, head)
         prev = dummy
@@ -158,10 +158,10 @@ class Solution:
   `prev.next.next` for the odd node. One without the other either crashes or drops a
   node.
 - **`a.next = b.next` first.** Reverse the order and `b.next` has already become `a`, so
-  `a.next = a` — a one-node cycle.
+  `a.next = a`, a one-node cycle.
 - **Swap nodes, not values.** Say why: the problem asks for it, and node payloads aren't
   always a single mutable int.
-- **`return dummy.next`** — the head always changes for any list of length ≥ 2.
+- **`return dummy.next`**: the head always changes for any list of length ≥ 2.
 - **Empty and single-node lists** fall straight through the loop and return correctly.
   No guards needed; verify rather than add them.
 
@@ -178,10 +178,10 @@ class Solution:
 ## 🔗 Transfer
 This is the k = 2 case of tomorrow's problem. EP55 generalises it to blocks of any `k`,
 where "rewire three pointers by hand" stops being practical and EP52's reversal loop
-comes back — but the `before`-moves-to-the-block's-tail bookkeeping you just learned is
+comes back, but the `before`-moves-to-the-block's-tail bookkeeping you just learned is
 identical, and so is the "only touch a **full** block" rule.
 
 ## 📹 Metadata
-- **Title:** `Swap Nodes in Pairs — where does the previous pointer go? | LinkedList Reversal #3`
+- **Title:** `Swap Nodes in Pairs, where does the previous pointer go? | LinkedList Reversal #3`
 - **Thumbnail:** `PREV = A, NOT B` (red block)
 - **Short:** `prev = b` and the infinite loop it causes, live. 40s.

@@ -1,4 +1,4 @@
-# Pattern 02 — Fast & Slow Pointers (Floyd's Tortoise and Hare)
+# Pattern 02: Fast & Slow Pointers (Floyd's Tortoise and Hare)
 
 **8 episodes · EP 13–20**
 
@@ -7,19 +7,19 @@
 ## The one-sentence version
 
 Two pointers moving at **different speeds** through a sequence detect cycles, find
-midpoints, and locate structure — in **O(1) space**, without a hash set.
+midpoints, and locate structure, in **O(1) space**, without a hash set.
 
 ## ELI5
 
 Two runners on a track. One jogs, one sprints at double speed.
 
 - **If the track is a loop**, the sprinter eventually laps the jogger and they meet.
-  They *must* — the sprinter gains exactly one step on the jogger every tick, so the
+  They *must*, the sprinter gains exactly one step on the jogger every tick, so the
   gap closes by 1 each time until it hits 0. It can't be skipped over.
 - **If the track is a straight line**, the sprinter hits the end and there's no meeting.
 
 That's the whole pattern. "Did they meet?" answers *is there a cycle?* And when the
-sprinter reaches the end, the jogger is standing exactly **halfway** — which gives you
+sprinter reaches the end, the jogger is standing exactly **halfway**: which gives you
 the midpoint for free, in the same single pass.
 
 ## How to recognise it
@@ -32,7 +32,7 @@ the midpoint for free, in the same single pass.
 | "Do it in **O(1) space**" on a list problem | the constraint that rules out a hash set |
 | Reorder / palindrome-check a list in place | Reorder List, Palindrome Linked List |
 
-**The tell:** the naive answer is a hash set of visited nodes — O(n) space. Any time
+**The tell:** the naive answer is a hash set of visited nodes, O(n) space. Any time
 the problem says *constant space*, it's asking for this.
 
 **The hidden version is the one that wins interviews.** Happy Number and Find the
@@ -43,7 +43,7 @@ Spotting it is the entire trick.
 
 ## The three shapes
 
-### Shape A — Cycle detection
+### Shape A: Cycle detection
 ```python
 slow = fast = head
 while fast and fast.next:
@@ -61,7 +61,7 @@ is the last node.
 **Why they're guaranteed to meet:** once both are inside the loop, `fast` closes the
 gap by exactly 1 per iteration. A gap shrinking by 1 can never jump past 0.
 
-### Shape B — Finding the cycle's start (Floyd's second phase)
+### Shape B: Finding the cycle's start (Floyd's second phase)
 After they meet, reset one pointer to the head and move **both at the same speed**.
 They meet again at the entrance of the cycle.
 
@@ -73,7 +73,7 @@ while slow is not fast:
 return slow                  # the node where the cycle begins
 ```
 
-**Why it works** — know this proof, it gets asked:
+**Why it works**: know this proof, it gets asked:
 
 Let `F` = distance from head to the cycle entrance, `a` = distance from the entrance
 to the meeting point, `C` = cycle length.
@@ -83,10 +83,10 @@ to the meeting point, `C` = cycle length.
 - `fast` moved twice as far: `2(F + a) = F + a + nC` → **`F + a = nC`** → **`F = nC − a`**.
 
 So walking `F` steps from the head lands you at the same place as walking `nC − a`
-steps from the meeting point — which is the entrance. Hence: same speed, they collide
+steps from the meeting point, which is the entrance. Hence: same speed, they collide
 there.
 
-### Shape C — Midpoint
+### Shape C: Midpoint
 ```python
 slow = fast = head
 while fast and fast.next:
@@ -104,9 +104,9 @@ mixing them up is the most common bug in Reorder List and Palindrome Linked List
 
 | Shape | Time | Space |
 |---|---|---|
-| A — cycle detection | O(n) | **O(1)** |
-| B — cycle start | O(n) | **O(1)** |
-| C — midpoint | O(n) | **O(1)** |
+| A, cycle detection | O(n) | **O(1)** |
+| B, cycle start | O(n) | **O(1)** |
+| C, midpoint | O(n) | **O(1)** |
 | naive hash-set alternative | O(n) | O(n) ← this is what you're beating |
 
 ## The episodes
@@ -131,6 +131,6 @@ mixing them up is the most common bug in Reorder List and Palindrome Linked List
 3. Why `while fast and fast.next` and not `while fast`? *(`fast.next.next`
    dereferences two links ahead.)*
 4. When is a problem with no linked list still this pattern? *(Whenever you have
-   `next = f(current)` over a finite set — iteration must eventually cycle.)*
+   `next = f(current)` over a finite set, iteration must eventually cycle.)*
 5. What does this buy over a hash set? *(O(1) space instead of O(n). That's the
    entire reason the pattern exists.)*

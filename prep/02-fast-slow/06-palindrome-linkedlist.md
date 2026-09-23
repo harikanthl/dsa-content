@@ -23,14 +23,14 @@ Input:  1 -> 2 -> 2 -> 1
 Output: true
 
 Input:  1 -> 2 -> 3 -> 2 -> 1
-Output: true        (odd length — the middle 3 is its own mirror)
+Output: true        (odd length, the middle 3 is its own mirror)
 
 Input:  1 -> 2
 Output: false
 ```
 
 ## 🧸 ELI5
-> You have a line of numbered cards you can only read left to right — you can't flip
+> You have a line of numbered cards you can only read left to right, you can't flip
 > the line around.
 >
 > So: walk to the middle. Take the back half off the table and lay it out reversed, so
@@ -52,7 +52,7 @@ return vals == vals[::-1]
 
 **O(n) time, O(n) space.** This is correct, takes ten seconds to write, and is the
 right first answer in an interview. Then the follow-up lands: *O(1) space*. That's
-where the real work starts — and note that the recursive solution people reach for
+where the real work starts, and note that the recursive solution people reach for
 next is also O(n) space, just hidden in the call stack. Say that; it catches people.
 
 ## 💡 The pattern reveal
@@ -61,15 +61,15 @@ next is also O(n) space, just hidden in the call stack. Say that; it catches peo
 
 **Key insight:** you cannot read a singly linked list backwards, so stop trying. Turn
 half of it around instead. Reversal is O(1) space because it only rewires existing
-`.next` pointers — it allocates nothing.
+`.next` pointers, it allocates nothing.
 
 **This is the pattern's first composition episode.** Nothing here is new. The skill
 being tested is assembling three known pieces in the right order and getting the seams
 right.
 
-## 🔍 Dry run — `1 → 2 → 2 → 1` (even length)
+## 🔍 Dry run: `1 → 2 → 2 → 1` (even length)
 
-**Step 1 — find the middle** (`while fast and fast.next`):
+**Step 1, find the middle** (`while fast and fast.next`):
 
 | step | slow | fast |
 |---|---|---|
@@ -77,29 +77,29 @@ right.
 | 1 | 2ᵇ | 2ᶜ |
 | 2 | **2ᶜ** | `None` |
 
-`slow` stops at the third node — the start of the second half. (Superscripts label
+`slow` stops at the third node, the start of the second half. (Superscripts label
 positions, since values repeat.)
 
-**Step 2 — reverse from `slow`:** `2ᶜ → 1ᵈ` becomes `1ᵈ → 2ᶜ`, and the list is now:
+**Step 2, reverse from `slow`:** `2ᶜ → 1ᵈ` becomes `1ᵈ → 2ᶜ`, and the list is now:
 
 ```
 first half:   1ᵃ -> 2ᵇ -> (2ᶜ, now the tail of the reversed half)
 second half:  1ᵈ -> 2ᶜ -> None
 ```
 
-**Step 3 — walk both:**
+**Step 3, walk both:**
 
 | step | left | right | match? |
 |---|---|---|---|
 | 1 | 1ᵃ | 1ᵈ | ✓ |
 | 2 | 2ᵇ | 2ᶜ | ✓ |
-| 3 | — | `None` | right exhausted → return `True` |
+| 3 | - | `None` | right exhausted → return `True` |
 
-## 🔍 Dry run — `1 → 2 → 3 → 2 → 1` (odd length)
+## 🔍 Dry run: `1 → 2 → 3 → 2 → 1` (odd length)
 The middle pointer lands on `3`. Reversing from `3` gives `1 → 2 → 3`, and comparing
 `1 → 2 → 3 …` against `1 → 2 → 3` matches for two steps before the right side runs
 out. **The odd middle is compared against itself and always matches, which is
-correct** — a single central element is its own mirror. This is why the loop condition
+correct**: a single central element is its own mirror. This is why the loop condition
 is on the *right* (shorter) half.
 
 ## ✅ Optimal solution
@@ -108,10 +108,10 @@ class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         """Find the middle, reverse the second half, walk both halves forwards.
 
-        Time:  O(n) — three linear passes: middle, reverse, compare.
-        Space: O(1) — only pointer rewiring; nothing is allocated.
+        Time:  O(n), three linear passes: middle, reverse, compare.
+        Space: O(1), only pointer rewiring; nothing is allocated.
         """
-        # 1. middle — for even lengths this lands on the START of the second half
+        # 1. middle, for even lengths this lands on the START of the second half
         slow = fast = head
         while fast and fast.next:
             slow = slow.next
@@ -140,7 +140,7 @@ slow.next, prev, slow = prev, slow, slow.next
 ```
 Python evaluates the **entire right side first**, then assigns left to right. So
 `slow.next` gets the old `prev`, `prev` gets the old `slow`, and `slow` gets the old
-`slow.next` — no temporary variable needed and no ordering bug possible. Write it as
+`slow.next`, no temporary variable needed and no ordering bug possible. Write it as
 four explicit lines the first time on camera, *then* collapse it, so viewers see
 they're the same thing:
 
@@ -153,22 +153,22 @@ slow = nxt           # so does slow
 
 ## ⚠️ Gotchas
 - **Loop on `right`, not `left`.** After reversing, the two halves are *not* the same
-  length — for odd inputs the left half is one longer, and for even inputs the middle
+  length, for odd inputs the left half is one longer, and for even inputs the middle
   node ends up in both. Looping on the reversed (right) half stops at the right moment
   in both cases. Looping on `left` walks off the end.
 - **The list is left mutated.** The second half now points backwards. LeetCode doesn't
-  check, but an interviewer might ask — the polite version re-reverses at the end to
+  check, but an interviewer might ask, the polite version re-reverses at the end to
   restore it. Mention it; offering to restore is a real-world signal.
 - **Don't try to cut the list in half first.** Setting `first_half_tail.next = None` is
   tempting and adds a bookkeeping pointer you don't need. The comparison already stops
   correctly without it.
 - **Empty list and single node** both return `True` with no special case: the middle
   loop doesn't run, reversal produces a one-node list, one comparison passes.
-- Comparing `left.val != right.val`, not `left is not right` — this is about **values**,
+- Comparing `left.val != right.val`, not `left is not right`, this is about **values**,
   unlike EP13 where identity was the point. Say the contrast out loud.
 
 ## 🎤 Interview talking points
-- *"I'd give the array copy first — O(n) space, ten seconds to write, obviously
+- *"I'd give the array copy first, O(n) space, ten seconds to write, obviously
   correct. For the O(1) follow-up I reverse the second half in place."*
 - *"Recursion is not a space win here; the call stack is O(n). People offer it as the
   clever answer and it fails the same constraint."*
@@ -184,6 +184,6 @@ cold, tomorrow's is a ten-line edit. The same middle-then-reverse move also powe
 merge sort on linked lists.
 
 ## 📹 Metadata
-- **Title:** `Palindrome Linked List — reverse half of it | Fast & Slow #6`
+- **Title:** `Palindrome Linked List, reverse half of it | Fast & Slow #6`
 - **Thumbnail:** `TURN HALF AROUND` (teal block)
 - **Short:** The reversal three-liner expanded to four lines and collapsed back, 45s.

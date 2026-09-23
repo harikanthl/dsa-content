@@ -11,11 +11,13 @@
 
 ## 📋 Problem, in your words
 ```
-Given non-negative integers arr and an integer target,
+Given positive integers arr and an integer target (it may be negative),
 put '+' or '-' in front of every element.
 Count how many sign assignments make the expression equal target.
 
-Same problem as LeetCode 494. n up to ~20 (LC) / larger on GfG, sum(arr) <= ~1000.
+GfG: totalWays(arr, target), n <= 50, 1 <= arr[i] <= 20, sum(arr) <= 1000,
+     -1000 <= target <= 1000.
+Same problem as LeetCode 494 (findTargetSumWays), where arr[i] may also be 0.
 ```
 
 ## 🔢 The example
@@ -25,8 +27,11 @@ Output: 5
 Why:    one minus sign, and it can go on any of the 5 ones:
         -1+1+1+1+1, +1-1+1+1+1, +1+1-1+1+1, +1+1+1-1+1, +1+1+1+1-1
 
+Input:  arr = [1, 2, 3], target = 2   -> 1   (+1 -2 +3)
+Input:  arr = [1, 2, 3], target = -2  -> 1   (-1 +2 -3: flip every sign of the above)
 Input:  arr = [1], target = 1         -> 1
-Input:  arr = [0, 0, 1], target = 1   -> 4   (each 0 can be +0 or -0: 2 x 2)
+Input:  arr = [0, 0, 1], target = 1   -> 4   (LeetCode only, GfG has no zeros:
+                                              each 0 can be +0 or -0, 2 x 2)
 Input:  arr = [1, 2], target = 4      -> 0   (4 > total, impossible)
 ```
 
@@ -98,30 +103,32 @@ backwards loop guarantees `dp[3]` was still the 4th row's value when it was read
 
 ## ✅ Optimal solution
 ```python
-def findTargetSumWays(arr: List[int], target: int) -> int:
-    """Count +/- sign assignments whose total is target.
+class Solution:
+    def totalWays(self, arr: List[int], target: int) -> int:
+        """Count +/- sign assignments whose total is target.
 
-    plus - minus = target and plus + minus = total  =>  plus = (total + target) / 2,
-    so count the subsets that sum to that.
-    Time:  O(n * P), P = (total + target) / 2 <= total.
-    Space: O(P), one row of counts.
-    """
-    total = sum(arr)
-    if abs(target) > total or (total + target) % 2:
-        return 0                              # unreachable, or P isn't an integer
-    P = (total + target) // 2
+        plus - minus = target and plus + minus = total  =>  plus = (total + target) / 2,
+        so count the subsets that sum to that.
+        Time:  O(n * P), P = (total + target) / 2 <= total.
+        Space: O(P), one row of counts.
+        """
+        total = sum(arr)
+        if abs(target) > total or (total + target) % 2:
+            return 0                              # unreachable, or P isn't an integer
+        # target may be negative (GfG: -1000..1000); abs() above keeps P >= 0
+        P = (total + target) // 2
 
-    dp = [0] * (P + 1)
-    dp[0] = 1                                 # one way to make 0: take nothing
-    for x in arr:
-        for c in range(P, x - 1, -1):         # backwards: each element once
-            dp[c] += dp[c - x]                # ways without x, plus ways ending with x
-    return dp[P]
+        dp = [0] * (P + 1)
+        dp[0] = 1                                 # one way to make 0: take nothing
+        for x in arr:
+            for c in range(P, x - 1, -1):         # backwards: each element once
+                dp[c] += dp[c - x]                # ways without x, plus ways ending with x
+        return dp[P]
 ```
 **Time:** O(n · total) · **Space:** O(total)
 
 ## ⚠️ Gotchas
-- **Zeros are handled, and double the count.** For `x = 0` the loop runs `c` from P down
+- **Zeros are handled, and double the count** (LeetCode allows zeros; GfG has `arr[i] >= 1`). For `x = 0` the loop runs `c` from P down
   to 0 and does `dp[c] += dp[c]`: every count doubles. That's right, `+0` and `-0` are
   two different assignments. `[0, 0, 1]`, target 1 → 4. Many people add a special case
   for zeros that's actually wrong.

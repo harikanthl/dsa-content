@@ -28,6 +28,7 @@ Why:    cows at 1, 4, 8 -> gaps 3 and 4, the smallest is 3.
 Input:  stalls = [10, 1, 2, 7, 5], k = 3   -> 4   (cows at 1, 5, 10)
 Input:  stalls = [1, 5], k = 2             -> 4   (only one way to do it)
 ```
+The first two are GfG's own examples. Note the second one is **unsorted**.
 
 ## 🧸 ELI5
 > The cows hate each other. You're the farmer and you pick a **rule**: "no two cows
@@ -92,34 +93,37 @@ Step 3 is the one to point at on screen: plain `(3 + 4) // 2` would be 3, feasib
 
 ## ✅ Optimal solution
 ```python
-def aggressive_cows(stalls: list[int], k: int) -> int:
-    """Largest possible minimum gap when placing k cows in the stalls.
+class Solution:
+    def aggressiveCows(self, arr, k):
+        """Largest possible minimum gap when placing k cows in the stalls.
 
-    Time:  O(n log n + n log R), R = max - min: the sort, then log R greedy passes.
-    Space: O(1) beyond the sorted copy.
-    """
-    stalls = sorted(stalls)                 # greedy placement needs left-to-right order
+        Time:  O(n log n + n log R), R = max - min: the sort, then log R greedy passes.
+        Space: O(n) for the sorted copy.
+        """
+        stalls = sorted(arr)                # arrives unsorted; the greedy needs left-to-right
 
-    def can_place(gap: int) -> bool:
-        placed, last = 1, stalls[0]         # first cow always goes in the first stall
-        for s in stalls[1:]:
-            if s - last >= gap:
-                placed += 1
-                last = s
-                if placed == k:
-                    return True
-        return placed >= k
+        def can_place(gap: int) -> bool:
+            placed, last = 1, stalls[0]     # first cow always goes in the first stall
+            for s in stalls[1:]:
+                if s - last >= gap:
+                    placed += 1
+                    last = s
+                    if placed == k:
+                        return True
+            return placed >= k
 
-    lo, hi = 1, stalls[-1] - stalls[0]
-    while lo < hi:
-        mid = (lo + hi + 1) // 2            # round up, or lo = mid can stall
-        if can_place(mid):
-            lo = mid                        # mid works; try bigger
-        else:
-            hi = mid - 1                    # mid fails; so does everything above
-    return lo
+        lo, hi = 1, stalls[-1] - stalls[0]
+        while lo < hi:
+            mid = (lo + hi + 1) // 2        # round up, or lo = mid can stall
+            if can_place(mid):
+                lo = mid                    # mid works; try bigger
+            else:
+                hi = mid - 1                # mid fails; so does everything above
+        return lo
 ```
-**Time:** O(n log n + n log R) · **Space:** O(1) extra
+GfG passes the stall positions as `arr`; the first line sorts them into `stalls`.
+
+**Time:** O(n log n + n log R) · **Space:** O(n) for the sorted copy
 
 ## ⚠️ Gotchas
 - **`(lo + hi + 1) // 2`.** The maximise template without the `+ 1` hangs the first time

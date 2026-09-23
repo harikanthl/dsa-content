@@ -34,6 +34,10 @@ Check:  5 before 2 ✓  5 before 0 ✓  4 before 0 ✓  4 before 1 ✓  2 before
 
 Also valid: [5, 4, 2, 3, 1, 0], [4, 5, 0, 2, 3, 1], ...
 Not valid:  [5, 2, 3, 1, 4, 0]    <- 1 appears before 4, but 4 -> 1 is an edge
+
+GfG's own examples (the judge prints "true" if your order is valid):
+V = 4, edges = [[3,0], [1,0], [2,0]]                    ->  [1, 2, 3, 0]  (0 must be last)
+V = 6, edges = [[1,3], [2,3], [4,1], [4,0], [5,0], [5,2]]  ->  [4, 5, 1, 0, 2, 3]
 ```
 
 ## 🧸 ELI5

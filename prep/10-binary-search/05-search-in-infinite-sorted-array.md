@@ -1,6 +1,6 @@
 # EP075 · P10E05 · Search in an Infinite Sorted Array   [Medium]
 
-**Pattern:** Binary Search · **Link:** https://www.geeksforgeeks.org/find-position-element-sorted-array-infinite-numbers/
+**Pattern:** Binary Search · **Link:** LeetCode 702 (Premium) https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/ · GfG article https://www.geeksforgeeks.org/dsa/find-position-element-sorted-array-infinite-numbers/
 
 ---
 
@@ -12,15 +12,16 @@
 
 ## 📋 Problem, in your words
 ```
-A sorted array is too large to know its length (think: infinite, or a stream).
+A sorted array of UNIQUE values, and you don't know its length.
 You can only read one element at a time: reader.get(i).
-Reading past the real data returns +infinity.
+Reading past the real data returns 2^31 - 1, bigger than any real value.
 
 Return the index of target, or -1 if it isn't there.
 ```
-This is a GfG article, not a judged problem. The closest judged version is LeetCode 702,
-*Search in a Sorted Array of Unknown Size* (premium), which uses the same `get(i)`
-interface with `2^31 - 1` as the "past the end" value. The code below works for both.
+GfG only has this as an article; there's no practice problem to submit to. The judged
+version is LeetCode 702, *Search in a Sorted Array of Unknown Size* (Premium), and the
+solution below uses its exact interface: `search(self, reader, target)` with an
+`ArrayReader` whose `get(i)` returns `2^31 - 1` out of bounds.
 
 ## 🔢 The example
 ```
@@ -66,8 +67,8 @@ checkpoint and it was `< target`. Then run the ordinary template on that window.
 | gallop | `hi = 1, 2, 4, 8 ...` while `get(hi) < target` | O(log p) reads |
 | search | lower_bound on `[hi // 2, hi]` | O(log p), the window is at most p wide |
 
-The "past the end returns infinity" rule is what makes the gallop safe: running off the
-real data just looks like a very big number, which stops the doubling.
+The "past the end returns `2^31 - 1`" rule is what makes the gallop safe: running off
+the real data just looks like a very big number, which stops the doubling.
 
 ## 🔍 Dry run: `arr = [3, 5, 7, 9, 10, 90, 100, ...]`, `target = 10`
 
@@ -94,30 +95,38 @@ Three reads to gallop, three to search and confirm. In a test with a target abou
 
 ## ✅ Optimal solution
 ```python
-def search_infinite(reader, target: int) -> int:
-    """Index of target in a sorted array of unknown length, or -1.
+# """
+# This is ArrayReader's API interface.
+# You should not implement it, or speculate about its implementation
+# """
+# class ArrayReader:
+#    def get(self, index: int) -> int:
 
-    reader.get(i) returns arr[i], or +infinity past the end of the data.
+class Solution:
+    def search(self, reader: 'ArrayReader', target: int) -> int:
+        """Index of target in a sorted array of unknown length, or -1.
 
-    Time:  O(log p), p = target's position: log p doublings, then a
-           binary search over a window of width <= p.
-    Space: O(1).
-    """
-    # phase 1: gallop until we're at or past target, so [hi // 2, hi] contains it
-    hi = 1
-    while reader.get(hi) < target:
-        hi *= 2
+        reader.get(i) returns arr[i], or 2^31 - 1 past the end of the data.
 
-    # phase 2: plain lower_bound on the window; hi + 1 makes it half-open
-    lo, hi = hi // 2, hi + 1
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if reader.get(mid) < target:
-            lo = mid + 1
-        else:
-            hi = mid
+        Time:  O(log p), p = target's position: log p doublings, then a
+               binary search over a window of width <= p.
+        Space: O(1).
+        """
+        # phase 1: gallop until we're at or past target, so [hi // 2, hi] contains it
+        hi = 1
+        while reader.get(hi) < target:
+            hi *= 2
 
-    return lo if reader.get(lo) == target else -1
+        # phase 2: plain lower_bound on the window; hi + 1 makes it half-open
+        lo, hi = hi // 2, hi + 1
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if reader.get(mid) < target:
+                lo = mid + 1
+            else:
+                hi = mid
+
+        return lo if reader.get(lo) == target else -1
 ```
 **Time:** O(log p) · **Space:** O(1)
 
@@ -131,9 +140,10 @@ def search_infinite(reader, target: int) -> int:
   use what the gallop told you.
 - **Start the gallop at 1, not 0.** `0 * 2 = 0` doubles forever. Index 0 is still
   covered, since the window `[0, 1]` includes it.
-- **Past-the-end must compare as big.** If your reader throws or returns `None` past
-  the end, the gallop crashes. Wrap it so it returns infinity. In LeetCode 702 it
-  returns `2^31 - 1`, which works as long as targets are smaller.
+- **Past-the-end must compare as big.** LeetCode 702's `get` returns `2^31 - 1` out of
+  bounds, which is bigger than any real value, so the gallop stops on its own. If a
+  reader you're given throws or returns `None` past the end instead, the gallop
+  crashes: wrap it so out-of-range reads come back as a huge number.
 - **The final `get(lo)` is always safe** here because `get` never throws. With a real
   array you'd need the `lo < n` check from EP71.
 

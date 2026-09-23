@@ -25,12 +25,13 @@ Input:  arr = [7, 10, 4, 3, 20, 15], k = 3
 Output: 7
 Why:    sorted it's [3, 4, 7, 10, 15, 20]; the 3rd one is 7
 
-Input:  arr = [2, 3, 1, 20, 15], k = 4
-Output: 15
+Input:  arr = [10, 5, 4, 3, 48, 6, 2, 33, 53, 10], k = 4
+Output: 5              <- sorted: [2, 3, 4, 5, 6, 10, 10, ...]; the 4th is 5
 
 Input:  arr = [5], k = 1
 Output: 5
 ```
+The first two are GfG's own examples.
 
 ## 🧸 ELI5
 > You're picking the **3 shortest kids** for the front row of a class photo, and kids
@@ -93,19 +94,20 @@ immediately evicted. The heap never grows past k + 1.
 ```python
 import heapq
 
-def kth_smallest(arr: list[int], k: int) -> int:
-    """k-th smallest element of an unsorted array (k is 1-indexed).
+class Solution:
+    def kthSmallest(self, arr, k):
+        """k-th smallest element of an unsorted array (k is 1-indexed).
 
-    Time:  O(n log k), n pushes, each on a heap of at most k + 1 entries.
-    Space: O(k), the heap.
-    """
-    heap = []                           # MAX-heap (negated) of the k smallest so far
-    for x in arr:
-        heapq.heappush(heap, -x)
-        if len(heap) > k:
-            heapq.heappop(heap)         # drop the largest; k smallest remain
+        Time:  O(n log k), n pushes, each on a heap of at most k + 1 entries.
+        Space: O(k), the heap.
+        """
+        heap = []                       # MAX-heap (negated) of the k smallest so far
+        for x in arr:
+            heapq.heappush(heap, -x)
+            if len(heap) > k:
+                heapq.heappop(heap)     # drop the largest; k smallest remain
 
-    return -heap[0]                     # largest of the k smallest = k-th smallest
+        return -heap[0]                 # largest of the k smallest = k-th smallest
 ```
 **Time:** O(n log k) · **Space:** O(k)
 

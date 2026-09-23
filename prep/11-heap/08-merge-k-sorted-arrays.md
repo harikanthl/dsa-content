@@ -14,21 +14,26 @@
 ```
 Given k sorted arrays, return one sorted array with every element.
 
-  - GfG gives a k x k matrix; the code works for any lengths
+  - GfG passes them as one matrix mat, n x m: k = n rows, each sorted
+  - the code works for rows of any lengths
   - duplicates are kept
   - don't just concatenate and sort (that's the brute force)
 ```
 
 ## 🔢 The example
 ```
-Input:  [[1, 4, 7],
-         [2, 5, 8],
-         [3, 6, 9]]
+Input:  mat = [[1, 4, 7],
+               [2, 5, 8],
+               [3, 6, 9]]
 Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-Input:  [[1, 2, 3, 4], [2, 2, 3, 4], [5, 5, 6, 6], [7, 8, 9, 9]]
+Input:  mat = [[1, 3, 5, 7], [2, 4, 6, 8], [0, 9, 10, 11]]
+Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]      <- 3 rows of 4: not square
+
+Input:  mat = [[1, 2, 3, 4], [2, 2, 3, 4], [5, 5, 6, 6], [7, 8, 9, 9]]
 Output: [1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 9, 9]
 ```
+The last two are GfG's own examples.
 
 ## 🧸 ELI5
 > Three checkout queues at a supermarket, and in each queue people are already lined up
@@ -63,8 +68,8 @@ element from the same array**. The heap never holds more than k things.
 ```python
 val, i, j = heapq.heappop(heap)
 out.append(val)
-if j + 1 < len(arr[i]):
-    heapq.heappush(heap, (arr[i][j + 1], i, j + 1))    # that queue steps up
+if j + 1 < len(mat[i]):
+    heapq.heappush(heap, (mat[i][j + 1], i, j + 1))    # that queue steps up
 ```
 
 `i` and `j` aren't just bookkeeping. `i` also breaks ties between equal values from
@@ -91,31 +96,35 @@ Answer **`[1..9]`** ✓. The heap size is 3 for six steps, then drains as arrays
 ```python
 import heapq
 
-def merge_k_arrays(arr: list[list[int]], k: int) -> list[int]:
-    """Merge k sorted arrays into one sorted list.
+class Solution:
+    def mergeArrays(self, mat):
+        """Merge the sorted rows of mat into one sorted list.
 
-    Time:  O(N log k), N total elements, each pushed and popped once on a heap of <= k.
-    Space: O(k) for the heap, plus O(N) for the output.
-    """
-    # one entry per array: (current front value, which array, index in it)
-    heap = [(row[0], i, 0) for i, row in enumerate(arr) if row]
-    heapq.heapify(heap)
+        Time:  O(N log k), N total elements, k rows: each element is pushed and
+               popped once on a heap of <= k.
+        Space: O(k) for the heap, plus O(N) for the output.
+        """
+        # one entry per row: (current front value, which row, index in it)
+        heap = [(row[0], i, 0) for i, row in enumerate(mat) if row]
+        heapq.heapify(heap)
 
-    out = []
-    while heap:
-        val, i, j = heapq.heappop(heap)
-        out.append(val)
-        if j + 1 < len(arr[i]):
-            heapq.heappush(heap, (arr[i][j + 1], i, j + 1))   # advance THAT array
+        out = []
+        while heap:
+            val, i, j = heapq.heappop(heap)
+            out.append(val)
+            if j + 1 < len(mat[i]):
+                heapq.heappush(heap, (mat[i][j + 1], i, j + 1))   # advance THAT row
 
-    return out
+        return out
 ```
+GfG doesn't pass k: it's `len(mat)`, and the code never needs it by name.
+
 **Time:** O(N log k) · **Space:** O(k) + output
 
 ## ⚠️ Gotchas
 - **Push from the same array you popped from.** Pushing "the next smallest overall"
   isn't something you can know. `i` in the tuple is how you know where to look.
-- **`if row` when seeding.** An empty array has no `row[0]`. GfG's are all k long;
+- **`if row` when seeding.** An empty array has no `row[0]`. GfG's rows are all m long;
   LeetCode's linked-list version (LC 23) has empty lists.
 - **Tie-breaker.** `(val, i, j)` never compares beyond ints. For LC 23 with list
   **nodes**, `(node.val, node)` crashes on equal values because nodes don't define `<`.

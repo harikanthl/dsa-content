@@ -27,6 +27,7 @@ Why:    items 1 and 2: weight 3 + 4 = 7, value 4 + 5 = 9
 
 Input:  W = 4, val = [1, 2, 3], wt = [4, 5, 1]  -> 3
 Input:  W = 3, val = [1, 2, 3], wt = [4, 5, 6]  -> 0   (nothing fits)
+Input:  W = 5, val = [10, 40, 30, 50], wt = [5, 4, 2, 3]  -> 80   (items 2 + 3: 2 + 3 kg)
 ```
 
 ## 🧸 ELI5
@@ -107,26 +108,26 @@ it and keeping 9 wins.
 ```python
 from functools import lru_cache
 
+class Solution:
+    def knapsack(self, W: int, val: List[int], wt: List[int]) -> int:
+        """Most value from items taken whole, total weight at most W.
 
-def knapsack(W: int, val: List[int], wt: List[int]) -> int:
-    """Most value from items taken whole, total weight at most W.
+        best(i, c) = most value using the first i items with capacity c.
+        Time:  O(n * W), at most (n + 1)(W + 1) states, O(1) work each.
+        Space: O(n * W) for the memo, plus O(n) recursion depth.
+        """
 
-    best(i, c) = most value using the first i items with capacity c.
-    Time:  O(n * W), at most (n + 1)(W + 1) states, O(1) work each.
-    Space: O(n * W) for the memo, plus O(n) recursion depth.
-    """
+        @lru_cache(maxsize=None)
+        def best(i: int, c: int) -> int:
+            if i == 0:
+                return 0                              # no items left to consider
+            w, v = wt[i - 1], val[i - 1]              # the i-th item is index i - 1
+            skip = best(i - 1, c)
+            if w > c:
+                return skip                           # doesn't fit: skip is forced
+            return max(skip, best(i - 1, c - w) + v)  # take it: smaller bag, earn v
 
-    @lru_cache(maxsize=None)
-    def best(i: int, c: int) -> int:
-        if i == 0:
-            return 0                              # no items left to consider
-        w, v = wt[i - 1], val[i - 1]              # the i-th item is index i - 1
-        skip = best(i - 1, c)
-        if w > c:
-            return skip                           # doesn't fit: skip is forced
-        return max(skip, best(i - 1, c - w) + v)  # take it: smaller bag, earn v
-
-    return best(len(val), W)
+        return best(len(val), W)
 ```
 **Time:** O(n · W) · **Space:** O(n · W)
 

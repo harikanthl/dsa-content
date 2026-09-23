@@ -118,6 +118,23 @@ class Solution:
 ```
 **Time:** O(log(n − k) + k) · **Space:** O(1) extra
 
+**The heap version (type this first if the sorted-window idea doesn't come).** It's
+EP98's size-k max-heap with the tie-break folded into the key. Pushing `(-dist, -a)`
+makes the root the *farthest* element, and among equal distances the *larger* one, so
+that's what gets evicted:
+
+```python
+class Solution:
+    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        """Same answer via EP98's pattern. O(n log k) time, O(k) space."""
+        heap = []                                   # (-distance, -value): root = worst
+        for a in arr:
+            heapq.heappush(heap, (-abs(a - x), -a))
+            if len(heap) > k:
+                heapq.heappop(heap)                 # evict farthest; ties evict larger
+        return sorted(-neg_a for _, neg_a in heap)
+```
+
 ## ⚠️ Gotchas
 - **`hi = n - k`, not `n - 1`.** The window must fit: `mid + k` is read, so `mid` can be
   at most `n - k - 1` inside the loop, and `lo` can end at `n - k`.

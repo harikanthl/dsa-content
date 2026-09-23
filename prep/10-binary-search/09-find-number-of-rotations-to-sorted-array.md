@@ -30,6 +30,7 @@ Output: 1
 Input:  arr = [1, 2, 3, 4, 5]
 Output: 0              <- never rotated
 ```
+The last two are GfG's own examples.
 
 ## 🧸 ELI5
 > A line of kids sorted by height. Each "rotation" takes the kid at the **back** and
@@ -79,23 +80,24 @@ the range.
 
 ## ✅ Optimal solution
 ```python
-def find_k_rotation(arr: list[int]) -> int:
-    """How many times a sorted array of distinct values was rotated right.
+class Solution:
+    def findKRotation(self, arr):
+        """How many times a sorted array of distinct values was rotated right.
 
-    The minimum started at index 0 and moves one step right per rotation,
-    so its current index is the rotation count.
+        The minimum started at index 0 and moves one step right per rotation,
+        so its current index is the rotation count.
 
-    Time:  O(log n), EP78's search.
-    Space: O(1).
-    """
-    lo, hi = 0, len(arr) - 1
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if arr[mid] > arr[hi]:
-            lo = mid + 1            # mid is in the rotated-up part; the minimum is right of it
-        else:
-            hi = mid                # mid is in the low part; the minimum is mid or left of it
-    return lo                       # index of the minimum == rotation count
+        Time:  O(log n), EP78's search.
+        Space: O(1).
+        """
+        lo, hi = 0, len(arr) - 1
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if arr[mid] > arr[hi]:
+                lo = mid + 1        # mid is in the rotated-up part; the minimum is right of it
+            else:
+                hi = mid            # mid is in the low part; the minimum is mid or left of it
+        return lo                   # index of the minimum == rotation count
 ```
 **Time:** O(log n) · **Space:** O(1)
 

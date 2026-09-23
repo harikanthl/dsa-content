@@ -31,6 +31,7 @@ Why:    [12, 34, 67] | [90]   -> 113 and 90, the max is 113.
 Input:  arr = [15, 17, 20], k = 5  -> -1   (5 students, 3 books)
 Input:  arr = [22, 23, 67], k = 1  -> 112  (one student reads everything)
 ```
+The first two are GfG's own examples.
 
 ## 🧸 ELI5
 > The teacher sets a **reading limit**: "nobody reads more than `L` pages." Then she walks
@@ -93,32 +94,33 @@ Only two groupings ever appear. The search is homing in on the exact limit where
 
 ## ✅ Optimal solution
 ```python
-def find_pages(arr: list[int], k: int) -> int:
-    """Minimum possible maximum pages per student, contiguous allocation.
+class Solution:
+    def findPages(self, arr, k):
+        """Minimum possible maximum pages per student, contiguous allocation.
 
-    Time:  O(n log S), S = sum(arr): log S greedy passes.
-    Space: O(1).
-    """
-    if k > len(arr):
-        return -1                           # someone would get no book
+        Time:  O(n log S), S = sum(arr): log S greedy passes.
+        Space: O(1).
+        """
+        if k > len(arr):
+            return -1                       # someone would get no book
 
-    def students_needed(limit: int) -> int:
-        students, pages = 1, 0
-        for p in arr:
-            if pages + p > limit:           # this book starts the next student
-                students += 1
-                pages = 0
-            pages += p
-        return students
+        def students_needed(limit: int) -> int:
+            students, pages = 1, 0
+            for p in arr:
+                if pages + p > limit:       # this book starts the next student
+                    students += 1
+                    pages = 0
+                pages += p
+            return students
 
-    lo, hi = max(arr), sum(arr)             # someone reads the biggest book; one reads all
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if students_needed(mid) <= k:
-            hi = mid                        # limit works; try stricter
-        else:
-            lo = mid + 1
-    return lo
+        lo, hi = max(arr), sum(arr)         # someone reads the biggest book; one reads all
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if students_needed(mid) <= k:
+                hi = mid                    # limit works; try stricter
+            else:
+                lo = mid + 1
+        return lo
 ```
 **Time:** O(n log S) · **Space:** O(1)
 

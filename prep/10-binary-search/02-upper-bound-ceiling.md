@@ -27,9 +27,13 @@ Output: 2              <- arr[2] = 8, the smallest value >= 5
 Input:  arr = [1, 2, 8, 10, 11, 12, 19], x = 20
 Output: -1             <- nothing is >= 20
 
+Input:  arr = [1, 1, 2, 8, 10, 11, 12, 19], x = 0
+Output: 0              <- the ceiling is 1, which appears twice; its FIRST index
+
 Input:  arr = [1, 1, 2, 8, 8, 10], x = 8
 Output: 3              <- x itself is present; its FIRST index
 ```
+The first three are GfG's own examples.
 
 ## 🧸 ELI5
 > You're 5 feet tall and walking down a line of doorways sorted from shortest to
@@ -86,32 +90,34 @@ value 2 ✓. The floor is the element just left of where 5 would be inserted.
 
 ## ✅ Optimal solution
 ```python
-def lower_bound(arr: list[int], x: int) -> int:
-    """First index i with arr[i] >= x, or len(arr) if there isn't one."""
-    lo, hi = 0, len(arr)
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if arr[mid] < x:
-            lo = mid + 1                # mid is too small; drop it
-        else:
-            hi = mid                    # mid could be the answer; keep it
-    return lo
+class Solution:
+    def findCeil(self, arr, x):
+        """Index of the first element >= x, or -1.
 
+        Time:  O(log n), one lower_bound.
+        Space: O(1).
+        """
+        i = self.lower_bound(arr, x)
+        return i if i < len(arr) else -1    # n means "past the end": no ceiling
 
-def find_ceil(arr: list[int], x: int) -> int:
-    """Index of the first element >= x, or -1.
+    def lower_bound(self, arr, x):
+        """First index i with arr[i] >= x, or len(arr) if there isn't one."""
+        lo, hi = 0, len(arr)
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if arr[mid] < x:
+                lo = mid + 1                # mid is too small; drop it
+            else:
+                hi = mid                    # mid could be the answer; keep it
+        return lo
 
-    Time:  O(log n), one lower_bound.
-    Space: O(1).
-    """
-    i = lower_bound(arr, x)
-    return i if i < len(arr) else -1    # n means "past the end": no ceiling
-
-
-def find_floor(arr: list[int], x: int) -> int:
-    """Index of the last element <= x, or -1. The sibling, for free."""
-    return lower_bound(arr, x + 1) - 1  # one before the first element > x
+    def findFloor(self, arr, x):
+        """Index of the last element <= x, or -1. The sibling, for free."""
+        return self.lower_bound(arr, x + 1) - 1  # one before the first element > x
 ```
+GfG calls `findCeil(arr, x)`. The other two methods ride along: `lower_bound` does the
+work, and `findFloor` is there for the follow-up question.
+
 **Time:** O(log n) · **Space:** O(1)
 
 ## ⚠️ Gotchas
@@ -123,7 +129,7 @@ def find_floor(arr: list[int], x: int) -> int:
   code.
 - **`n` is not an index.** `lower_bound` returning `len(arr)` means "no ceiling";
   translate it to -1 before returning.
-- **`find_floor` returns -1 naturally** when x is smaller than everything:
+- **`findFloor` returns -1 naturally** when x is smaller than everything:
   `lower_bound(x + 1)` is 0, minus one is -1. Test `x = 0`.
 - **`x + 1` only works for integers.** Say so if the interviewer asks about floats.
 
@@ -138,7 +144,7 @@ def find_floor(arr: list[int], x: int) -> int:
 ## 🔗 Transfer
 Two calls to `lower_bound`, `x` and `x + 1`, bracket every copy of `x` in the array.
 Tomorrow's EP73, First and Last Position, is exactly that bracket, and EP74 Count
-Occurrences is its width. Keep `find_floor` in mind for EP84 H-Index II, where you'll
+Occurrences is its width. Keep `findFloor` in mind for EP84 H-Index II, where you'll
 want "the first index where the condition holds" on a sorted array again.
 
 ## 📹 Metadata

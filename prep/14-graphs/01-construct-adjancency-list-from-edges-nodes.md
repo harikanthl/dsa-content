@@ -38,6 +38,12 @@ Output:
   adj[3] = [4, 1, 2]
   adj[4] = [0, 1, 3]
 
+GfG prints: [[1,4], [0,2,3,4], [1,3], [1,2,4], [0,1,3]]
+            (its driver sorts each list before printing, see Gotchas)
+
+V = 4, edges = [[0,3], [0,2], [2,1]]  ->  [[3,2], [2], [0,1], [0]]
+                                          GfG prints [[2,3], [2], [0,1], [0]]
+
 V = 4, edges = [[0,1]]   ->   [[1], [0], [], []]   <- 2 and 3 are isolated, still listed
 ```
 
@@ -134,8 +140,11 @@ class Solution:
   (EP164) and Prim (EP170) both need this form.
 - **Self-loop `[2, 2]`** appends 2 to adj[2] twice under the undirected rule. That's
   the honest representation (degree 2), but mention it if the input can contain one.
-- **Neighbour order matters on GfG.** The judge compares against input order, so don't
-  sort, and don't use a set.
+- **Why GfG's expected output looks sorted.** Its driver prints `sorted(set(adj[i]))`
+  for every node, so any neighbour order is accepted and the sample output always
+  appears in ascending order. Don't sort to "match" it: that's wasted O(E log E). And
+  don't lean on the driver elsewhere: in EP153 and EP154 the traversal order follows
+  `adj` order exactly, so the order you build here is the order you'll visit in.
 
 ## 🎤 Interview talking points
 - *"First three questions: directed? weighted? and are the nodes given explicitly, or

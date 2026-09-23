@@ -23,6 +23,10 @@ and be able to explain why the 1-D loop goes from W down to w.
 Input:  W = 7, val = [1, 4, 5, 7], wt = [1, 3, 4, 5]
 Output: 9      (items 1 + 2: 3 kg + 4 kg, value 4 + 5)
 
+GfG's examples: W = 4, val = [1, 2, 3], wt = [4, 5, 1]            -> 3
+                W = 3, val = [1, 2, 3], wt = [4, 5, 6]            -> 0
+                W = 5, val = [10, 40, 30, 50], wt = [5, 4, 2, 3]  -> 80
+
 The trap test:  W = 2, val = [1], wt = [1]
 Correct:        1      (one item, take it once)
 Forward loop:   2      <- took the same item twice
@@ -105,36 +109,37 @@ The trap test, `W = 2`, one item (1 kg, 1), starting from `dp = [0, 0, 0]`:
 
 ## ✅ Optimal solution
 ```python
-def knapsack(W: int, val: List[int], wt: List[int]) -> int:
-    """0/1 knapsack, one row.
+class Solution:
+    def knapsack(self, W: int, val: List[int], wt: List[int]) -> int:
+        """0/1 knapsack, one row.
 
-    dp[c] = best value with capacity c using the items processed so far.
-    Time:  O(n * W), every item touches every capacity once.
-    Space: O(W), one row reused for every item.
-    """
-    dp = [0] * (W + 1)                        # row 0: no items, nothing earned
-    for w, v in zip(wt, val):
-        for c in range(W, w - 1, -1):         # BACKWARDS: dp[c - w] is still last row's
-            dp[c] = max(dp[c],                # skip this item
-                        dp[c - w] + v)        # take it, once
-    return dp[W]
+        dp[c] = best value with capacity c using the items processed so far.
+        Time:  O(n * W), every item touches every capacity once.
+        Space: O(W), one row reused for every item.
+        """
+        dp = [0] * (W + 1)                        # row 0: no items, nothing earned
+        for w, v in zip(wt, val):
+            for c in range(W, w - 1, -1):         # BACKWARDS: dp[c - w] is still last row's
+                dp[c] = max(dp[c],                # skip this item
+                            dp[c - w] + v)        # take it, once
+        return dp[W]
 ```
 **Time:** O(n · W) · **Space:** O(W)
 
 The 2-D version, to write first if you're asked to show the step:
 
 ```python
-def knapsack_2d(W: int, val: List[int], wt: List[int]) -> int:
-    """dp[i][c] = best value using the first i items with capacity c. O(n*W) time and space."""
-    n = len(val)
-    dp = [[0] * (W + 1) for _ in range(n + 1)]
-    for i in range(1, n + 1):
-        w, v = wt[i - 1], val[i - 1]
-        for c in range(W + 1):
-            dp[i][c] = dp[i - 1][c]                                  # skip
-            if c >= w:
-                dp[i][c] = max(dp[i][c], dp[i - 1][c - w] + v)       # take
-    return dp[n][W]
+    def knapsack_2d(self, W: int, val: List[int], wt: List[int]) -> int:
+        """dp[i][c] = best value using the first i items with capacity c. O(n*W) time and space."""
+        n = len(val)
+        dp = [[0] * (W + 1) for _ in range(n + 1)]
+        for i in range(1, n + 1):
+            w, v = wt[i - 1], val[i - 1]
+            for c in range(W + 1):
+                dp[i][c] = dp[i - 1][c]                                  # skip
+                if c >= w:
+                    dp[i][c] = max(dp[i][c], dp[i - 1][c - w] + v)       # take
+        return dp[n][W]
 ```
 
 ## ⚠️ Gotchas

@@ -28,6 +28,7 @@ Output: 0              <- both searches return 7; 7 - 7 = 0
 Input:  arr = [8, 9, 10, 12, 12, 12], target = 12
 Output: 3
 ```
+All three are GfG's own examples.
 
 ## 🧸 ELI5
 > Books on a shelf sorted by page count. How many books have exactly 200 pages? Put a
@@ -90,26 +91,26 @@ insertion point.
 
 ## ✅ Optimal solution
 ```python
-def lower_bound(arr: list[int], x: int) -> int:
-    """First index i with arr[i] >= x, or len(arr)."""
-    lo, hi = 0, len(arr)
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if arr[mid] < x:
-            lo = mid + 1
-        else:
-            hi = mid
-    return lo
+class Solution:
+    def countFreq(self, arr, target):
+        """How many times target appears in a sorted array.
 
+        Time:  O(log n), two lower_bound calls.
+        Space: O(1).
+        """
+        # every copy of target sits in [lower_bound(target), lower_bound(target + 1))
+        return self.lower_bound(arr, target + 1) - self.lower_bound(arr, target)
 
-def count_freq(arr: list[int], target: int) -> int:
-    """How many times target appears in a sorted array.
-
-    Time:  O(log n), two lower_bound calls.
-    Space: O(1).
-    """
-    # every copy of target sits in [lower_bound(target), lower_bound(target + 1))
-    return lower_bound(arr, target + 1) - lower_bound(arr, target)
+    def lower_bound(self, arr, x):
+        """First index i with arr[i] >= x, or len(arr)."""
+        lo, hi = 0, len(arr)
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if arr[mid] < x:
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo
 ```
 **Time:** O(log n) · **Space:** O(1)
 

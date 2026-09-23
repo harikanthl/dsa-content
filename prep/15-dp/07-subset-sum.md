@@ -26,6 +26,8 @@ Output: True       (4 + 5, also 3 + 4 + 2)
 Input:  arr = [3, 34, 4, 12, 5, 2], sum = 30
 Output: False
 
+Input:  arr = [1, 2, 3], sum = 6  -> True   (the whole array)
+
 Input:  arr = [1, 2], sum = 0  -> True   (the empty subset)
 ```
 
@@ -90,22 +92,24 @@ it's still the value from *before* 5 was considered.
 
 ## ✅ Optimal solution
 ```python
-def isSubsetSum(arr: List[int], target: int) -> bool:
-    """Can some subset of arr (each element at most once) sum to exactly target?
+class Solution:
+    def isSubsetSum(self, arr: List[int], sum: int) -> bool:
+        """Can some subset of arr (each element at most once) sum to exactly target?
 
-    dp[c] = True if some subset of the elements seen so far sums to c.
-    Time:  O(n * target), each element sweeps every sum once.
-    Space: O(target), one boolean row.
-    """
-    dp = [False] * (target + 1)
-    dp[0] = True                              # the empty subset makes 0
-    for x in arr:
-        for c in range(target, x - 1, -1):    # backwards: x is used at most once
-            if dp[c - x]:
-                dp[c] = True
-        if dp[target]:
-            return True                       # nothing ever turns off: stop early
-    return dp[target]
+        dp[c] = True if some subset of the elements seen so far sums to c.
+        Time:  O(n * target), each element sweeps every sum once.
+        Space: O(target), one boolean row.
+        """
+        target = sum                              # GfG's name shadows the built-in sum()
+        dp = [False] * (target + 1)
+        dp[0] = True                              # the empty subset makes 0
+        for x in arr:
+            for c in range(target, x - 1, -1):    # backwards: x is used at most once
+                if dp[c - x]:
+                    dp[c] = True
+            if dp[target]:
+                return True                       # nothing ever turns off: stop early
+        return dp[target]
 ```
 **Time:** O(n · target) · **Space:** O(target)
 
@@ -131,8 +135,10 @@ def can(i: int, s: int) -> bool:
 - **Negative numbers break it.** The table index is a sum, and sums would go below 0.
   The problem says positive; if an interviewer adds negatives, you need an offset or a
   set of reachable sums.
-- **GfG's parameter is called `sum`.** Rename it inside your function, because `sum`
-  shadows the built-in and you'll want `sum()` in the Target Sum follow-up.
+- **GfG's parameter is called `sum`.** Keep the name so the signature matches the
+  judge, but copy it to `target` on the first line and use that. Inside the method
+  `sum` is now an int, so calling `sum(arr)` there raises `TypeError: 'int' object is
+  not callable`. You'll want the real `sum()` in the Target Sum follow-up.
 
 ## 🎤 Interview talking points
 - *"It's 0/1 knapsack where the question is reachability, so the cell is a boolean:

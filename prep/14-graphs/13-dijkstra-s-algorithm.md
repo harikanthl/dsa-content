@@ -34,6 +34,10 @@ Output: [4, 3, 0]
 Why:    2 -> 0 directly costs 6, but 2 -> 1 -> 0 costs 3 + 1 = 4.
         BFS would reach 0 first by the direct edge and wrongly keep 6.
 
+V = 5, edges = [[0,1,4], [0,2,8], [1,4,6], [2,3,2], [3,4,10]], src = 0
+                                     ->   [0, 4, 8, 10, 10]
+        (4 is 10 via 0-1-4 = 4+6; the other way, 0-2-3-4, costs 8+2+10 = 20)
+
 V = 2, edges = [[0,1,9]], src = 0   ->   [0, 9]
 ```
 
